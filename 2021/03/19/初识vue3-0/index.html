@@ -6,32 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://xiechengyu.github.io">
-  <title>前端技术之路 | </title>
+  <title>初识vue3.0 | </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言最近我在看了前端之路https://github.com/kamranahmedse/developer-roadmap之后有了自己去翻译其中的关键词的想法，也可以在翻译的过程中去学习一些自己并不了解的技术，然后能够形成自己的前端学习之路。">
-<meta name="keywords" content="前端">
+  <meta name="description" content="前言最近看了兴起的vue3.0框架，有几点知识记录一二。">
+<meta name="keywords" content="vue,vue3.0">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前端技术之路">
-<meta property="og:url" content="https://xiechengyu.github.io/2019/06/28/前端技术之路/index.html">
+<meta property="og:title" content="初识vue3.0">
+<meta property="og:url" content="https://xiechengyu.github.io/2021/03/19/初识vue3-0/index.html">
 <meta property="og:site_name">
-<meta property="og:description" content="前言最近我在看了前端之路https://github.com/kamranahmedse/developer-roadmap之后有了自己去翻译其中的关键词的想法，也可以在翻译的过程中去学习一些自己并不了解的技术，然后能够形成自己的前端学习之路。">
+<meta property="og:description" content="前言最近看了兴起的vue3.0框架，有几点知识记录一二。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://i2.tiimg.com/694134/ebe1ccacaf234804.png">
-<meta property="og:image" content="http://i2.tiimg.com/694134/9d55273cc2b66aa2.png">
-<meta property="og:image" content="http://i2.tiimg.com/694134/a0aa1388e967dc10.png">
-<meta property="og:image" content="http://i2.tiimg.com/694134/bbe7fd6dce841886.png">
-<meta property="og:image" content="http://i2.tiimg.com/694134/9c16af3fae35e72a.png">
-<meta property="og:image" content="http://i2.tiimg.com/694134/04854ac04effcad8.png">
-<meta property="og:image" content="http://i2.tiimg.com/694134/a571966c4d832020.png">
-<meta property="og:image" content="http://i2.tiimg.com/694134/2793ba48f0d2bdc6.png">
-<meta property="og:image" content="http://i2.tiimg.com/694134/99c645132edbf78e.png">
-<meta property="og:image" content="http://i2.tiimg.com/694134/c670d89555b0023b.png">
-<meta property="og:image" content="http://i2.tiimg.com/694134/278be7c8326ca47e.png">
-<meta property="og:updated_time" content="2019-09-07T15:40:00.777Z">
+<meta property="og:updated_time" content="2021-03-18T16:43:18.839Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="前端技术之路">
-<meta name="twitter:description" content="前言最近我在看了前端之路https://github.com/kamranahmedse/developer-roadmap之后有了自己去翻译其中的关键词的想法，也可以在翻译的过程中去学习一些自己并不了解的技术，然后能够形成自己的前端学习之路。">
-<meta name="twitter:image" content="http://i2.tiimg.com/694134/ebe1ccacaf234804.png">
+<meta name="twitter:title" content="初识vue3.0">
+<meta name="twitter:description" content="前言最近看了兴起的vue3.0框架，有几点知识记录一二。">
   
   
     <link rel="icon" href="/favicon.png">
@@ -153,39 +141,61 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-前端技术之路" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-初识vue3-0" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      前端技术之路
+      初识vue3.0
     </h1>
   
 
         
-        <a href="/2019/06/28/前端技术之路/" class="archive-article-date">
-  	<time datetime="2019-06-28T09:28:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-28</time>
+        <a href="/2021/03/19/初识vue3-0/" class="archive-article-date">
+  	<time datetime="2021-03-18T16:12:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近我在看了前端之路<a href="https://github.com/kamranahmedse/developer-roadmap" target="_blank" rel="noopener">https://github.com/kamranahmedse/developer-roadmap</a>之后有了自己去翻译其中的关键词的想法，也可以在翻译的过程中去学习一些自己并不了解的技术，然后能够形成自己的前端学习之路。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近看了兴起的vue3.0框架，有几点知识记录一二。</p>
 <a id="more"></a>
-<h2 id="前端开发技术生命之路总图"><a href="#前端开发技术生命之路总图" class="headerlink" title="前端开发技术生命之路总图"></a>前端开发技术生命之路总图</h2><p><img src="http://i2.tiimg.com/694134/ebe1ccacaf234804.png" alt="qian1"></p>
-<p><img src="http://i2.tiimg.com/694134/9d55273cc2b66aa2.png" alt="qian2"></p>
-<p><img src="http://i2.tiimg.com/694134/a0aa1388e967dc10.png" alt="qian3"></p>
-<h2 id="前端开发技术生命之路分图"><a href="#前端开发技术生命之路分图" class="headerlink" title="前端开发技术生命之路分图"></a>前端开发技术生命之路分图</h2><p><img src="http://i2.tiimg.com/694134/bbe7fd6dce841886.png" alt="html"></p>
-<p><img src="http://i2.tiimg.com/694134/9c16af3fae35e72a.png" alt="css"></p>
-<p><img src="http://i2.tiimg.com/694134/04854ac04effcad8.png" alt="js"></p>
-<p><img src="http://i2.tiimg.com/694134/a571966c4d832020.png" alt="bao"></p>
-<p><img src="http://i2.tiimg.com/694134/2793ba48f0d2bdc6.png" alt="csskuang"></p>
-<p><img src="http://i2.tiimg.com/694134/99c645132edbf78e.png" alt="cssyu"></p>
-<p><img src="http://i2.tiimg.com/694134/c670d89555b0023b.png" alt="cssjie"></p>
-<p><img src="http://i2.tiimg.com/694134/278be7c8326ca47e.png" alt="gou"></p>
+<h2 id="1、setup-函数的用法。"><a href="#1、setup-函数的用法。" class="headerlink" title="1、setup 函数的用法。"></a>1、setup 函数的用法。</h2><p>可以代替 Vue2 中的 date 和 methods 属性，直接把逻辑卸载 setup 里就可以</p>
+<p>ref 函数的使用，它是一个神奇的函数，我们这节只是初次相遇，要在template中使用的变量，必须用ref包装一下。</p>
+<p>return出去的数据和方法，在模板中才可以使用，这样可以精准的控制暴漏的变量和方法。</p>
+<h2 id="2、reactive。"><a href="#2、reactive。" class="headerlink" title="2、reactive。"></a>2、reactive。</h2><p>它也是一个函数(方法)，只不过里边接受的参数是一个 Object(对象)</p>
+<h2 id="3、interface"><a href="#3、interface" class="headerlink" title="3、interface"></a>3、interface</h2><p>用来作类型注解</p>
+<h2 id="4、toRefs"><a href="#4、toRefs" class="headerlink" title="4、toRefs"></a>4、toRefs</h2><p>把 data 变成refData,这样就可以使用扩展运算符的方式了</p>
+<h2 id="5-vue3-0的生命周期包括："><a href="#5-vue3-0的生命周期包括：" class="headerlink" title="5.vue3.0的生命周期包括："></a>5.vue3.0的生命周期包括：</h2><p>setup() :开始创建组件之前，在beforeCreate和created之前执行。创建的是data和method</p>
+<p>onBeforeMount() : 组件挂载到节点上之前执行的函数。</p>
+<p>onMounted() : 组件挂载完成后执行的函数。</p>
+<p>onBeforeUpdate(): 组件更新之前执行的函数。</p>
+<p>onUpdated(): 组件更新完成之后执行的函数。</p>
+<p>onBeforeUnmount(): 组件卸载之前执行的函数。</p>
+<p>onUnmounted(): 组件卸载完成后执行的函数</p>
+<p>onActivated(): 被包含在<keep-alive>中的组件，会多出两个生命周期钩子函数。被激活时执行。</keep-alive></p>
+<p>onDeactivated(): 比如从 A 组件，切换到 B 组件，A 组件消失时执行。</p>
+<p>onErrorCaptured(): 当捕获一个来自子孙组件的异常时激活钩子函数）。</p>
+<h2 id="6-vue3与vue2的生命周期对比"><a href="#6-vue3与vue2的生命周期对比" class="headerlink" title="6.vue3与vue2的生命周期对比"></a>6.vue3与vue2的生命周期对比</h2><p>Vue2————–vue3</p>
+<p>beforeCreate  -&gt; setup()</p>
+<p>created       -&gt; setup()</p>
+<p>beforeMount   -&gt; onBeforeMount</p>
+<p>mounted       -&gt; onMounted</p>
+<p>beforeUpdate  -&gt; onBeforeUpdate</p>
+<p>updated       -&gt; onUpdated</p>
+<p>beforeDestroy -&gt; onBeforeUnmount</p>
+<p>destroyed     -&gt; onUnmounted</p>
+<p>activated     -&gt; onActivated</p>
+<p>deactivated   -&gt; onDeactivated</p>
+<p>errorCaptured -&gt; onErrorCaptured</p>
+<h2 id="7-onRenderTracked和onRenderTriggered"><a href="#7-onRenderTracked和onRenderTriggered" class="headerlink" title="7.onRenderTracked和onRenderTriggered"></a>7.onRenderTracked和onRenderTriggered</h2><p>用来调试</p>
+<h2 id="8-watch"><a href="#8-watch" class="headerlink" title="8.watch"></a>8.watch</h2><p>按需引入</p>
+<h2 id="9-直接引用模块代替mixins引入"><a href="#9-直接引用模块代替mixins引入" class="headerlink" title="9.直接引用模块代替mixins引入"></a>9.直接引用模块代替mixins引入</h2><h2 id="10-封装axios"><a href="#10-封装axios" class="headerlink" title="10.封装axios"></a>10.封装axios</h2><h2 id="11-teleport"><a href="#11-teleport" class="headerlink" title="11.teleport"></a>11.teleport</h2><p>把组件渲染到你任意想渲染的外部Dom上</p>
+<h2 id="12-，Suspense"><a href="#12-，Suspense" class="headerlink" title="12.，Suspense"></a>12.，Suspense</h2><p>提供两个template的位置，一个是没有请求回来时显示的内容，一个是全部请求完毕的内容。这样进行异步内容的渲染就会非常简单。返回一个promise对象</p>
+<h2 id="13-onErrorCaptured"><a href="#13-onErrorCaptured" class="headerlink" title="13.onErrorCaptured"></a>13.onErrorCaptured</h2><p>捕获异常</p>
 
       
 
@@ -199,7 +209,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">vue3.0</a>
         		</li>
       		
 		</ul>
@@ -255,7 +269,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://xiechengyu.github.io/2019/06/28/前端技术之路/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://xiechengyu.github.io/2021/03/19/初识vue3-0/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -269,18 +283,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/07/18/React 面试题/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          react面试题
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/06/24/@规则/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">css的@规则</div>
+    <a href="/2019/07/18/React 面试题/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">react面试题</div>
       <i class="icon-circle-right"></i>
     </a>
   
