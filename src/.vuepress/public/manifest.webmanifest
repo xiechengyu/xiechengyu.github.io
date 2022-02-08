@@ -1,0 +1,72 @@
+{
+  "name": "谢成昱的个人博客",
+  "short_name": "xiechengyu's Blog",
+  "description": "谢成昱的个人博客",
+  "theme_color": "#5c92d1",
+  "icons": [
+    {
+      "src": "https://avatars.githubusercontent.com/u/41778797?v=4",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://avatars.githubusercontent.com/u/41778797?v=4",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "https://avatars.githubusercontent.com/u/41778797?v=4",
+      "sizes": "192x192",
+      "purpose": "maskable",
+      "type": "image/png"
+    },
+    {
+      "src": "https://avatars.githubusercontent.com/u/41778797?v=4",
+      "sizes": "512x512",
+      "purpose": "maskable",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "标签",
+      "short_name": "标签",
+      "icons": [
+        {
+          "src": "/assets/icon/tag-maskable.png",
+          "sizes": "192x192",
+          "purpose": "maskable",
+          "type": "image/png"
+        },
+        {
+          "src": "/assets/icon/tag-monochrome.png",
+          "sizes": "192x192",
+          "purpose": "monochrome",
+          "type": "image/png"
+        }
+      ],
+      "url": "/tag/",
+      "description": "文章标签分组"
+    },
+    {
+      "name": "时间线",
+      "short_name": "时间线",
+      "icons": [
+        {
+          "src": "/assets/icon/timeline-maskable.png",
+          "sizes": "192x192",
+          "purpose": "maskable",
+          "type": "image/png"
+        },
+        {
+          "src": "/assets/icon/timeline-monochrome.png",
+          "sizes": "192x192",
+          "purpose": "monochrome",
+          "type": "image/png"
+        }
+      ],
+      "url": "/timeline/",
+      "description": "时间线文章列表"
+    }
+  ]
+}
