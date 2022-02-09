@@ -84,7 +84,8 @@ module.exports = config({
     algoliaType: "full",
 
     git: {
-      timezone: "Asia/Beijing",
+      timezone: "Asia/Shanghai",
+      contributor: false
     },
 
     pwa: {
