@@ -5,6 +5,7 @@ tags: ["swiper","javascript"]
 category: 笔记
 prev: ../sclick的配置
 next: false
+article: false
 comments: true
 ---
 

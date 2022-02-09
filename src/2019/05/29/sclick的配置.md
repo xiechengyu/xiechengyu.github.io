@@ -5,6 +5,7 @@ tags: ["slick",'javascript']
 category: 笔记
 prev: ../箭头函数
 next: ../swiper的配置
+article: false
 comments: true
 ---
 跳转地址

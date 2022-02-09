@@ -5,6 +5,7 @@ tags: ["slick",'javascript']
 category: 笔记
 prev: ../箭头函数
 next: ../swiper的配置
+sticky: 10
 comments: true
 ---
 
