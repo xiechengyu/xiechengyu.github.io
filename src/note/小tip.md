@@ -11,7 +11,7 @@ comments: true
 
 ## 前言
 
-一些小tip
+一些js小tip
 
 <!-- more -->
 
