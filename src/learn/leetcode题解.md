@@ -5,6 +5,7 @@ tags: ["js","leetcode"]
 prev: false
 next: ../初识typescript
 category: 学习
+sticky: true
 comments: true
 ---
 
