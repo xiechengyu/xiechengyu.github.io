@@ -2,7 +2,7 @@
 title: 初识typescript
 date: 2021-03-22 17:42:04
 category: 学习
-prev: false
+prev: ../leetcode题解
 next: ../初识vue3
 tags: ["typescript"]
 ---
