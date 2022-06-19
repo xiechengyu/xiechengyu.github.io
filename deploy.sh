@@ -3,11 +3,9 @@
 # 确保脚本抛出遇到的错误
 set -e
 
-cd leetcode
+rm -rf leetcode
 
-git pull
-
-cd ../
+git clone git@github.com:xiechengyu/leetcode.git
 
 node build.js
 
