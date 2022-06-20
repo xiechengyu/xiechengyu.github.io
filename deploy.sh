@@ -3,6 +3,12 @@
 # 确保脚本抛出遇到的错误
 set -e
 
+rm -rf leetcode
+
+git clone git@github.com:xiechengyu/leetcode.git
+
+node build.js
+
 # 生成静态文件
 npm run build
 
