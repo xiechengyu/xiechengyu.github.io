@@ -11,11 +11,9 @@ const mdPath = './src/learn/leetcode题解.md';
 const writeStream = fs.createWriteStream(mdPath);
 const origin = fs.readFileSync('./leetcode.md').toString();
 writeStream.write(origin);
-leetcodeDir.forEach((v) => {
-  if (/js$/.test(v)) {
-    const data = fs.readFileSync(path.join("./leetcode", v)).toString()
-    writeStream.write('\n## ' + v.replace('.js', '') + '\n```js\n' + data + '\n```\n\n')
-  }
+leetcodeDir.filter((v) => /js$/.test(v)).sort((a, b) => a.split(".")[0] - b.split(".")[0]).forEach((v) => {
+  const data = fs.readFileSync(path.join("./leetcode", v)).toString()
+  writeStream.write('\n## ' + v.replace('.js', '') + '\n```js\n' + data + '\n```\n\n')
 })
 writeStream.end()
 

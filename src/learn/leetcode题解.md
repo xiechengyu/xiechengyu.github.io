@@ -17,1245 +17,12 @@ leetcode刷题题解
 把在leetcode上刷过的题目记录一二
 
 
-## 100.相同的树
+## 2.两数相加
 ```js
 /*
- * @lc app=leetcode.cn id=100 lang=javascript
+ * @lc app=leetcode.cn id=2 lang=javascript
  *
- * [100] 相同的树
- */
-
-// @lc code=start
-/**
- * Definition for a binary tree node.
- * function TreeNode(val, left, right) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.left = (left===undefined ? null : left)
- *     this.right = (right===undefined ? null : right)
- * }
- */
-/**
- * @param {TreeNode} p
- * @param {TreeNode} q
- * @return {boolean}
- */
-var isSameTree = function (p, q) {
-    let stackP = [], stackQ = []
-    while (p || stackP.length || q || stackQ.length) {
-        if (p || q) {
-            if ((!p || !q) || p.val !== q.val) return false
-            stackP.push(p)
-            stackQ.push(q)
-            p = p.left
-            q = q.left
-        } else {
-            p = stackP.pop()
-            q = stackQ.pop()
-            if (p.val !== q.val) return false
-            p = p.right
-            q = q.right
-        }
-    }
-    return true
-};
-// @lc code=end
-
-
-```
-
-
-## 1002.查找共用字符
-```js
-/*
- * @lc app=leetcode.cn id=1002 lang=javascript
- *
- * [1002] 查找共用字符
- */
-
-// @lc code=start
-/**
- * @param {string[]} words
- * @return {string[]}
- */
-var commonChars = function (words) {
-  words = words.map(item => item.split(""))
-  if (words.length === 1) return words[0]
-  const res = []
-  for (let i = 0; i < words[0].length; i++) {
-    res.push(words[0][i])
-    for (let j = 1; j < words.length; j++) {
-      const index = words[j].indexOf(words[0][i])
-      if (index === -1) {
-        res.pop()
-        break
-      } else {
-        words[j].splice(index, 1)
-      }
-    }
-  }
-  return res
-};
-// @lc code=end
-```
-
-
-## 1005.k-次取反后最大化的数组和
-```js
-
-/*
- * @lc app=leetcode.cn id=1005 lang=javascript
- *
- * [1005] K 次取反后最大化的数组和
- */
-
-// @lc code=start
-/**
- * @param {number[]} nums
- * @param {number} k
- * @return {number}
- */
-var largestSumAfterKNegations = function (nums, k) {
-  while (k > 0) {
-    const min = Math.min(...nums)
-    const i = nums.indexOf(min)
-    nums[i] = -nums[i]
-    k--
-  }
-  return nums.reduce((a, b) => a + b, 0)
-};
-// @lc code=end
-
-
-```
-
-
-## 101.对称二叉树
-```js
-/*
- * @lc app=leetcode.cn id=101 lang=javascript
- *
- * [101] 对称二叉树
- */
-
-// @lc code=start
-/**
- * Definition for a binary tree node.
- * function TreeNode(val, left, right) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.left = (left===undefined ? null : left)
- *     this.right = (right===undefined ? null : right)
- * }
- */
-/**
- * @param {TreeNode} root
- * @return {boolean}
- */
-var isSymmetric = function (root) {
-    let stackP = [], stackQ = [], p = root.left, q = root.right
-    while (p || stackP.length || q || stackQ.length) {
-        if (p || q) {
-            if ((!p || !q) || p.val !== q.val) return false
-            stackP.push(p)
-            stackQ.push(q)
-            p = p.left
-            q = q.right
-        } else {
-            p = stackP.pop()
-            q = stackQ.pop()
-            if (p.val !== q.val) return false
-            p = p.right
-            q = q.left
-        }
-    }
-    return true
-};
-// @lc code=end
-
-
-```
-
-
-## 1013.将数组分成和相等的三个部分
-```js
-/*
- * @lc app=leetcode.cn id=1013 lang=javascript
- *
- * [1013] 将数组分成和相等的三个部分
- */
-
-// @lc code=start
-/**
- * @param {number[]} arr
- * @return {boolean}
- */
-var canThreePartsEqualSum = function (arr) {
-  const count = arr.reduce((a, b) => a + b, 0)
-  const area = count / 3
-  let res = 0, time = 0
-  for (let i = 0; i < arr.length; i++) {
-    res += arr[i]
-    if (res === area) {
-      res = 0
-      time++
-    }
-  }
-  return time >= 3
-};
-// @lc code=end
-```
-
-
-## 1021.删除最外层的括号
-```js
-/*
- * @lc app=leetcode.cn id=1021 lang=javascript
- *
- * [1021] 删除最外层的括号
- */
-
-// @lc code=start
-/**
- * @param {string} s
- * @return {string}
- */
-var removeOuterParentheses = function (s) {
-  let res = "", count = 0
-  for (let i = 0; i < s.length; i++) {
-    if (s[i] === "(") {
-      if (count) res += s[i]
-      count++
-    } else {
-      count--
-      if (count) res += s[i]
-    }
-  }
-  return res
-};
-// @lc code=end
-
-
-```
-
-
-## 1025.除数博弈
-```js
-/*
- * @lc app=leetcode.cn id=1025 lang=javascript
- *
- * [1025] 除数博弈
- */
-
-// @lc code=start
-/**
- * @param {number} n
- * @return {boolean}
- */
-var divisorGame = function (n) {
-  return n % 2 === 0
-};
-// @lc code=end
-
-
-```
-
-
-## 1030.距离顺序排列矩阵单元格
-```js
-/*
- * @lc app=leetcode.cn id=1030 lang=javascript
- *
- * [1030] 距离顺序排列矩阵单元格
- */
-
-// @lc code=start
-/**
- * @param {number} rows
- * @param {number} cols
- * @param {number} rCenter
- * @param {number} cCenter
- * @return {number[][]}
- */
-var allCellsDistOrder = function (rows, cols, rCenter, cCenter) {
-  let res = []
-  for (let i = 0; i < rows; i++) {
-    for (let j = 0; j < cols; j++) {
-      res.push([i, j])
-    }
-  }
-  return res.sort((a, b) => Math.abs(a[0] - rCenter) + Math.abs(a[1] - cCenter) - Math.abs(b[0] - rCenter) - Math.abs(b[1] - cCenter))
-};
-// @lc code=end
-
-
-```
-
-
-## 104.二叉树的最大深度
-```js
-/*
- * @lc app=leetcode.cn id=104 lang=javascript
- *
- * [104] 二叉树的最大深度
- */
-
-// @lc code=start
-/**
- * Definition for a binary tree node.
- * function TreeNode(val, left, right) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.left = (left===undefined ? null : left)
- *     this.right = (right===undefined ? null : right)
- * }
- */
-/**
- * @param {TreeNode} root
- * @return {number}
- */
-var maxDepth = function (root) {
-    if (!root) return 0
-    return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1
-};
-// @lc code=end
-
-
-```
-
-
-## 1046.最后一块石头的重量
-```js
-/*
- * @lc app=leetcode.cn id=1046 lang=javascript
- *
- * [1046] 最后一块石头的重量
- */
-
-// @lc code=start
-/**
- * @param {number[]} stones
- * @return {number}
- */
-var lastStoneWeight = function (stones) {
-  while (stones.length > 1) {
-    stones = stones.sort((a, b) => b - a)
-    const y = stones.shift()
-    const x = stones.shift()
-    if (x !== y) stones.push(y - x)
-  }
-  return stones.length > 0 ? stones[0] : 0
-};
-// @lc code=end
-
-
-```
-
-
-## 1047.删除字符串中的所有相邻重复项
-```js
-/*
- * @lc app=leetcode.cn id=1047 lang=javascript
- *
- * [1047] 删除字符串中的所有相邻重复项
- */
-
-// @lc code=start
-/**
- * @param {string} s
- * @return {string}
- */
-var removeDuplicates = function (s) {
-  const res = []
-  for (let i = 0; i < s.length; i++) {
-    if (res[res.length - 1] !== s[i]) {
-      res.push(s[i])
-    } else {
-      res.pop()
-    }
-  }
-  return res.join("")
-};
-// @lc code=end
-
-
-```
-
-
-## 1051.高度检查器
-```js
-/*
- * @lc app=leetcode.cn id=1051 lang=javascript
- *
- * [1051] 高度检查器
- */
-
-// @lc code=start
-/**
- * @param {number[]} heights
- * @return {number}
- */
-var heightChecker = function (heights) {
-  let res = 0
-  const arr = heights.slice(0).sort((a, b) => a - b)
-  for (let i = 0; i < heights.length; i++) {
-    if (arr[i] !== heights[i]) res++
-  }
-  return res
-};
-// @lc code=end
-
-
-```
-
-
-## 1071.字符串的最大公因子
-```js
-/*
- * @lc app=leetcode.cn id=1071 lang=javascript
- *
- * [1071] 字符串的最大公因子
- */
-
-// @lc code=start
-/**
- * @param {string} str1
- * @param {string} str2
- * @return {string}
- */
-var gcdOfStrings = function (str1, str2) {
-  for (let i = 0; i < str2.length; i++) {
-    const str = str2.slice(0, str2.length - i)
-    if (str1.split(str).findIndex(j => j !== "") === -1 && str2.split(str).findIndex(j => j !== "") === -1) return str
-  }
-  return ""
-};
-// @lc code=end
-
-
-```
-
-
-## 1078.bigram-分词
-```js
-/*
- * @lc app=leetcode.cn id=1078 lang=javascript
- *
- * [1078] Bigram 分词
- */
-
-// @lc code=start
-/**
- * @param {string} text
- * @param {string} first
- * @param {string} second
- * @return {string[]}
- */
-var findOcurrences = function (text, first, second) {
-  const res = []
-  text = text.split(" ")
-  for (let i = 0; i < text.length; i++) {
-    if (!text[i + 2]) break
-    if (text[i] === first && text[i + 1] === second) res.push(text[i + 2])
-  }
-  return res
-};
-// @lc code=end
-
-
-```
-
-
-## 108.将有序数组转换为二叉搜索树
-```js
-/*
- * @lc app=leetcode.cn id=108 lang=javascript
- *
- * [108] 将有序数组转换为二叉搜索树
- */
-
-// @lc code=start
-/**
- * Definition for a binary tree node.
- * function TreeNode(val, left, right) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.left = (left===undefined ? null : left)
- *     this.right = (right===undefined ? null : right)
- * }
- */
-/**
- * @param {number[]} nums
- * @return {TreeNode}
- */
-var sortedArrayToBST = function(nums) {
-
-};
-// @lc code=end
-
-
-```
-
-
-## 1089.复写零
-```js
-/*
- * @lc app=leetcode.cn id=1089 lang=javascript
- *
- * [1089] 复写零
- */
-
-// @lc code=start
-/**
- * @param {number[]} arr
- * @return {void} Do not return anything, modify arr in-place instead.
- */
-var duplicateZeros = function (arr) {
-  for (let i = 0; i < arr.length - 1; i++) {
-    if (arr[i] === 0) {
-      arr.splice(i, 0, 0)
-      arr.pop()
-      i++
-    }
-  }
-};
-// @lc code=end
-
-
-```
-
-
-## 110.平衡二叉树
-```js
-/*
- * @lc app=leetcode.cn id=110 lang=javascript
- *
- * [110] 平衡二叉树
- */
-
-// @lc code=start
-/**
- * Definition for a binary tree node.
- * function TreeNode(val, left, right) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.left = (left===undefined ? null : left)
- *     this.right = (right===undefined ? null : right)
- * }
- */
-/**
- * @param {TreeNode} root
- * @return {boolean}
- */
-var isBalanced = function(root) {
-
-};
-// @lc code=end
-
-
-```
-
-
-## 1103.分糖果-ii
-```js
-/*
- * @lc app=leetcode.cn id=1103 lang=javascript
- *
- * [1103] 分糖果 II
- */
-
-// @lc code=start
-/**
- * @param {number} candies
- * @param {number} num_people
- * @return {number[]}
- */
-var distributeCandies = function (candies, num_people) {
-  let n = 1, i = 0
-  const res = []
-  res.length = num_people
-  res.fill(0, 0, num_people)
-  while (candies > 0) {
-    if (candies <= n) {
-      res[i] += candies
-      break
-    }
-    res[i] += n
-    candies -= n
-    n++
-    if (i === num_people - 1) {
-      i = 0
-    } else {
-      i++
-    }
-  }
-  return res
-};
-// @lc code=end
-
-
-```
-
-
-## 1108.ip-地址无效化
-```js
-/*
- * @lc app=leetcode.cn id=1108 lang=javascript
- *
- * [1108] IP 地址无效化
- */
-
-// @lc code=start
-/**
- * @param {string} address
- * @return {string}
- */
-var defangIPaddr = function(address) {
-  return address.replace(/\./g,"[.]")
-};
-// @lc code=end
-
-
-```
-
-
-## 1122.数组的相对排序
-```js
-/*
- * @lc app=leetcode.cn id=1122 lang=javascript
- *
- * [1122] 数组的相对排序
- */
-
-// @lc code=start
-/**
- * @param {number[]} arr1
- * @param {number[]} arr2
- * @return {number[]}
- */
-var relativeSortArray = function (arr1, arr2) {
-  const res = []
-  for (let i = 0; i < arr2.length; i++) {
-    for (let j = 0; j < arr1.length;) {
-      if (arr1[j] === arr2[i]) {
-        res.push(arr1[j])
-        arr1.splice(j, 1)
-      } else {
-        j++
-      }
-    }
-  }
-  arr1.sort((a, b) => a - b)
-  return [...res, ...arr1]
-};
-// @lc code=end
-
-
-```
-
-
-## 1128.等价多米诺骨牌对的数量
-```js
-
-/*
- * @lc app=leetcode.cn id=1128 lang=javascript
- *
- * [1128] 等价多米诺骨牌对的数量
- */
-
-// @lc code=start
-/**
- * @param {number[][]} dominoes
- * @return {number}
- */
-var numEquivDominoPairs = function (dominoes) {
-  let res = 0, map = new Map()
-  for (let i = 0; i < dominoes.length; i++) {
-    const s = dominoes[i][0] < dominoes[i][1] ? `${dominoes[i][0]}${dominoes[i][1]}` : `${dominoes[i][1]}${dominoes[i][0]}`
-    if (!map.has(s)) {
-      map.set(s, 0)
-      continue
-    }
-    const c = map.get(s) + 1
-    map.set(s, c)
-    res += c
-  }
-  return res
-};
-
-// @lc code=end
-
-
-```
-
-
-## 1137.第-n-个泰波那契数
-```js
-/*
- * @lc app=leetcode.cn id=1137 lang=javascript
- *
- * [1137] 第 N 个泰波那契数
- */
-
-// @lc code=start
-/**
- * @param {number} n
- * @return {number}
- */
-var tribonacci = function (n) {
-  const map = new Map([[0, 0], [1, 1], [2, 1]])
-  for (let i = 3; i <= n; i++) {
-    map.set(i, map.get(i - 3) + map.get(i - 2) + map.get(i - 1))
-  }
-  return map.get(n)
-};
-// @lc code=end
-
-
-```
-
-
-## 1154.一年中的第几天
-```js
-/*
- * @lc app=leetcode.cn id=1154 lang=javascript
- *
- * [1154] 一年中的第几天
- */
-
-// @lc code=start
-/**
- * @param {string} date
- * @return {number}
- */
-var dayOfYear = function (date) {
-  date = date.split("-")
-  return ((((((new Date(date).getTime() - new Date(`${date[0]}-01-01`).getTime()) / 1000) / 60) / 60) / 24) + 1)
-};
-// @lc code=end
-
-
-```
-
-
-## 1160.拼写单词
-```js
-/*
- * @lc app=leetcode.cn id=1160 lang=javascript
- *
- * [1160] 拼写单词
- */
-
-// @lc code=start
-/**
- * @param {string[]} words
- * @param {string} chars
- * @return {number}
- */
-var countCharacters = function (words, chars) {
-  let res = 0
-  for (let i = 0; i < words.length; i++) {
-    const c = chars.split("")
-    for (let j = 0; j < words[i].length; j++) {
-      const index = c.indexOf(words[i][j])
-      if (index === -1) break
-      if (j === words[i].length - 1) {
-        res += words[i].length
-        break
-      }
-      c.splice(index, 1)
-    }
-  }
-  return res
-};
-// @lc code=end
-
-
-```
-
-
-## 1175.质数排列
-```js
-/*
- * @lc app=leetcode.cn id=1175 lang=javascript
- *
- * [1175] 质数排列
- */
-
-// @lc code=start
-/**
- * @param {number} n
- * @return {number}
- */
-var numPrimeArrangements = function(n) {
-
-};
-// @lc code=end
-
-
-```
-
-
-## 118.杨辉三角
-```js
-/*
- * @lc app=leetcode.cn id=118 lang=javascript
- *
- * [118] 杨辉三角
- */
-
-// @lc code=start
-/**
- * @param {number} numRows
- * @return {number[][]}
- */
-var generate = function (numRows) {
-    let res = [[1]]
-    for (let i = 1; i < numRows; i++) {
-        let item = [1]
-        for (let j = 1; j < res[i - 1].length; j++) {
-            item.push(res[i - 1][j] + res[i - 1][j - 1])
-        }
-        item.push(1)
-        res.push(item)
-    }
-    return res
-};
-// @lc code=end
-
-
-```
-
-
-## 1184.公交站间的距离
-```js
-/*
- * @lc app=leetcode.cn id=1184 lang=javascript
- *
- * [1184] 公交站间的距离
- */
-
-// @lc code=start
-/**
- * @param {number[]} distance
- * @param {number} start
- * @param {number} destination
- * @return {number}
- */
-var distanceBetweenBusStops = function (distance, start, destination) {
-  if (start === destination) return 0
-  if (start > destination) [start, destination] = [destination, start];
-  const total = distance.reduce((acc, cur) => acc + cur),route = distance.slice(start, destination).reduce((acc, cur) => acc + cur);
-  return Math.min(route, total - route);
-};
-// @lc code=end
-
-
-```
-
-
-## 1185.一周中的第几天
-```js
-/*
- * @lc app=leetcode.cn id=1185 lang=javascript
- *
- * [1185] 一周中的第几天
- */
-
-// @lc code=start
-/**
- * @param {number} day
- * @param {number} month
- * @param {number} year
- * @return {string}
- */
-var dayOfTheWeek = function (day, month, year) {
-  const a = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-  return a[new Date(`${year}-${month}-${day}`).getDay()]
-};
-// @lc code=end
-
-
-```
-
-
-## 1189.气球-的最大数量
-```js
-/*
- * @lc app=leetcode.cn id=1189 lang=javascript
- *
- * [1189] “气球” 的最大数量
- */
-
-// @lc code=start
-/**
- * @param {string} text
- * @return {number}
- */
-var maxNumberOfBalloons = function (text) {
-  const map = new Map([['b', 0], ['a', 0], ['l', 0], ['o', 0], ['n', 0]])
-  for (let i = 0; i < text.length; i++) {
-    if (map.has(text[i])) map.set(text[i], map.get(text[i]) + 1)
-  }
-  let res = 0
-  while (true) {
-    if (map.get('b') >= 1 && map.get('a') >= 1 && map.get('l') >= 2 && map.get('o') >= 2 && map.get('n') >= 1) {
-      res++
-      map.set('b', map.get('b') - 1)
-      map.set('a', map.get('a') - 1)
-      map.set('l', map.get('l') - 2)
-      map.set('o', map.get('o') - 2)
-      map.set('n', map.get('n') - 1)
-    } else {
-      return res
-    }
-  }
-};
-// @lc code=end
-
-
-```
-
-
-## 119.杨辉三角-ii
-```js
-/*
- * @lc app=leetcode.cn id=119 lang=javascript
- *
- * [119] 杨辉三角 II
- */
-
-// @lc code=start
-/**
- * @param {number} rowIndex
- * @return {number[]}
- */
-var getRow = function (rowIndex) {
-    let res = [[1]]
-    for (let i = 1; i < rowIndex + 1; i++) {
-        let item = [1]
-        for (let j = 1; j < res[i - 1].length; j++) {
-            item.push(res[i - 1][j] + res[i - 1][j - 1])
-        }
-        item.push(1)
-        res.push(item)
-    }
-    return res.pop()
-};
-// @lc code=end
-
-
-```
-
-
-## 1200.最小绝对差
-```js
-/*
- * @lc app=leetcode.cn id=1200 lang=javascript
- *
- * [1200] 最小绝对差
- */
-
-// @lc code=start
-/**
- * @param {number[]} arr
- * @return {number[][]}
- */
-var minimumAbsDifference = function (arr) {
-  arr = arr.sort((a, b) => a - b)
-  let c = Number.MAX_VALUE, res = []
-  for (let i = 1; i < arr.length; i++) {
-    const v = arr[i] - arr[i - 1]
-    if (v > c) continue
-    else if (v < c) {
-      res = []
-      c = v
-    }
-    res.push([arr[i - 1], arr[i]])
-  }
-  return res
-};
-// @lc code=end
-
-
-```
-
-
-## 1207.独一无二的出现次数
-```js
-/*
- * @lc app=leetcode.cn id=1207 lang=javascript
- *
- * [1207] 独一无二的出现次数
- */
-
-// @lc code=start
-/**
- * @param {number[]} arr
- * @return {boolean}
- */
-var uniqueOccurrences = function (arr) {
-  arr = arr.sort((a, b) => a - b)
-  const map = new Map()
-  let curr = 0
-  for (let i = 0; i < arr.length; i++) {
-    curr++
-    if (arr[i] === arr[i + 1]) continue
-    if (map.has(curr)) return false
-    map.set(curr, arr[i])
-    curr = 0
-  }
-  return true
-};
-// @lc code=end
-
-
-```
-
-
-## 121.买卖股票的最佳时机
-```js
-/*
- * @lc app=leetcode.cn id=121 lang=javascript
- *
- * [121] 买卖股票的最佳时机
- */
-
-// @lc code=start
-/**
- * @param {number[]} prices
- * @return {number}
- */
-var maxProfit = function (prices) {
-    let min = Number.MAX_SAFE_INTEGER, max = 0
-    for (let i = 0; i < prices.length; i++) {
-        min = Math.min(min, prices[i])
-        max = Math.max(max, prices[i] - min)
-    }
-    return max
-};
-// @lc code=end
-
-
-```
-
-
-## 1217.玩筹码
-```js
-/*
- * @lc app=leetcode.cn id=1217 lang=javascript
- *
- * [1217] 玩筹码
- */
-
-// @lc code=start
-/**
- * @param {number[]} position
- * @return {number}
- */
-var minCostToMoveChips = function(position) {
-
-};
-// @lc code=end
-
-
-```
-
-
-## 1221.分割平衡字符串
-```js
-/*
- * @lc app=leetcode.cn id=1221 lang=javascript
- *
- * [1221] 分割平衡字符串
- */
-
-// @lc code=start
-/**
- * @param {string} s
- * @return {number}
- */
-var balancedStringSplit = function (s) {
-  let res = 0, r = 0, l = 0
-  for (let i = 0; i < s.length; i++) {
-    if (s[i] === 'R') r++
-    else l++
-    if (r === l) {
-      res++
-      r = 0
-      l = 0
-    }
-  }
-  return res
-};
-// @lc code=end
-
-
-```
-
-
-## 1232.缀点成线
-```js
-/*
- * @lc app=leetcode.cn id=1232 lang=javascript
- *
- * [1232] 缀点成线
- */
-
-// @lc code=start
-/**
- * @param {number[][]} coordinates
- * @return {boolean}
- */
-var checkStraightLine = function (coordinates) {
-  for (let i = 2; i < coordinates.length; i++) {
-    const x = (coordinates[i][0] - coordinates[0][0]) / (coordinates[i][1] - coordinates[0][1]), y = (coordinates[i][0] - coordinates[1][0]) / (coordinates[i][1] - coordinates[1][1])
-    if (x !== y && !((x === Infinity || x === -Infinity) && (y === Infinity || y === -Infinity))) {
-      return false
-    }
-  }
-  return true
-};
-// @lc code=end
-
-
-```
-
-
-## 125.验证回文串
-```js
-/*
- * @lc app=leetcode.cn id=125 lang=javascript
- *
- * [125] 验证回文串
- */
-
-// @lc code=start
-/**
- * @param {string} s
- * @return {boolean}
- */
-var isPalindrome = function (s) {
-    if (s.trim() === "") return true
-    s = (s.match(/[0-9a-z]/ig) || []).map(i => i.toLocaleLowerCase())
-    for (let i = 0; i < s.length / 2; i++) {
-        if (s[i] !== s[s.length - i - 1]) return false
-    }
-    return true
-};
-// @lc code=end
-
-
-```
-
-
-## 1252.奇数值单元格的数目
-```js
-/*
- * @lc app=leetcode.cn id=1252 lang=javascript
- *
- * [1252] 奇数值单元格的数目
- */
-
-// @lc code=start
-/**
- * @param {number} m
- * @param {number} n
- * @param {number[][]} indices
- * @return {number}
- */
-var oddCells = function (m, n, indices) {
-  const arr = [];
-  let res = 0;
-  for (let i = 0; i < indices.length; i++) {
-    const [x, y] = indices[i]
-    for (let j = 0; j < m; j++) {
-      if (i === 0) arr.push([])
-      for (let z = 0; z < n; z++) {
-        if (i === 0) arr[j].push(0)
-        if (x === j || y === z) {
-          arr[j][z] += 1
-        }
-        if (x === j && y === z) {
-          arr[j][z] += 1
-        }
-        if (i === indices.length - 1) {
-          if (arr[j][z] % 2 !== 0) res++
-        }
-      }
-    }
-  }
-  return res
-};
-// @lc code=end
-
-
-```
-
-
-## 1281.整数的各位积和之差
-```js
-/*
- * @lc app=leetcode.cn id=1281 lang=javascript
- *
- * [1281] 整数的各位积和之差
- */
-
-// @lc code=start
-/**
- * @param {number} n
- * @return {number}
- */
-var subtractProductAndSum = function (n) {
-  n = n.toString();
-  let a = 1, b = 0;
-  for (let i = 0; i < n.length; i++) {
-    a *= Number(n[i])
-    b += Number(n[i])
-  }
-  return a - b
-};
-// @lc code=end
-
-
-```
-
-
-## 1287.有序数组中出现次数超过-25-的元素
-```js
-/*
- * @lc app=leetcode.cn id=1287 lang=javascript
- *
- * [1287] 有序数组中出现次数超过25%的元素
- */
-
-// @lc code=start
-/**
- * @param {number[]} arr
- * @return {number}
- */
-var findSpecialInteger = function (arr) {
-  let res = 0, count = 1
-  if (arr.length < 3) return arr[0]
-  for (let i = 1; i < arr.length; i++) {
-    if (arr[i] === arr[i - 1]) {
-      count++
-      res = arr[i]
-      if (count > arr.length / 4) return res
-    } else {
-      res = 0
-      count = 1
-    }
-  }
-  return res
-};
-// @lc code=end
-
-
-```
-
-
-## 1290.二进制链表转整数
-```js
-/*
- * @lc app=leetcode.cn id=1290 lang=javascript
- *
- * [1290] 二进制链表转整数
+ * [2] 两数相加
  */
 
 // @lc code=start
@@ -1267,16 +34,22 @@ var findSpecialInteger = function (arr) {
  * }
  */
 /**
- * @param {ListNode} head
- * @return {number}
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
  */
-var getDecimalValue = function (head) {
-  let num = ''
-  while (head) {
-    num += head.val
-    head = head.next
-  }
-  return parseInt(num, 2)
+var addTwoNumbers = function (l1, l2) {
+    let out = new ListNode()
+    while (l1 || l2) {
+        const value = l1 ? l1.value : 0 + l2 ? l2.value : 0
+        if (value > 10) {
+            out.value = value
+            l1.next.value += 1
+        } else {
+            out.value = value - 10
+        }
+    }
+    return out
 };
 // @lc code=end
 
@@ -1284,52 +57,28 @@ var getDecimalValue = function (head) {
 ```
 
 
-## 1295.统计位数为偶数的数字
+## 4.寻找两个正序数组的中位数
 ```js
 /*
- * @lc app=leetcode.cn id=1295 lang=javascript
+ * @lc app=leetcode.cn id=4 lang=javascript
  *
- * [1295] 统计位数为偶数的数字
+ * [4] 寻找两个正序数组的中位数
  */
 
 // @lc code=start
 /**
- * @param {number[]} nums
+ * @param {number[]} nums1
+ * @param {number[]} nums2
  * @return {number}
  */
-var findNumbers = function (nums) {
-  let res = 0
-  for (let i = 0; i < nums.length; i++) {
-    if (nums[i].toString().length % 2 === 0) res++
-  }
-  return res
-};
-// @lc code=end
-
-
-```
-
-
-## 1299.将每个元素替换为右侧最大元素
-```js
-/*
- * @lc app=leetcode.cn id=1299 lang=javascript
- *
- * [1299] 将每个元素替换为右侧最大元素
- */
-
-// @lc code=start
-/**
- * @param {number[]} arr
- * @return {number[]}
- */
-var replaceElements = function (arr) {
-  const res = []
-  for (let i = 0; i < arr.length - 1; i++) {
-    res.push(Math.max(...arr.slice(i + 1, arr.length)))
-  }
-  res.push(-1)
-  return res
+var findMedianSortedArrays = function (nums1, nums2) {
+    const nums = [...nums1, ...nums2].sort((a, b) => b - a)
+    if (nums.length % 2 === 0) {
+        const end = nums.length / 2
+        return ((nums[end - 1] + nums[end]) / 2).toFixed(5).toString().padEnd(5, "0")
+    } else {
+        return nums[(nums.length - 1) / 2] + ".00000"
+    }
 };
 // @lc code=end
 
@@ -1386,678 +135,6 @@ var romanToInt = function (s) {
 ```
 
 
-## 1304.和为零的n个唯一整数
-```js
-/*
- * @lc app=leetcode.cn id=1304 lang=javascript
- *
- * [1304] 和为零的N个唯一整数
- */
-
-// @lc code=start
-/**
- * @param {number} n
- * @return {number[]}
- */
-var sumZero = function (n) {
-  const res = []
-  let count = 0
-  for (let i = 1; i < n; i++) {
-    res.push(i)
-    count += i
-  }
-  res.push(-count)
-  return res
-};
-// @lc code=end
-
-
-```
-
-
-## 1309.解码字母到整数映射
-```js
-/*
- * @lc app=leetcode.cn id=1309 lang=javascript
- *
- * [1309] 解码字母到整数映射
- */
-
-// @lc code=start
-/**
- * @param {string} s
- * @return {string}
- */
-var freqAlphabets = function (s) {
-  let res = ''
-  for (let i = 0; i < s.length; i++) {
-    if (s[i + 2] === "#") {
-      res += String.fromCharCode(Number(s[i] + s[i + 1]) + 96)
-      i += 2
-    } else {
-      res += String.fromCharCode(Number(s[i]) + 96)
-    }
-  }
-  return res
-};
-// @lc code=end
-
-
-```
-
-
-## 1313.解压缩编码列表
-```js
-/*
- * @lc app=leetcode.cn id=1313 lang=javascript
- *
- * [1313] 解压缩编码列表
- */
-
-// @lc code=start
-/**
- * @param {number[]} nums
- * @return {number[]}
- */
-var decompressRLElist = function (nums) {
-  const res = []
-  for (let i = 0; i < nums.length; i += 2) {
-    for (let j = 0; j < nums[i]; j++) {
-      res.push(nums[i + 1])
-    }
-  }
-  return res
-};
-// @lc code=end
-
-
-```
-
-
-## 1317.将整数转换为两个无零整数的和
-```js
-/*
- * @lc app=leetcode.cn id=1317 lang=javascript
- *
- * [1317] 将整数转换为两个无零整数的和
- */
-
-// @lc code=start
-/**
- * @param {number} n
- * @return {number[]}
- */
-var getNoZeroIntegers = function (n) {
-  for (let i = 1; i < (n / 2) + 1; i++) {
-    if (!i.toString().includes('0') && !(n - i).toString().includes('0')) return [i, n - i]
-  }
-};
-// @lc code=end
-
-
-```
-
-
-## 1323.6-和-9-组成的最大数字
-```js
-/*
- * @lc app=leetcode.cn id=1323 lang=javascript
- *
- * [1323] 6 和 9 组成的最大数字
- */
-
-// @lc code=start
-/**
- * @param {number} num
- * @return {number}
- */
-var maximum69Number  = function(num) {
-  return Number(num.toString().replace('6','9'))
-};
-// @lc code=end
-
-
-```
-
-
-## 1331.数组序号转换
-```js
-/*
- * @lc app=leetcode.cn id=1331 lang=javascript
- *
- * [1331] 数组序号转换
- */
-
-// @lc code=start
-/**
- * @param {number[]} arr
- * @return {number[]}
- */
-var arrayRankTransform = function (arr) {
-  const a = [...new Set([...arr].sort((a, b) => a - b))], res = []
-  for (let i = 0; i < arr.length; i++) {
-    res.push(a.indexOf(arr[i]) + 1)
-  }
-  return res
-};
-// @lc code=end
-
-
-```
-
-
-## 1332.删除回文子序列
-```js
-/*
- * @lc app=leetcode.cn id=1332 lang=javascript
- *
- * [1332] 删除回文子序列
- */
-
-// @lc code=start
-/**
-//  * @param {string} s
-//  * @return {number}
-//  */
-// const removePalindromeSub = (s) => {
-//   let res = 0, i = 0
-//   while (s.length > 0) {
-//     const a = s.substring(0, s.length - i)
-//     if (a.split('').reverse().join('')) {
-//       res++
-//       s = s.substring(s.length - i, s.length)
-//       i = 0
-//     } else {
-//       i++
-//     }
-//   }
-//   return res
-// };
-
-/**
- * @param {string} s
- * @return {number}
- */
-const removePalindromeSub = s => s === s.split('').reverse().join('') ? 1 : 2
-
-// @lc code=end
-
-
-```
-
-
-## 1337.矩阵中战斗力最弱的-k-行
-```js
-/*
- * @lc app=leetcode.cn id=1337 lang=javascript
- *
- * [1337] 矩阵中战斗力最弱的 K 行
- */
-
-// @lc code=start
-/**
- * @param {number[][]} mat
- * @param {number} k
- * @return {number[]}
- */
-var kWeakestRows = function (mat, k) {
-  const arr = []
-  for (let i = 0; i < mat.length; i++) {
-    let c = 0
-    for (let j = 0; j < mat[i].length; j++) {
-      if (mat[i][j] === 0) {
-        arr.push({ i, c })
-        c = 0
-        break
-      } else {
-        c++
-        if (c === mat[i].length) {
-          arr.push({ i, c })
-          c = 0
-        }
-      }
-    }
-  }
-  return arr.sort((a, b) => a.c - b.c).slice(0, k).map((item) => item.i)
-
-};
-// @lc code=end
-
-
-```
-
-
-## 1342.将数字变成-0-的操作次数
-```js
-/*
- * @lc app=leetcode.cn id=1342 lang=javascript
- *
- * [1342] 将数字变成 0 的操作次数
- */
-
-// @lc code=start
-/**
- * @param {number} num
- * @return {number}
- */
-var numberOfSteps = function (num) {
-  let res = 0
-  while (num > 0) {
-    if (num % 2 === 0) num = num / 2
-    else num--
-    res++
-  }
-  return res
-};
-// @lc code=end
-
-
-```
-
-
-## 1346.检查整数及其两倍数是否存在
-```js
-/*
- * @lc app=leetcode.cn id=1346 lang=javascript
- *
- * [1346] 检查整数及其两倍数是否存在
- */
-
-// @lc code=start
-/**
- * @param {number[]} arr
- * @return {boolean}
- */
-// var checkIfExist = function (arr) {
-//   for (let i = 0; i < arr.length - 1; i++) {
-//     for (let j = i + 1; j < arr.length; j++) {
-//       if (arr[i] * 2 === arr[j] || arr[i] === arr[j] * 2) return true
-//     }
-//   }
-//   return false
-// };
-
-var checkIfExist = function (arr) {
-  const set = new Set()
-  for (let i = 0; i < arr.length; i++) {
-    if (set.has(arr[i])) return true
-    else {
-      set.add(arr[i] * 2)
-      set.add(arr[i] / 2)
-    }
-  }
-  return false
-};
-// @lc code=end
-
-
-```
-
-
-## 1351.统计有序矩阵中的负数
-```js
-/*
- * @lc app=leetcode.cn id=1351 lang=javascript
- *
- * [1351] 统计有序矩阵中的负数
- */
-
-// @lc code=start
-/**
- * @param {number[][]} grid
- * @return {number}
- */
-var countNegatives = function (grid) {
-  let res = 0
-  for (let i = grid.length - 1; i >= 0; i--) {
-    if (grid[i][grid[i].length - 1] > -1) break
-    for (let j = grid[i].length - 1; j >= 0; j--) {
-      if (grid[i][j] < 0) res++
-      else continue
-    }
-  }
-  return res
-};
-// @lc code=end
-
-
-```
-
-
-## 1356.根据数字二进制下-1-的数目排序
-```js
-/*
- * @lc app=leetcode.cn id=1356 lang=javascript
- *
- * [1356] 根据数字二进制下 1 的数目排序
- */
-
-// @lc code=start
-/**
- * @param {number[]} arr
- * @return {number[]}
- */
-const sortByBits = (arr) => arr.sort((a, b) => count(a) - count(b) || a - b);
-
-const count = (num) => num.toString(2).split("").reduce((p, c) => {
-  if (c === "1") p++
-  return p
-}, 0)
-
-// @lc code=end
-
-
-```
-
-
-## 136.只出现一次的数字
-```js
-/*
- * @lc app=leetcode.cn id=136 lang=javascript
- *
- * [136] 只出现一次的数字
- */
-
-// @lc code=start
-/**
- * @param {number[]} nums
- * @return {number}
- */
-var singleNumber = function (nums) {
-    for (let j = 1; j < nums.length;) {
-        if (nums[0] === nums[j]) {
-            nums.splice(j, 1)
-            nums.shift()
-            j = 1
-        } else {
-            j++
-        }
-    }
-    return nums[0]
-};
-// @lc code=end
-
-
-```
-
-
-## 1360.日期之间隔几天
-```js
-/*
- * @lc app=leetcode.cn id=1360 lang=javascript
- *
- * [1360] 日期之间隔几天
- */
-
-// @lc code=start
-/**
- * @param {string} date1
- * @param {string} date2
- * @return {number}
- */
-var daysBetweenDates = (date1, date2) => Math.abs((new Date(date1).getTime() - new Date(date2).getTime()) / 86400000)
-// @lc code=end
-
-
-```
-
-
-## 1365.有多少小于当前数字的数字
-```js
-/*
- * @lc app=leetcode.cn id=1365 lang=javascript
- *
- * [1365] 有多少小于当前数字的数字
- */
-
-// @lc code=start
-/**
- * @param {number[]} nums
- * @return {number[]}
- */
-var smallerNumbersThanCurrent = function (nums) {
-  const res = []
-  for (let i = 0; i < nums.length; i++) {
-    let c = 0
-    for (let j = 0; j < nums.length; j++) {
-      if (i !== j && nums[i] > nums[j]) c++
-      if (j === nums.length - 1) {
-        res.push(c)
-        c = 0
-      }
-    }
-  }
-  return res
-};
-// @lc code=end
-
-
-```
-
-
-## 1370.上升下降字符串
-```js
-/*
- * @lc app=leetcode.cn id=1370 lang=javascript
- *
- * [1370] 上升下降字符串
- */
-
-// @lc code=start
-/**
- * @param {string} s
- * @return {string}
- */
-var sortString = function (s) {
-  let res = '', flag = true
-  const arr = []
-  for (let i = 0; i < s.length; i++) {
-    const j = s[i].charCodeAt() - 97
-    arr[j] = arr[j] ? arr[j] + 1 : 1
-  }
-  while (res.length < s.length) {
-    if (flag) {
-      for (let i = 0; i < arr.length; i++) {
-        if (arr[i] && arr[i] > 0) {
-          res += String.fromCharCode(i + 97)
-          arr[i] -= 1
-        }
-      }
-      flag = false
-    } else {
-      for (let i = arr.length - 1; i > -1; i--) {
-        if (arr[i] && arr[i] > 0) {
-          res += String.fromCharCode(i + 97)
-          arr[i] -= 1
-        }
-      }
-      flag = true
-    }
-  }
-  return res
-};
-// @lc code=end
-
-
-```
-
-
-## 1374.生成每种字符都是奇数个的字符串
-```js
-/*
- * @lc app=leetcode.cn id=1374 lang=javascript
- *
- * [1374] 生成每种字符都是奇数个的字符串
- */
-
-// @lc code=start
-/**
- * @param {number} n
- * @return {string}
- */
-var generateTheString = function (n) {
-  return n % 2 === 0 ? 'a'.repeat(n - 1) + 'b' : 'a'.repeat(n)
-};
-// @lc code=end
-
-
-```
-
-
-## 1380.矩阵中的幸运数
-```js
-/*
- * @lc app=leetcode.cn id=1380 lang=javascript
- *
- * [1380] 矩阵中的幸运数
- */
-
-// @lc code=start
-/**
- * @param {number[][]} matrix
- * @return {number[]}
- */
-var luckyNumbers = function (matrix) {
-  const res = []
-  for (let i = 0; i < matrix.length; i++) {
-    const item = Math.min.apply(this, matrix[i]), index = matrix[i].indexOf(item);
-    let max = item
-    for (let j = 0; j < matrix.length; j++) {
-      max = Math.max(max, matrix[j][index])
-    }
-    if (max === item) res.push(max)
-  }
-  return res
-};
-// @lc code=end
-
-
-```
-
-
-## 1385.两个数组间的距离值
-```js
-/*
- * @lc app=leetcode.cn id=1385 lang=javascript
- *
- * [1385] 两个数组间的距离值
- */
-
-// @lc code=start
-/**
- * @param {number[]} arr1
- * @param {number[]} arr2
- * @param {number} d
- * @return {number}
- */
-var findTheDistanceValue = function (arr1, arr2, d) {
-  let res = 0
-  for (let i = 0; i < arr1.length; i++) {
-    res++
-    for (let j = 0; j < arr2.length; j++) {
-      if (Math.abs(arr1[i] - arr2[j]) <= d) {
-        res--
-        break
-      }
-    }
-  }
-  return res
-};
-// @lc code=end
-
-
-```
-
-
-## 1389.按既定顺序创建目标数组
-```js
-/*
- * @lc app=leetcode.cn id=1389 lang=javascript
- *
- * [1389] 按既定顺序创建目标数组
- */
-
-// @lc code=start
-/**
- * @param {number[]} nums
- * @param {number[]} index
- * @return {number[]}
- */
-var createTargetArray = function (nums, index) {
-  const res = []
-  for (let i = 0; i < nums.length; i++) {
-    res.splice(index[i], 0, nums[i])
-  }
-  return res
-};
-// @lc code=end
-
-
-```
-
-
-## 1394.找出数组中的幸运数
-```js
-/*
- * @lc app=leetcode.cn id=1394 lang=javascript
- *
- * [1394] 找出数组中的幸运数
- */
-
-// @lc code=start
-/**
- * @param {number[]} arr
- * @return {number}
- */
-var findLucky = function (arr) {
-  const map = new Map()
-  let res = -1
-  for (let i = 0; i < arr.length; i++) {
-    map.set(arr[i], map.has(arr[i]) ? map.get(arr[i]) + 1 : 1)
-  }
-  for (const [k, v] of map) {
-    if (k === v) res = Math.max(res, k)
-  }
-  return res
-};
-// @lc code=end
-
-
-```
-
-
-## 1399.统计最大组的数目
-```js
-/*
- * @lc app=leetcode.cn id=1399 lang=javascript
- *
- * [1399] 统计最大组的数目
- */
-
-// @lc code=start
-/**
- * @param {number} n
- * @return {number}
- */
-var countLargestGroup = function (n) {
-  const map = new Map()
-  let res = 0, max = 0
-  for (let i = 1; i <= n; i++) {
-    const a = i.toString().split("").reduce((p, v) => p + Number(v), 0)
-    map.set(a, map.has(a) ? map.get(a) + 1 : 1)
-    max = Math.max(max, map.get(a))
-  }
-  for (const v of map.values()) {
-    if (v === max) res++
-  }
-  return res
-};
-// @lc code=end
-
-
-```
-
-
 ## 14.最长公共前缀
 ```js
 /*
@@ -2100,29 +177,677 @@ var longestCommonPrefix = function (strs) {
 ```
 
 
-## 1403.非递增顺序的最小子序列
+## 21.合并两个有序链表
 ```js
 /*
- * @lc app=leetcode.cn id=1403 lang=javascript
+ * @lc app=leetcode.cn id=21 lang=javascript
  *
- * [1403] 非递增顺序的最小子序列
+ * [21] 合并两个有序链表
+ */
+
+// @lc code=start
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var mergeTwoLists = function (l1, l2) {
+    let headnode = new ListNode(), node = headnode;
+    while (l1 && l2) {
+        if (l1.val < l2.val) {
+            node.next = l1
+            l1 = l1.next
+        } else {
+            node.next = l2
+            l2 = l2.next
+        }
+        node = node.next
+    }
+    node.next = l1 || l2
+    return headnode.next
+};
+// @lc code=end
+
+
+```
+
+
+## 26.删除有序数组中的重复项
+```js
+/*
+ * @lc app=leetcode.cn id=26 lang=javascript
+ *
+ * [26] 删除有序数组中的重复项
  */
 
 // @lc code=start
 /**
  * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function (nums) {
+    for (let i = 0; i < nums.length;) {
+        if (nums[i] === nums[i - 1]) {
+            nums.splice(i - 1, 1)
+        } else {
+            i++
+        }
+    }
+    return nums.length
+};
+// @lc code=end
+
+
+```
+
+
+## 27.移除元素
+```js
+/*
+ * @lc app=leetcode.cn id=27 lang=javascript
+ *
+ * [27] 移除元素
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums
+ * @param {number} val
+ * @return {number}
+ */
+var removeElement = function (nums, val) {
+    for (let i = 0; i < nums.length;) {
+        if (nums[i] === val) {
+            nums.splice(i, 1)
+        } else {
+            i++
+        }
+    }
+    return nums.length
+};
+// @lc code=end
+
+
+```
+
+
+## 35.搜索插入位置
+```js
+/*
+ * @lc app=leetcode.cn id=35 lang=javascript
+ *
+ * [35] 搜索插入位置
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var searchInsert = function (nums, target) {
+    if (target <= nums[0]) return 0
+    if (target > nums[nums.length - 1]) return nums.length
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i - 1] <= target && nums[i] >= target) return i
+    }
+};
+// @lc code=end
+
+
+```
+
+
+## 53.最大子序和
+```js
+/*
+ * @lc app=leetcode.cn id=53 lang=javascript
+ *
+ * [53] 最大子序和
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSubArray = function (nums) {
+    let prev = 0, max = -Number.MAX_VALUE
+    for (let i = 0; i < nums.length; i++) {
+        prev = Math.max(prev + nums[i], nums[i])
+        max = Math.max(max, prev)
+    }
+    return max
+};
+// @lc code=end
+
+
+```
+
+
+## 58.最后一个单词的长度
+```js
+/*
+ * @lc app=leetcode.cn id=58 lang=javascript
+ *
+ * [58] 最后一个单词的长度
+ */
+
+// @lc code=start
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLastWord = function (s) {
+    const arr = s.trim().split(" ")
+    return arr[arr.length - 1].length
+};
+// @lc code=end
+
+
+```
+
+
+## 66.加一
+```js
+/*
+ * @lc app=leetcode.cn id=66 lang=javascript
+ *
+ * [66] 加一
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} digits
  * @return {number[]}
  */
-var minSubsequence = function (nums) {
-  nums.sort((a, b) => b - a)
-  let count = nums.reduce((p, v) => p + v), s = 0
-  const res = []
-  for (let i = 0; i < nums.length; i++) {
-    s += nums[i]
-    count -= nums[i]
-    res.push(nums[i])
-    if (s > count) return res
-  }
+var plusOne = function (digits) {
+    for (let i = digits.length - 1; i > -1; i--) {
+        digits[i]++
+        if (digits[i] > 9) {
+            digits[i] = 0
+        } else {
+            return digits
+        }
+    }
+    digits.unshift(1)
+    return digits
+};
+// @lc code=end
+
+
+```
+
+
+## 67.二进制求和
+```js
+/*
+ * @lc app=leetcode.cn id=67 lang=javascript
+ *
+ * [67] 二进制求和
+ */
+
+// @lc code=start
+/**
+ * @param {string} a
+ * @param {string} b
+ * @return {string}
+ */
+var addBinary = function (a, b) {
+    return (BigInt("0b" + a) + BigInt("0b" + b)).toString(2)
+};
+// @lc code=end
+
+
+```
+
+
+## 83.删除排序链表中的重复元素
+```js
+/*
+ * @lc app=leetcode.cn id=83 lang=javascript
+ *
+ * [83] 删除排序链表中的重复元素
+ */
+
+import { left } from "inquirer/lib/utils/readline";
+
+// @lc code=start
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var deleteDuplicates = function (head) {
+    let node = head
+    while (node) {
+        const next = node.next
+        if (next && (next.val === node.val)) {
+            node.next = next.next
+        } else {
+            node = node.next
+        }
+    }
+    return head
+};
+// @lc code=end
+
+
+```
+
+
+## 88.合并两个有序数组
+```js
+/*
+ * @lc app=leetcode.cn id=88 lang=javascript
+ *
+ * [88] 合并两个有序数组
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums1
+ * @param {number} m
+ * @param {number[]} nums2
+ * @param {number} n
+ * @return {void} Do not return anything, modify nums1 in-place instead.
+ */
+var merge = function (nums1, m, nums2, n) {
+    for (let i = m + n - 1; i >= 0; i--) {
+        if (n === 0) break
+        if (nums1[m - 1] > nums2[n - 1]) {
+            nums1[i] = nums1[m - 1];
+            m--;
+        } else {
+            nums1[i] = nums2[n - 1]
+            n--;
+        }
+    }
+};
+// @lc code=end
+
+
+```
+
+
+## 94.二叉树的中序遍历
+```js
+/*
+ * @lc app=leetcode.cn id=94 lang=javascript
+ *
+ * [94] 二叉树的中序遍历
+ */
+
+// @lc code=start
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var inorderTraversal = function (root) {
+    let res = [], stack = []
+    while (root || stack.length > 0) {
+        if(root){
+            stack.push(root)
+            root = root.left
+        }else{
+            root = stack.pop()
+            res.push(root.val)
+            root = root.right
+        }
+    }
+    return res
+};
+// @lc code=end
+
+
+```
+
+
+## 100.相同的树
+```js
+/*
+ * @lc app=leetcode.cn id=100 lang=javascript
+ *
+ * [100] 相同的树
+ */
+
+// @lc code=start
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {boolean}
+ */
+var isSameTree = function (p, q) {
+    let stackP = [], stackQ = []
+    while (p || stackP.length || q || stackQ.length) {
+        if (p || q) {
+            if ((!p || !q) || p.val !== q.val) return false
+            stackP.push(p)
+            stackQ.push(q)
+            p = p.left
+            q = q.left
+        } else {
+            p = stackP.pop()
+            q = stackQ.pop()
+            if (p.val !== q.val) return false
+            p = p.right
+            q = q.right
+        }
+    }
+    return true
+};
+// @lc code=end
+
+
+```
+
+
+## 101.对称二叉树
+```js
+/*
+ * @lc app=leetcode.cn id=101 lang=javascript
+ *
+ * [101] 对称二叉树
+ */
+
+// @lc code=start
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isSymmetric = function (root) {
+    let stackP = [], stackQ = [], p = root.left, q = root.right
+    while (p || stackP.length || q || stackQ.length) {
+        if (p || q) {
+            if ((!p || !q) || p.val !== q.val) return false
+            stackP.push(p)
+            stackQ.push(q)
+            p = p.left
+            q = q.right
+        } else {
+            p = stackP.pop()
+            q = stackQ.pop()
+            if (p.val !== q.val) return false
+            p = p.right
+            q = q.left
+        }
+    }
+    return true
+};
+// @lc code=end
+
+
+```
+
+
+## 104.二叉树的最大深度
+```js
+/*
+ * @lc app=leetcode.cn id=104 lang=javascript
+ *
+ * [104] 二叉树的最大深度
+ */
+
+// @lc code=start
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var maxDepth = function (root) {
+    if (!root) return 0
+    return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1
+};
+// @lc code=end
+
+
+```
+
+
+## 108.将有序数组转换为二叉搜索树
+```js
+/*
+ * @lc app=leetcode.cn id=108 lang=javascript
+ *
+ * [108] 将有序数组转换为二叉搜索树
+ */
+
+// @lc code=start
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {number[]} nums
+ * @return {TreeNode}
+ */
+var sortedArrayToBST = function(nums) {
+
+};
+// @lc code=end
+
+
+```
+
+
+## 110.平衡二叉树
+```js
+/*
+ * @lc app=leetcode.cn id=110 lang=javascript
+ *
+ * [110] 平衡二叉树
+ */
+
+// @lc code=start
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isBalanced = function(root) {
+
+};
+// @lc code=end
+
+
+```
+
+
+## 118.杨辉三角
+```js
+/*
+ * @lc app=leetcode.cn id=118 lang=javascript
+ *
+ * [118] 杨辉三角
+ */
+
+// @lc code=start
+/**
+ * @param {number} numRows
+ * @return {number[][]}
+ */
+var generate = function (numRows) {
+    let res = [[1]]
+    for (let i = 1; i < numRows; i++) {
+        let item = [1]
+        for (let j = 1; j < res[i - 1].length; j++) {
+            item.push(res[i - 1][j] + res[i - 1][j - 1])
+        }
+        item.push(1)
+        res.push(item)
+    }
+    return res
+};
+// @lc code=end
+
+
+```
+
+
+## 119.杨辉三角-ii
+```js
+/*
+ * @lc app=leetcode.cn id=119 lang=javascript
+ *
+ * [119] 杨辉三角 II
+ */
+
+// @lc code=start
+/**
+ * @param {number} rowIndex
+ * @return {number[]}
+ */
+var getRow = function (rowIndex) {
+    let res = [[1]]
+    for (let i = 1; i < rowIndex + 1; i++) {
+        let item = [1]
+        for (let j = 1; j < res[i - 1].length; j++) {
+            item.push(res[i - 1][j] + res[i - 1][j - 1])
+        }
+        item.push(1)
+        res.push(item)
+    }
+    return res.pop()
+};
+// @lc code=end
+
+
+```
+
+
+## 121.买卖股票的最佳时机
+```js
+/*
+ * @lc app=leetcode.cn id=121 lang=javascript
+ *
+ * [121] 买卖股票的最佳时机
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function (prices) {
+    let min = Number.MAX_SAFE_INTEGER, max = 0
+    for (let i = 0; i < prices.length; i++) {
+        min = Math.min(min, prices[i])
+        max = Math.max(max, prices[i] - min)
+    }
+    return max
+};
+// @lc code=end
+
+
+```
+
+
+## 125.验证回文串
+```js
+/*
+ * @lc app=leetcode.cn id=125 lang=javascript
+ *
+ * [125] 验证回文串
+ */
+
+// @lc code=start
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isPalindrome = function (s) {
+    if (s.trim() === "") return true
+    s = (s.match(/[0-9a-z]/ig) || []).map(i => i.toLocaleLowerCase())
+    for (let i = 0; i < s.length / 2; i++) {
+        if (s[i] !== s[s.length - i - 1]) return false
+    }
+    return true
+};
+// @lc code=end
+
+
+```
+
+
+## 136.只出现一次的数字
+```js
+/*
+ * @lc app=leetcode.cn id=136 lang=javascript
+ *
+ * [136] 只出现一次的数字
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var singleNumber = function (nums) {
+    for (let j = 1; j < nums.length;) {
+        if (nums[0] === nums[j]) {
+            nums.splice(j, 1)
+            nums.shift()
+            j = 1
+        } else {
+            j++
+        }
+    }
+    return nums[0]
 };
 // @lc code=end
 
@@ -2470,46 +1195,6 @@ var hammingWeight = function(n) {
 ```
 
 
-## 2.两数相加
-```js
-/*
- * @lc app=leetcode.cn id=2 lang=javascript
- *
- * [2] 两数相加
- */
-
-// @lc code=start
-/**
- * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
- */
-/**
- * @param {ListNode} l1
- * @param {ListNode} l2
- * @return {ListNode}
- */
-var addTwoNumbers = function (l1, l2) {
-    let out = new ListNode()
-    while (l1 || l2) {
-        const value = l1 ? l1.value : 0 + l2 ? l2.value : 0
-        if (value > 10) {
-            out.value = value
-            l1.next.value += 1
-        } else {
-            out.value = value - 10
-        }
-    }
-    return out
-};
-// @lc code=end
-
-
-```
-
-
 ## 202.快乐数
 ```js
 /*
@@ -2672,107 +1357,6 @@ var reverseList = function(head) {
 ```
 
 
-## 21.合并两个有序链表
-```js
-/*
- * @lc app=leetcode.cn id=21 lang=javascript
- *
- * [21] 合并两个有序链表
- */
-
-// @lc code=start
-/**
- * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
- */
-/**
- * @param {ListNode} l1
- * @param {ListNode} l2
- * @return {ListNode}
- */
-var mergeTwoLists = function (l1, l2) {
-    let headnode = new ListNode(), node = headnode;
-    while (l1 && l2) {
-        if (l1.val < l2.val) {
-            node.next = l1
-            l1 = l1.next
-        } else {
-            node.next = l2
-            l2 = l2.next
-        }
-        node = node.next
-    }
-    node.next = l1 || l2
-    return headnode.next
-};
-// @lc code=end
-
-
-```
-
-
-## 26.删除有序数组中的重复项
-```js
-/*
- * @lc app=leetcode.cn id=26 lang=javascript
- *
- * [26] 删除有序数组中的重复项
- */
-
-// @lc code=start
-/**
- * @param {number[]} nums
- * @return {number}
- */
-var removeDuplicates = function (nums) {
-    for (let i = 0; i < nums.length;) {
-        if (nums[i] === nums[i - 1]) {
-            nums.splice(i - 1, 1)
-        } else {
-            i++
-        }
-    }
-    return nums.length
-};
-// @lc code=end
-
-
-```
-
-
-## 27.移除元素
-```js
-/*
- * @lc app=leetcode.cn id=27 lang=javascript
- *
- * [27] 移除元素
- */
-
-// @lc code=start
-/**
- * @param {number[]} nums
- * @param {number} val
- * @return {number}
- */
-var removeElement = function (nums, val) {
-    for (let i = 0; i < nums.length;) {
-        if (nums[i] === val) {
-            nums.splice(i, 1)
-        } else {
-            i++
-        }
-    }
-    return nums.length
-};
-// @lc code=end
-
-
-```
-
-
 ## 338.比特位计数
 ```js
 /*
@@ -2844,33 +1428,6 @@ var isPowerOfFour = function (n) {
  */
 
 
-// @lc code=end
-
-
-```
-
-
-## 35.搜索插入位置
-```js
-/*
- * @lc app=leetcode.cn id=35 lang=javascript
- *
- * [35] 搜索插入位置
- */
-
-// @lc code=start
-/**
- * @param {number[]} nums
- * @param {number} target
- * @return {number}
- */
-var searchInsert = function (nums, target) {
-    if (target <= nums[0]) return 0
-    if (target > nums[nums.length - 1]) return nums.length
-    for (let i = 0; i < nums.length; i++) {
-        if (nums[i - 1] <= target && nums[i] >= target) return i
-    }
-};
 // @lc code=end
 
 
@@ -3031,35 +1588,6 @@ var isSubsequence = function (s, t) {
     t = t.replace(t[index], "")
   }
   return false
-};
-// @lc code=end
-
-
-```
-
-
-## 4.寻找两个正序数组的中位数
-```js
-/*
- * @lc app=leetcode.cn id=4 lang=javascript
- *
- * [4] 寻找两个正序数组的中位数
- */
-
-// @lc code=start
-/**
- * @param {number[]} nums1
- * @param {number[]} nums2
- * @return {number}
- */
-var findMedianSortedArrays = function (nums1, nums2) {
-    const nums = [...nums1, ...nums2].sort((a, b) => b - a)
-    if (nums.length % 2 === 0) {
-        const end = nums.length / 2
-        return ((nums[end - 1] + nums[end]) / 2).toFixed(5).toString().padEnd(5, "0")
-    } else {
-        return nums[(nums.length - 1) / 2] + ".00000"
-    }
 };
 // @lc code=end
 
@@ -3668,33 +2196,6 @@ var detectCapitalUse = function (word) {
 ```
 
 
-## 53.最大子序和
-```js
-/*
- * @lc app=leetcode.cn id=53 lang=javascript
- *
- * [53] 最大子序和
- */
-
-// @lc code=start
-/**
- * @param {number[]} nums
- * @return {number}
- */
-var maxSubArray = function (nums) {
-    let prev = 0, max = -Number.MAX_VALUE
-    for (let i = 0; i < nums.length; i++) {
-        prev = Math.max(prev + nums[i], nums[i])
-        max = Math.max(max, prev)
-    }
-    return max
-};
-// @lc code=end
-
-
-```
-
-
 ## 541.反转字符串-ii
 ```js
 /*
@@ -3859,29 +2360,6 @@ var distributeCandies = function (candyType) {
   const len = candyType.length
   candyType = [...new Set(candyType)]
   return Math.min(len / 2, candyType.length)
-};
-// @lc code=end
-
-
-```
-
-
-## 58.最后一个单词的长度
-```js
-/*
- * @lc app=leetcode.cn id=58 lang=javascript
- *
- * [58] 最后一个单词的长度
- */
-
-// @lc code=start
-/**
- * @param {string} s
- * @return {number}
- */
-var lengthOfLastWord = function (s) {
-    const arr = s.trim().split(" ")
-    return arr[arr.length - 1].length
 };
 // @lc code=end
 
@@ -4102,37 +2580,6 @@ var judgeCircle = function (moves) {
 ```
 
 
-## 66.加一
-```js
-/*
- * @lc app=leetcode.cn id=66 lang=javascript
- *
- * [66] 加一
- */
-
-// @lc code=start
-/**
- * @param {number[]} digits
- * @return {number[]}
- */
-var plusOne = function (digits) {
-    for (let i = digits.length - 1; i > -1; i--) {
-        digits[i]++
-        if (digits[i] > 9) {
-            digits[i] = 0
-        } else {
-            return digits
-        }
-    }
-    digits.unshift(1)
-    return digits
-};
-// @lc code=end
-
-
-```
-
-
 ## 661.图片平滑器
 ```js
 /*
@@ -4148,29 +2595,6 @@ var plusOne = function (digits) {
  */
 var imageSmoother = function(img) {
 
-};
-// @lc code=end
-
-
-```
-
-
-## 67.二进制求和
-```js
-/*
- * @lc app=leetcode.cn id=67 lang=javascript
- *
- * [67] 二进制求和
- */
-
-// @lc code=start
-/**
- * @param {string} a
- * @param {string} b
- * @return {string}
- */
-var addBinary = function (a, b) {
-    return (BigInt("0b" + a) + BigInt("0b" + b)).toString(2)
 };
 // @lc code=end
 
@@ -4956,46 +3380,6 @@ var toGoatLatin = function (sentence) {
 ```
 
 
-## 83.删除排序链表中的重复元素
-```js
-/*
- * @lc app=leetcode.cn id=83 lang=javascript
- *
- * [83] 删除排序链表中的重复元素
- */
-
-import { left } from "inquirer/lib/utils/readline";
-
-// @lc code=start
-/**
- * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
- */
-/**
- * @param {ListNode} head
- * @return {ListNode}
- */
-var deleteDuplicates = function (head) {
-    let node = head
-    while (node) {
-        const next = node.next
-        if (next && (next.val === node.val)) {
-            node.next = next.next
-        } else {
-            node = node.next
-        }
-    }
-    return head
-};
-// @lc code=end
-
-
-```
-
-
 ## 830.较大分组的位置
 ```js
 /*
@@ -5215,40 +3599,6 @@ var lemonadeChange = function (bills) {
     }
   }
   return true
-};
-// @lc code=end
-
-
-```
-
-
-## 88.合并两个有序数组
-```js
-/*
- * @lc app=leetcode.cn id=88 lang=javascript
- *
- * [88] 合并两个有序数组
- */
-
-// @lc code=start
-/**
- * @param {number[]} nums1
- * @param {number} m
- * @param {number[]} nums2
- * @param {number} n
- * @return {void} Do not return anything, modify nums1 in-place instead.
- */
-var merge = function (nums1, m, nums2, n) {
-    for (let i = m + n - 1; i >= 0; i--) {
-        if (n === 0) break
-        if (nums1[m - 1] > nums2[n - 1]) {
-            nums1[i] = nums1[m - 1];
-            m--;
-        } else {
-            nums1[i] = nums2[n - 1]
-            n--;
-        }
-    }
 };
 // @lc code=end
 
@@ -5634,47 +3984,6 @@ var reorderLogFiles = function (logs) {
     else return n
   })
   return [...zimu, ...shuzi]
-};
-// @lc code=end
-
-
-```
-
-
-## 94.二叉树的中序遍历
-```js
-/*
- * @lc app=leetcode.cn id=94 lang=javascript
- *
- * [94] 二叉树的中序遍历
- */
-
-// @lc code=start
-/**
- * Definition for a binary tree node.
- * function TreeNode(val, left, right) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.left = (left===undefined ? null : left)
- *     this.right = (right===undefined ? null : right)
- * }
- */
-/**
- * @param {TreeNode} root
- * @return {number[]}
- */
-var inorderTraversal = function (root) {
-    let res = [], stack = []
-    while (root || stack.length > 0) {
-        if(root){
-            stack.push(root)
-            root = root.left
-        }else{
-            root = stack.pop()
-            res.push(root.val)
-            root = root.right
-        }
-    }
-    return res
 };
 // @lc code=end
 
@@ -6079,6 +4388,1697 @@ var checkNorth = function (x, y, BList, pList) {
   return 0
 }
 // @lc code=end
+
+```
+
+
+## 1002.查找共用字符
+```js
+/*
+ * @lc app=leetcode.cn id=1002 lang=javascript
+ *
+ * [1002] 查找共用字符
+ */
+
+// @lc code=start
+/**
+ * @param {string[]} words
+ * @return {string[]}
+ */
+var commonChars = function (words) {
+  words = words.map(item => item.split(""))
+  if (words.length === 1) return words[0]
+  const res = []
+  for (let i = 0; i < words[0].length; i++) {
+    res.push(words[0][i])
+    for (let j = 1; j < words.length; j++) {
+      const index = words[j].indexOf(words[0][i])
+      if (index === -1) {
+        res.pop()
+        break
+      } else {
+        words[j].splice(index, 1)
+      }
+    }
+  }
+  return res
+};
+// @lc code=end
+```
+
+
+## 1005.k-次取反后最大化的数组和
+```js
+
+/*
+ * @lc app=leetcode.cn id=1005 lang=javascript
+ *
+ * [1005] K 次取反后最大化的数组和
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var largestSumAfterKNegations = function (nums, k) {
+  while (k > 0) {
+    const min = Math.min(...nums)
+    const i = nums.indexOf(min)
+    nums[i] = -nums[i]
+    k--
+  }
+  return nums.reduce((a, b) => a + b, 0)
+};
+// @lc code=end
+
+
+```
+
+
+## 1013.将数组分成和相等的三个部分
+```js
+/*
+ * @lc app=leetcode.cn id=1013 lang=javascript
+ *
+ * [1013] 将数组分成和相等的三个部分
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} arr
+ * @return {boolean}
+ */
+var canThreePartsEqualSum = function (arr) {
+  const count = arr.reduce((a, b) => a + b, 0)
+  const area = count / 3
+  let res = 0, time = 0
+  for (let i = 0; i < arr.length; i++) {
+    res += arr[i]
+    if (res === area) {
+      res = 0
+      time++
+    }
+  }
+  return time >= 3
+};
+// @lc code=end
+```
+
+
+## 1021.删除最外层的括号
+```js
+/*
+ * @lc app=leetcode.cn id=1021 lang=javascript
+ *
+ * [1021] 删除最外层的括号
+ */
+
+// @lc code=start
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var removeOuterParentheses = function (s) {
+  let res = "", count = 0
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === "(") {
+      if (count) res += s[i]
+      count++
+    } else {
+      count--
+      if (count) res += s[i]
+    }
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1025.除数博弈
+```js
+/*
+ * @lc app=leetcode.cn id=1025 lang=javascript
+ *
+ * [1025] 除数博弈
+ */
+
+// @lc code=start
+/**
+ * @param {number} n
+ * @return {boolean}
+ */
+var divisorGame = function (n) {
+  return n % 2 === 0
+};
+// @lc code=end
+
+
+```
+
+
+## 1030.距离顺序排列矩阵单元格
+```js
+/*
+ * @lc app=leetcode.cn id=1030 lang=javascript
+ *
+ * [1030] 距离顺序排列矩阵单元格
+ */
+
+// @lc code=start
+/**
+ * @param {number} rows
+ * @param {number} cols
+ * @param {number} rCenter
+ * @param {number} cCenter
+ * @return {number[][]}
+ */
+var allCellsDistOrder = function (rows, cols, rCenter, cCenter) {
+  let res = []
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      res.push([i, j])
+    }
+  }
+  return res.sort((a, b) => Math.abs(a[0] - rCenter) + Math.abs(a[1] - cCenter) - Math.abs(b[0] - rCenter) - Math.abs(b[1] - cCenter))
+};
+// @lc code=end
+
+
+```
+
+
+## 1046.最后一块石头的重量
+```js
+/*
+ * @lc app=leetcode.cn id=1046 lang=javascript
+ *
+ * [1046] 最后一块石头的重量
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} stones
+ * @return {number}
+ */
+var lastStoneWeight = function (stones) {
+  while (stones.length > 1) {
+    stones = stones.sort((a, b) => b - a)
+    const y = stones.shift()
+    const x = stones.shift()
+    if (x !== y) stones.push(y - x)
+  }
+  return stones.length > 0 ? stones[0] : 0
+};
+// @lc code=end
+
+
+```
+
+
+## 1047.删除字符串中的所有相邻重复项
+```js
+/*
+ * @lc app=leetcode.cn id=1047 lang=javascript
+ *
+ * [1047] 删除字符串中的所有相邻重复项
+ */
+
+// @lc code=start
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var removeDuplicates = function (s) {
+  const res = []
+  for (let i = 0; i < s.length; i++) {
+    if (res[res.length - 1] !== s[i]) {
+      res.push(s[i])
+    } else {
+      res.pop()
+    }
+  }
+  return res.join("")
+};
+// @lc code=end
+
+
+```
+
+
+## 1051.高度检查器
+```js
+/*
+ * @lc app=leetcode.cn id=1051 lang=javascript
+ *
+ * [1051] 高度检查器
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} heights
+ * @return {number}
+ */
+var heightChecker = function (heights) {
+  let res = 0
+  const arr = heights.slice(0).sort((a, b) => a - b)
+  for (let i = 0; i < heights.length; i++) {
+    if (arr[i] !== heights[i]) res++
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1071.字符串的最大公因子
+```js
+/*
+ * @lc app=leetcode.cn id=1071 lang=javascript
+ *
+ * [1071] 字符串的最大公因子
+ */
+
+// @lc code=start
+/**
+ * @param {string} str1
+ * @param {string} str2
+ * @return {string}
+ */
+var gcdOfStrings = function (str1, str2) {
+  for (let i = 0; i < str2.length; i++) {
+    const str = str2.slice(0, str2.length - i)
+    if (str1.split(str).findIndex(j => j !== "") === -1 && str2.split(str).findIndex(j => j !== "") === -1) return str
+  }
+  return ""
+};
+// @lc code=end
+
+
+```
+
+
+## 1078.bigram-分词
+```js
+/*
+ * @lc app=leetcode.cn id=1078 lang=javascript
+ *
+ * [1078] Bigram 分词
+ */
+
+// @lc code=start
+/**
+ * @param {string} text
+ * @param {string} first
+ * @param {string} second
+ * @return {string[]}
+ */
+var findOcurrences = function (text, first, second) {
+  const res = []
+  text = text.split(" ")
+  for (let i = 0; i < text.length; i++) {
+    if (!text[i + 2]) break
+    if (text[i] === first && text[i + 1] === second) res.push(text[i + 2])
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1089.复写零
+```js
+/*
+ * @lc app=leetcode.cn id=1089 lang=javascript
+ *
+ * [1089] 复写零
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} arr
+ * @return {void} Do not return anything, modify arr in-place instead.
+ */
+var duplicateZeros = function (arr) {
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i] === 0) {
+      arr.splice(i, 0, 0)
+      arr.pop()
+      i++
+    }
+  }
+};
+// @lc code=end
+
+
+```
+
+
+## 1103.分糖果-ii
+```js
+/*
+ * @lc app=leetcode.cn id=1103 lang=javascript
+ *
+ * [1103] 分糖果 II
+ */
+
+// @lc code=start
+/**
+ * @param {number} candies
+ * @param {number} num_people
+ * @return {number[]}
+ */
+var distributeCandies = function (candies, num_people) {
+  let n = 1, i = 0
+  const res = []
+  res.length = num_people
+  res.fill(0, 0, num_people)
+  while (candies > 0) {
+    if (candies <= n) {
+      res[i] += candies
+      break
+    }
+    res[i] += n
+    candies -= n
+    n++
+    if (i === num_people - 1) {
+      i = 0
+    } else {
+      i++
+    }
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1108.ip-地址无效化
+```js
+/*
+ * @lc app=leetcode.cn id=1108 lang=javascript
+ *
+ * [1108] IP 地址无效化
+ */
+
+// @lc code=start
+/**
+ * @param {string} address
+ * @return {string}
+ */
+var defangIPaddr = function(address) {
+  return address.replace(/\./g,"[.]")
+};
+// @lc code=end
+
+
+```
+
+
+## 1122.数组的相对排序
+```js
+/*
+ * @lc app=leetcode.cn id=1122 lang=javascript
+ *
+ * [1122] 数组的相对排序
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} arr1
+ * @param {number[]} arr2
+ * @return {number[]}
+ */
+var relativeSortArray = function (arr1, arr2) {
+  const res = []
+  for (let i = 0; i < arr2.length; i++) {
+    for (let j = 0; j < arr1.length;) {
+      if (arr1[j] === arr2[i]) {
+        res.push(arr1[j])
+        arr1.splice(j, 1)
+      } else {
+        j++
+      }
+    }
+  }
+  arr1.sort((a, b) => a - b)
+  return [...res, ...arr1]
+};
+// @lc code=end
+
+
+```
+
+
+## 1128.等价多米诺骨牌对的数量
+```js
+
+/*
+ * @lc app=leetcode.cn id=1128 lang=javascript
+ *
+ * [1128] 等价多米诺骨牌对的数量
+ */
+
+// @lc code=start
+/**
+ * @param {number[][]} dominoes
+ * @return {number}
+ */
+var numEquivDominoPairs = function (dominoes) {
+  let res = 0, map = new Map()
+  for (let i = 0; i < dominoes.length; i++) {
+    const s = dominoes[i][0] < dominoes[i][1] ? `${dominoes[i][0]}${dominoes[i][1]}` : `${dominoes[i][1]}${dominoes[i][0]}`
+    if (!map.has(s)) {
+      map.set(s, 0)
+      continue
+    }
+    const c = map.get(s) + 1
+    map.set(s, c)
+    res += c
+  }
+  return res
+};
+
+// @lc code=end
+
+
+```
+
+
+## 1137.第-n-个泰波那契数
+```js
+/*
+ * @lc app=leetcode.cn id=1137 lang=javascript
+ *
+ * [1137] 第 N 个泰波那契数
+ */
+
+// @lc code=start
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var tribonacci = function (n) {
+  const map = new Map([[0, 0], [1, 1], [2, 1]])
+  for (let i = 3; i <= n; i++) {
+    map.set(i, map.get(i - 3) + map.get(i - 2) + map.get(i - 1))
+  }
+  return map.get(n)
+};
+// @lc code=end
+
+
+```
+
+
+## 1154.一年中的第几天
+```js
+/*
+ * @lc app=leetcode.cn id=1154 lang=javascript
+ *
+ * [1154] 一年中的第几天
+ */
+
+// @lc code=start
+/**
+ * @param {string} date
+ * @return {number}
+ */
+var dayOfYear = function (date) {
+  date = date.split("-")
+  return ((((((new Date(date).getTime() - new Date(`${date[0]}-01-01`).getTime()) / 1000) / 60) / 60) / 24) + 1)
+};
+// @lc code=end
+
+
+```
+
+
+## 1160.拼写单词
+```js
+/*
+ * @lc app=leetcode.cn id=1160 lang=javascript
+ *
+ * [1160] 拼写单词
+ */
+
+// @lc code=start
+/**
+ * @param {string[]} words
+ * @param {string} chars
+ * @return {number}
+ */
+var countCharacters = function (words, chars) {
+  let res = 0
+  for (let i = 0; i < words.length; i++) {
+    const c = chars.split("")
+    for (let j = 0; j < words[i].length; j++) {
+      const index = c.indexOf(words[i][j])
+      if (index === -1) break
+      if (j === words[i].length - 1) {
+        res += words[i].length
+        break
+      }
+      c.splice(index, 1)
+    }
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1175.质数排列
+```js
+/*
+ * @lc app=leetcode.cn id=1175 lang=javascript
+ *
+ * [1175] 质数排列
+ */
+
+// @lc code=start
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var numPrimeArrangements = function(n) {
+
+};
+// @lc code=end
+
+
+```
+
+
+## 1184.公交站间的距离
+```js
+/*
+ * @lc app=leetcode.cn id=1184 lang=javascript
+ *
+ * [1184] 公交站间的距离
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} distance
+ * @param {number} start
+ * @param {number} destination
+ * @return {number}
+ */
+var distanceBetweenBusStops = function (distance, start, destination) {
+  if (start === destination) return 0
+  if (start > destination) [start, destination] = [destination, start];
+  const total = distance.reduce((acc, cur) => acc + cur),route = distance.slice(start, destination).reduce((acc, cur) => acc + cur);
+  return Math.min(route, total - route);
+};
+// @lc code=end
+
+
+```
+
+
+## 1185.一周中的第几天
+```js
+/*
+ * @lc app=leetcode.cn id=1185 lang=javascript
+ *
+ * [1185] 一周中的第几天
+ */
+
+// @lc code=start
+/**
+ * @param {number} day
+ * @param {number} month
+ * @param {number} year
+ * @return {string}
+ */
+var dayOfTheWeek = function (day, month, year) {
+  const a = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+  return a[new Date(`${year}-${month}-${day}`).getDay()]
+};
+// @lc code=end
+
+
+```
+
+
+## 1189.气球-的最大数量
+```js
+/*
+ * @lc app=leetcode.cn id=1189 lang=javascript
+ *
+ * [1189] “气球” 的最大数量
+ */
+
+// @lc code=start
+/**
+ * @param {string} text
+ * @return {number}
+ */
+var maxNumberOfBalloons = function (text) {
+  const map = new Map([['b', 0], ['a', 0], ['l', 0], ['o', 0], ['n', 0]])
+  for (let i = 0; i < text.length; i++) {
+    if (map.has(text[i])) map.set(text[i], map.get(text[i]) + 1)
+  }
+  let res = 0
+  while (true) {
+    if (map.get('b') >= 1 && map.get('a') >= 1 && map.get('l') >= 2 && map.get('o') >= 2 && map.get('n') >= 1) {
+      res++
+      map.set('b', map.get('b') - 1)
+      map.set('a', map.get('a') - 1)
+      map.set('l', map.get('l') - 2)
+      map.set('o', map.get('o') - 2)
+      map.set('n', map.get('n') - 1)
+    } else {
+      return res
+    }
+  }
+};
+// @lc code=end
+
+
+```
+
+
+## 1200.最小绝对差
+```js
+/*
+ * @lc app=leetcode.cn id=1200 lang=javascript
+ *
+ * [1200] 最小绝对差
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} arr
+ * @return {number[][]}
+ */
+var minimumAbsDifference = function (arr) {
+  arr = arr.sort((a, b) => a - b)
+  let c = Number.MAX_VALUE, res = []
+  for (let i = 1; i < arr.length; i++) {
+    const v = arr[i] - arr[i - 1]
+    if (v > c) continue
+    else if (v < c) {
+      res = []
+      c = v
+    }
+    res.push([arr[i - 1], arr[i]])
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1207.独一无二的出现次数
+```js
+/*
+ * @lc app=leetcode.cn id=1207 lang=javascript
+ *
+ * [1207] 独一无二的出现次数
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} arr
+ * @return {boolean}
+ */
+var uniqueOccurrences = function (arr) {
+  arr = arr.sort((a, b) => a - b)
+  const map = new Map()
+  let curr = 0
+  for (let i = 0; i < arr.length; i++) {
+    curr++
+    if (arr[i] === arr[i + 1]) continue
+    if (map.has(curr)) return false
+    map.set(curr, arr[i])
+    curr = 0
+  }
+  return true
+};
+// @lc code=end
+
+
+```
+
+
+## 1217.玩筹码
+```js
+/*
+ * @lc app=leetcode.cn id=1217 lang=javascript
+ *
+ * [1217] 玩筹码
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} position
+ * @return {number}
+ */
+var minCostToMoveChips = function(position) {
+
+};
+// @lc code=end
+
+
+```
+
+
+## 1221.分割平衡字符串
+```js
+/*
+ * @lc app=leetcode.cn id=1221 lang=javascript
+ *
+ * [1221] 分割平衡字符串
+ */
+
+// @lc code=start
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var balancedStringSplit = function (s) {
+  let res = 0, r = 0, l = 0
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === 'R') r++
+    else l++
+    if (r === l) {
+      res++
+      r = 0
+      l = 0
+    }
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1232.缀点成线
+```js
+/*
+ * @lc app=leetcode.cn id=1232 lang=javascript
+ *
+ * [1232] 缀点成线
+ */
+
+// @lc code=start
+/**
+ * @param {number[][]} coordinates
+ * @return {boolean}
+ */
+var checkStraightLine = function (coordinates) {
+  for (let i = 2; i < coordinates.length; i++) {
+    const x = (coordinates[i][0] - coordinates[0][0]) / (coordinates[i][1] - coordinates[0][1]), y = (coordinates[i][0] - coordinates[1][0]) / (coordinates[i][1] - coordinates[1][1])
+    if (x !== y && !((x === Infinity || x === -Infinity) && (y === Infinity || y === -Infinity))) {
+      return false
+    }
+  }
+  return true
+};
+// @lc code=end
+
+
+```
+
+
+## 1252.奇数值单元格的数目
+```js
+/*
+ * @lc app=leetcode.cn id=1252 lang=javascript
+ *
+ * [1252] 奇数值单元格的数目
+ */
+
+// @lc code=start
+/**
+ * @param {number} m
+ * @param {number} n
+ * @param {number[][]} indices
+ * @return {number}
+ */
+var oddCells = function (m, n, indices) {
+  const arr = [];
+  let res = 0;
+  for (let i = 0; i < indices.length; i++) {
+    const [x, y] = indices[i]
+    for (let j = 0; j < m; j++) {
+      if (i === 0) arr.push([])
+      for (let z = 0; z < n; z++) {
+        if (i === 0) arr[j].push(0)
+        if (x === j || y === z) {
+          arr[j][z] += 1
+        }
+        if (x === j && y === z) {
+          arr[j][z] += 1
+        }
+        if (i === indices.length - 1) {
+          if (arr[j][z] % 2 !== 0) res++
+        }
+      }
+    }
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1281.整数的各位积和之差
+```js
+/*
+ * @lc app=leetcode.cn id=1281 lang=javascript
+ *
+ * [1281] 整数的各位积和之差
+ */
+
+// @lc code=start
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var subtractProductAndSum = function (n) {
+  n = n.toString();
+  let a = 1, b = 0;
+  for (let i = 0; i < n.length; i++) {
+    a *= Number(n[i])
+    b += Number(n[i])
+  }
+  return a - b
+};
+// @lc code=end
+
+
+```
+
+
+## 1287.有序数组中出现次数超过-25-的元素
+```js
+/*
+ * @lc app=leetcode.cn id=1287 lang=javascript
+ *
+ * [1287] 有序数组中出现次数超过25%的元素
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} arr
+ * @return {number}
+ */
+var findSpecialInteger = function (arr) {
+  let res = 0, count = 1
+  if (arr.length < 3) return arr[0]
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] === arr[i - 1]) {
+      count++
+      res = arr[i]
+      if (count > arr.length / 4) return res
+    } else {
+      res = 0
+      count = 1
+    }
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1290.二进制链表转整数
+```js
+/*
+ * @lc app=leetcode.cn id=1290 lang=javascript
+ *
+ * [1290] 二进制链表转整数
+ */
+
+// @lc code=start
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {number}
+ */
+var getDecimalValue = function (head) {
+  let num = ''
+  while (head) {
+    num += head.val
+    head = head.next
+  }
+  return parseInt(num, 2)
+};
+// @lc code=end
+
+
+```
+
+
+## 1295.统计位数为偶数的数字
+```js
+/*
+ * @lc app=leetcode.cn id=1295 lang=javascript
+ *
+ * [1295] 统计位数为偶数的数字
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findNumbers = function (nums) {
+  let res = 0
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i].toString().length % 2 === 0) res++
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1299.将每个元素替换为右侧最大元素
+```js
+/*
+ * @lc app=leetcode.cn id=1299 lang=javascript
+ *
+ * [1299] 将每个元素替换为右侧最大元素
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} arr
+ * @return {number[]}
+ */
+var replaceElements = function (arr) {
+  const res = []
+  for (let i = 0; i < arr.length - 1; i++) {
+    res.push(Math.max(...arr.slice(i + 1, arr.length)))
+  }
+  res.push(-1)
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1304.和为零的n个唯一整数
+```js
+/*
+ * @lc app=leetcode.cn id=1304 lang=javascript
+ *
+ * [1304] 和为零的N个唯一整数
+ */
+
+// @lc code=start
+/**
+ * @param {number} n
+ * @return {number[]}
+ */
+var sumZero = function (n) {
+  const res = []
+  let count = 0
+  for (let i = 1; i < n; i++) {
+    res.push(i)
+    count += i
+  }
+  res.push(-count)
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1309.解码字母到整数映射
+```js
+/*
+ * @lc app=leetcode.cn id=1309 lang=javascript
+ *
+ * [1309] 解码字母到整数映射
+ */
+
+// @lc code=start
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var freqAlphabets = function (s) {
+  let res = ''
+  for (let i = 0; i < s.length; i++) {
+    if (s[i + 2] === "#") {
+      res += String.fromCharCode(Number(s[i] + s[i + 1]) + 96)
+      i += 2
+    } else {
+      res += String.fromCharCode(Number(s[i]) + 96)
+    }
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1313.解压缩编码列表
+```js
+/*
+ * @lc app=leetcode.cn id=1313 lang=javascript
+ *
+ * [1313] 解压缩编码列表
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var decompressRLElist = function (nums) {
+  const res = []
+  for (let i = 0; i < nums.length; i += 2) {
+    for (let j = 0; j < nums[i]; j++) {
+      res.push(nums[i + 1])
+    }
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1317.将整数转换为两个无零整数的和
+```js
+/*
+ * @lc app=leetcode.cn id=1317 lang=javascript
+ *
+ * [1317] 将整数转换为两个无零整数的和
+ */
+
+// @lc code=start
+/**
+ * @param {number} n
+ * @return {number[]}
+ */
+var getNoZeroIntegers = function (n) {
+  for (let i = 1; i < (n / 2) + 1; i++) {
+    if (!i.toString().includes('0') && !(n - i).toString().includes('0')) return [i, n - i]
+  }
+};
+// @lc code=end
+
+
+```
+
+
+## 1323.6-和-9-组成的最大数字
+```js
+/*
+ * @lc app=leetcode.cn id=1323 lang=javascript
+ *
+ * [1323] 6 和 9 组成的最大数字
+ */
+
+// @lc code=start
+/**
+ * @param {number} num
+ * @return {number}
+ */
+var maximum69Number  = function(num) {
+  return Number(num.toString().replace('6','9'))
+};
+// @lc code=end
+
+
+```
+
+
+## 1331.数组序号转换
+```js
+/*
+ * @lc app=leetcode.cn id=1331 lang=javascript
+ *
+ * [1331] 数组序号转换
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} arr
+ * @return {number[]}
+ */
+var arrayRankTransform = function (arr) {
+  const a = [...new Set([...arr].sort((a, b) => a - b))], res = []
+  for (let i = 0; i < arr.length; i++) {
+    res.push(a.indexOf(arr[i]) + 1)
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1332.删除回文子序列
+```js
+/*
+ * @lc app=leetcode.cn id=1332 lang=javascript
+ *
+ * [1332] 删除回文子序列
+ */
+
+// @lc code=start
+/**
+//  * @param {string} s
+//  * @return {number}
+//  */
+// const removePalindromeSub = (s) => {
+//   let res = 0, i = 0
+//   while (s.length > 0) {
+//     const a = s.substring(0, s.length - i)
+//     if (a.split('').reverse().join('')) {
+//       res++
+//       s = s.substring(s.length - i, s.length)
+//       i = 0
+//     } else {
+//       i++
+//     }
+//   }
+//   return res
+// };
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+const removePalindromeSub = s => s === s.split('').reverse().join('') ? 1 : 2
+
+// @lc code=end
+
+
+```
+
+
+## 1337.矩阵中战斗力最弱的-k-行
+```js
+/*
+ * @lc app=leetcode.cn id=1337 lang=javascript
+ *
+ * [1337] 矩阵中战斗力最弱的 K 行
+ */
+
+// @lc code=start
+/**
+ * @param {number[][]} mat
+ * @param {number} k
+ * @return {number[]}
+ */
+var kWeakestRows = function (mat, k) {
+  const arr = []
+  for (let i = 0; i < mat.length; i++) {
+    let c = 0
+    for (let j = 0; j < mat[i].length; j++) {
+      if (mat[i][j] === 0) {
+        arr.push({ i, c })
+        c = 0
+        break
+      } else {
+        c++
+        if (c === mat[i].length) {
+          arr.push({ i, c })
+          c = 0
+        }
+      }
+    }
+  }
+  return arr.sort((a, b) => a.c - b.c).slice(0, k).map((item) => item.i)
+
+};
+// @lc code=end
+
+
+```
+
+
+## 1342.将数字变成-0-的操作次数
+```js
+/*
+ * @lc app=leetcode.cn id=1342 lang=javascript
+ *
+ * [1342] 将数字变成 0 的操作次数
+ */
+
+// @lc code=start
+/**
+ * @param {number} num
+ * @return {number}
+ */
+var numberOfSteps = function (num) {
+  let res = 0
+  while (num > 0) {
+    if (num % 2 === 0) num = num / 2
+    else num--
+    res++
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1346.检查整数及其两倍数是否存在
+```js
+/*
+ * @lc app=leetcode.cn id=1346 lang=javascript
+ *
+ * [1346] 检查整数及其两倍数是否存在
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} arr
+ * @return {boolean}
+ */
+// var checkIfExist = function (arr) {
+//   for (let i = 0; i < arr.length - 1; i++) {
+//     for (let j = i + 1; j < arr.length; j++) {
+//       if (arr[i] * 2 === arr[j] || arr[i] === arr[j] * 2) return true
+//     }
+//   }
+//   return false
+// };
+
+var checkIfExist = function (arr) {
+  const set = new Set()
+  for (let i = 0; i < arr.length; i++) {
+    if (set.has(arr[i])) return true
+    else {
+      set.add(arr[i] * 2)
+      set.add(arr[i] / 2)
+    }
+  }
+  return false
+};
+// @lc code=end
+
+
+```
+
+
+## 1351.统计有序矩阵中的负数
+```js
+/*
+ * @lc app=leetcode.cn id=1351 lang=javascript
+ *
+ * [1351] 统计有序矩阵中的负数
+ */
+
+// @lc code=start
+/**
+ * @param {number[][]} grid
+ * @return {number}
+ */
+var countNegatives = function (grid) {
+  let res = 0
+  for (let i = grid.length - 1; i >= 0; i--) {
+    if (grid[i][grid[i].length - 1] > -1) break
+    for (let j = grid[i].length - 1; j >= 0; j--) {
+      if (grid[i][j] < 0) res++
+      else continue
+    }
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1356.根据数字二进制下-1-的数目排序
+```js
+/*
+ * @lc app=leetcode.cn id=1356 lang=javascript
+ *
+ * [1356] 根据数字二进制下 1 的数目排序
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} arr
+ * @return {number[]}
+ */
+const sortByBits = (arr) => arr.sort((a, b) => count(a) - count(b) || a - b);
+
+const count = (num) => num.toString(2).split("").reduce((p, c) => {
+  if (c === "1") p++
+  return p
+}, 0)
+
+// @lc code=end
+
+
+```
+
+
+## 1360.日期之间隔几天
+```js
+/*
+ * @lc app=leetcode.cn id=1360 lang=javascript
+ *
+ * [1360] 日期之间隔几天
+ */
+
+// @lc code=start
+/**
+ * @param {string} date1
+ * @param {string} date2
+ * @return {number}
+ */
+var daysBetweenDates = (date1, date2) => Math.abs((new Date(date1).getTime() - new Date(date2).getTime()) / 86400000)
+// @lc code=end
+
+
+```
+
+
+## 1365.有多少小于当前数字的数字
+```js
+/*
+ * @lc app=leetcode.cn id=1365 lang=javascript
+ *
+ * [1365] 有多少小于当前数字的数字
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var smallerNumbersThanCurrent = function (nums) {
+  const res = []
+  for (let i = 0; i < nums.length; i++) {
+    let c = 0
+    for (let j = 0; j < nums.length; j++) {
+      if (i !== j && nums[i] > nums[j]) c++
+      if (j === nums.length - 1) {
+        res.push(c)
+        c = 0
+      }
+    }
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1370.上升下降字符串
+```js
+/*
+ * @lc app=leetcode.cn id=1370 lang=javascript
+ *
+ * [1370] 上升下降字符串
+ */
+
+// @lc code=start
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var sortString = function (s) {
+  let res = '', flag = true
+  const arr = []
+  for (let i = 0; i < s.length; i++) {
+    const j = s[i].charCodeAt() - 97
+    arr[j] = arr[j] ? arr[j] + 1 : 1
+  }
+  while (res.length < s.length) {
+    if (flag) {
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] && arr[i] > 0) {
+          res += String.fromCharCode(i + 97)
+          arr[i] -= 1
+        }
+      }
+      flag = false
+    } else {
+      for (let i = arr.length - 1; i > -1; i--) {
+        if (arr[i] && arr[i] > 0) {
+          res += String.fromCharCode(i + 97)
+          arr[i] -= 1
+        }
+      }
+      flag = true
+    }
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1374.生成每种字符都是奇数个的字符串
+```js
+/*
+ * @lc app=leetcode.cn id=1374 lang=javascript
+ *
+ * [1374] 生成每种字符都是奇数个的字符串
+ */
+
+// @lc code=start
+/**
+ * @param {number} n
+ * @return {string}
+ */
+var generateTheString = function (n) {
+  return n % 2 === 0 ? 'a'.repeat(n - 1) + 'b' : 'a'.repeat(n)
+};
+// @lc code=end
+
+
+```
+
+
+## 1380.矩阵中的幸运数
+```js
+/*
+ * @lc app=leetcode.cn id=1380 lang=javascript
+ *
+ * [1380] 矩阵中的幸运数
+ */
+
+// @lc code=start
+/**
+ * @param {number[][]} matrix
+ * @return {number[]}
+ */
+var luckyNumbers = function (matrix) {
+  const res = []
+  for (let i = 0; i < matrix.length; i++) {
+    const item = Math.min.apply(this, matrix[i]), index = matrix[i].indexOf(item);
+    let max = item
+    for (let j = 0; j < matrix.length; j++) {
+      max = Math.max(max, matrix[j][index])
+    }
+    if (max === item) res.push(max)
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1385.两个数组间的距离值
+```js
+/*
+ * @lc app=leetcode.cn id=1385 lang=javascript
+ *
+ * [1385] 两个数组间的距离值
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} arr1
+ * @param {number[]} arr2
+ * @param {number} d
+ * @return {number}
+ */
+var findTheDistanceValue = function (arr1, arr2, d) {
+  let res = 0
+  for (let i = 0; i < arr1.length; i++) {
+    res++
+    for (let j = 0; j < arr2.length; j++) {
+      if (Math.abs(arr1[i] - arr2[j]) <= d) {
+        res--
+        break
+      }
+    }
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1389.按既定顺序创建目标数组
+```js
+/*
+ * @lc app=leetcode.cn id=1389 lang=javascript
+ *
+ * [1389] 按既定顺序创建目标数组
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums
+ * @param {number[]} index
+ * @return {number[]}
+ */
+var createTargetArray = function (nums, index) {
+  const res = []
+  for (let i = 0; i < nums.length; i++) {
+    res.splice(index[i], 0, nums[i])
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1394.找出数组中的幸运数
+```js
+/*
+ * @lc app=leetcode.cn id=1394 lang=javascript
+ *
+ * [1394] 找出数组中的幸运数
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} arr
+ * @return {number}
+ */
+var findLucky = function (arr) {
+  const map = new Map()
+  let res = -1
+  for (let i = 0; i < arr.length; i++) {
+    map.set(arr[i], map.has(arr[i]) ? map.get(arr[i]) + 1 : 1)
+  }
+  for (const [k, v] of map) {
+    if (k === v) res = Math.max(res, k)
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1399.统计最大组的数目
+```js
+/*
+ * @lc app=leetcode.cn id=1399 lang=javascript
+ *
+ * [1399] 统计最大组的数目
+ */
+
+// @lc code=start
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var countLargestGroup = function (n) {
+  const map = new Map()
+  let res = 0, max = 0
+  for (let i = 1; i <= n; i++) {
+    const a = i.toString().split("").reduce((p, v) => p + Number(v), 0)
+    map.set(a, map.has(a) ? map.get(a) + 1 : 1)
+    max = Math.max(max, map.get(a))
+  }
+  for (const v of map.values()) {
+    if (v === max) res++
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1403.非递增顺序的最小子序列
+```js
+/*
+ * @lc app=leetcode.cn id=1403 lang=javascript
+ *
+ * [1403] 非递增顺序的最小子序列
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var minSubsequence = function (nums) {
+  nums.sort((a, b) => b - a)
+  let count = nums.reduce((p, v) => p + v), s = 0
+  const res = []
+  for (let i = 0; i < nums.length; i++) {
+    s += nums[i]
+    count -= nums[i]
+    res.push(nums[i])
+    if (s > count) return res
+  }
+};
+// @lc code=end
+
 
 ```
 
