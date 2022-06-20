@@ -14,7 +14,7 @@ writeStream.write(origin);
 leetcodeDir.forEach((v) => {
   if (/js$/.test(v)) {
     const data = fs.readFileSync(path.join("./leetcode", v)).toString()
-    writeStream.write('\n```js\n' + data + '\n```\n\n')
+    writeStream.write('\n## ' + v.replace('.js', '') + '\n```js\n' + data + '\n```\n\n')
   }
 })
 writeStream.end()

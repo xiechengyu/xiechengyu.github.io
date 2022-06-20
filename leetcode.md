@@ -9,7 +9,7 @@ sticky: true
 comments: true
 ---
 
-# 前言
+## 前言
 
 leetcode刷题题解
 <!-- more -->

@@ -9,7 +9,7 @@ sticky: true
 comments: true
 ---
 
-# 前言
+## 前言
 
 leetcode刷题题解
 <!-- more -->
@@ -17,6 +17,7 @@ leetcode刷题题解
 把在leetcode上刷过的题目记录一二
 
 
+## 100.相同的树
 ```js
 /*
  * @lc app=leetcode.cn id=100 lang=javascript
@@ -63,6 +64,7 @@ var isSameTree = function (p, q) {
 ```
 
 
+## 1002.查找共用字符
 ```js
 /*
  * @lc app=leetcode.cn id=1002 lang=javascript
@@ -97,6 +99,7 @@ var commonChars = function (words) {
 ```
 
 
+## 1005.k-次取反后最大化的数组和
 ```js
 
 /*
@@ -126,6 +129,7 @@ var largestSumAfterKNegations = function (nums, k) {
 ```
 
 
+## 101.对称二叉树
 ```js
 /*
  * @lc app=leetcode.cn id=101 lang=javascript
@@ -171,6 +175,7 @@ var isSymmetric = function (root) {
 ```
 
 
+## 1013.将数组分成和相等的三个部分
 ```js
 /*
  * @lc app=leetcode.cn id=1013 lang=javascript
@@ -200,6 +205,7 @@ var canThreePartsEqualSum = function (arr) {
 ```
 
 
+## 1021.删除最外层的括号
 ```js
 /*
  * @lc app=leetcode.cn id=1021 lang=javascript
@@ -231,6 +237,7 @@ var removeOuterParentheses = function (s) {
 ```
 
 
+## 1025.除数博弈
 ```js
 /*
  * @lc app=leetcode.cn id=1025 lang=javascript
@@ -252,6 +259,7 @@ var divisorGame = function (n) {
 ```
 
 
+## 1030.距离顺序排列矩阵单元格
 ```js
 /*
  * @lc app=leetcode.cn id=1030 lang=javascript
@@ -282,6 +290,7 @@ var allCellsDistOrder = function (rows, cols, rCenter, cCenter) {
 ```
 
 
+## 104.二叉树的最大深度
 ```js
 /*
  * @lc app=leetcode.cn id=104 lang=javascript
@@ -312,6 +321,7 @@ var maxDepth = function (root) {
 ```
 
 
+## 1046.最后一块石头的重量
 ```js
 /*
  * @lc app=leetcode.cn id=1046 lang=javascript
@@ -339,6 +349,7 @@ var lastStoneWeight = function (stones) {
 ```
 
 
+## 1047.删除字符串中的所有相邻重复项
 ```js
 /*
  * @lc app=leetcode.cn id=1047 lang=javascript
@@ -368,6 +379,7 @@ var removeDuplicates = function (s) {
 ```
 
 
+## 1051.高度检查器
 ```js
 /*
  * @lc app=leetcode.cn id=1051 lang=javascript
@@ -394,6 +406,7 @@ var heightChecker = function (heights) {
 ```
 
 
+## 1071.字符串的最大公因子
 ```js
 /*
  * @lc app=leetcode.cn id=1071 lang=javascript
@@ -420,6 +433,7 @@ var gcdOfStrings = function (str1, str2) {
 ```
 
 
+## 1078.bigram-分词
 ```js
 /*
  * @lc app=leetcode.cn id=1078 lang=javascript
@@ -449,6 +463,7 @@ var findOcurrences = function (text, first, second) {
 ```
 
 
+## 108.将有序数组转换为二叉搜索树
 ```js
 /*
  * @lc app=leetcode.cn id=108 lang=javascript
@@ -478,6 +493,7 @@ var sortedArrayToBST = function(nums) {
 ```
 
 
+## 1089.复写零
 ```js
 /*
  * @lc app=leetcode.cn id=1089 lang=javascript
@@ -505,6 +521,7 @@ var duplicateZeros = function (arr) {
 ```
 
 
+## 110.平衡二叉树
 ```js
 /*
  * @lc app=leetcode.cn id=110 lang=javascript
@@ -534,6 +551,7 @@ var isBalanced = function(root) {
 ```
 
 
+## 1103.分糖果-ii
 ```js
 /*
  * @lc app=leetcode.cn id=1103 lang=javascript
@@ -574,6 +592,7 @@ var distributeCandies = function (candies, num_people) {
 ```
 
 
+## 1108.ip-地址无效化
 ```js
 /*
  * @lc app=leetcode.cn id=1108 lang=javascript
@@ -595,6 +614,7 @@ var defangIPaddr = function(address) {
 ```
 
 
+## 1122.数组的相对排序
 ```js
 /*
  * @lc app=leetcode.cn id=1122 lang=javascript
@@ -629,6 +649,7 @@ var relativeSortArray = function (arr1, arr2) {
 ```
 
 
+## 1128.等价多米诺骨牌对的数量
 ```js
 
 /*
@@ -663,6 +684,7 @@ var numEquivDominoPairs = function (dominoes) {
 ```
 
 
+## 1137.第-n-个泰波那契数
 ```js
 /*
  * @lc app=leetcode.cn id=1137 lang=javascript
@@ -688,6 +710,7 @@ var tribonacci = function (n) {
 ```
 
 
+## 1154.一年中的第几天
 ```js
 /*
  * @lc app=leetcode.cn id=1154 lang=javascript
@@ -710,6 +733,7 @@ var dayOfYear = function (date) {
 ```
 
 
+## 1160.拼写单词
 ```js
 /*
  * @lc app=leetcode.cn id=1160 lang=javascript
@@ -745,6 +769,7 @@ var countCharacters = function (words, chars) {
 ```
 
 
+## 1175.质数排列
 ```js
 /*
  * @lc app=leetcode.cn id=1175 lang=javascript
@@ -766,6 +791,7 @@ var numPrimeArrangements = function(n) {
 ```
 
 
+## 118.杨辉三角
 ```js
 /*
  * @lc app=leetcode.cn id=118 lang=javascript
@@ -796,6 +822,7 @@ var generate = function (numRows) {
 ```
 
 
+## 1184.公交站间的距离
 ```js
 /*
  * @lc app=leetcode.cn id=1184 lang=javascript
@@ -822,6 +849,7 @@ var distanceBetweenBusStops = function (distance, start, destination) {
 ```
 
 
+## 1185.一周中的第几天
 ```js
 /*
  * @lc app=leetcode.cn id=1185 lang=javascript
@@ -846,6 +874,7 @@ var dayOfTheWeek = function (day, month, year) {
 ```
 
 
+## 1189.气球-的最大数量
 ```js
 /*
  * @lc app=leetcode.cn id=1189 lang=javascript
@@ -883,6 +912,7 @@ var maxNumberOfBalloons = function (text) {
 ```
 
 
+## 119.杨辉三角-ii
 ```js
 /*
  * @lc app=leetcode.cn id=119 lang=javascript
@@ -913,6 +943,7 @@ var getRow = function (rowIndex) {
 ```
 
 
+## 1200.最小绝对差
 ```js
 /*
  * @lc app=leetcode.cn id=1200 lang=javascript
@@ -945,6 +976,7 @@ var minimumAbsDifference = function (arr) {
 ```
 
 
+## 1207.独一无二的出现次数
 ```js
 /*
  * @lc app=leetcode.cn id=1207 lang=javascript
@@ -976,6 +1008,7 @@ var uniqueOccurrences = function (arr) {
 ```
 
 
+## 121.买卖股票的最佳时机
 ```js
 /*
  * @lc app=leetcode.cn id=121 lang=javascript
@@ -1002,6 +1035,7 @@ var maxProfit = function (prices) {
 ```
 
 
+## 1217.玩筹码
 ```js
 /*
  * @lc app=leetcode.cn id=1217 lang=javascript
@@ -1023,6 +1057,7 @@ var minCostToMoveChips = function(position) {
 ```
 
 
+## 1221.分割平衡字符串
 ```js
 /*
  * @lc app=leetcode.cn id=1221 lang=javascript
@@ -1054,6 +1089,7 @@ var balancedStringSplit = function (s) {
 ```
 
 
+## 1232.缀点成线
 ```js
 /*
  * @lc app=leetcode.cn id=1232 lang=javascript
@@ -1081,6 +1117,7 @@ var checkStraightLine = function (coordinates) {
 ```
 
 
+## 125.验证回文串
 ```js
 /*
  * @lc app=leetcode.cn id=125 lang=javascript
@@ -1107,6 +1144,7 @@ var isPalindrome = function (s) {
 ```
 
 
+## 1252.奇数值单元格的数目
 ```js
 /*
  * @lc app=leetcode.cn id=1252 lang=javascript
@@ -1150,6 +1188,7 @@ var oddCells = function (m, n, indices) {
 ```
 
 
+## 1281.整数的各位积和之差
 ```js
 /*
  * @lc app=leetcode.cn id=1281 lang=javascript
@@ -1177,6 +1216,7 @@ var subtractProductAndSum = function (n) {
 ```
 
 
+## 1287.有序数组中出现次数超过-25-的元素
 ```js
 /*
  * @lc app=leetcode.cn id=1287 lang=javascript
@@ -1210,6 +1250,7 @@ var findSpecialInteger = function (arr) {
 ```
 
 
+## 1290.二进制链表转整数
 ```js
 /*
  * @lc app=leetcode.cn id=1290 lang=javascript
@@ -1243,6 +1284,7 @@ var getDecimalValue = function (head) {
 ```
 
 
+## 1295.统计位数为偶数的数字
 ```js
 /*
  * @lc app=leetcode.cn id=1295 lang=javascript
@@ -1268,6 +1310,7 @@ var findNumbers = function (nums) {
 ```
 
 
+## 1299.将每个元素替换为右侧最大元素
 ```js
 /*
  * @lc app=leetcode.cn id=1299 lang=javascript
@@ -1294,6 +1337,7 @@ var replaceElements = function (arr) {
 ```
 
 
+## 13.罗马数字转整数
 ```js
 /*
  * @lc app=leetcode.cn id=13 lang=javascript
@@ -1342,6 +1386,7 @@ var romanToInt = function (s) {
 ```
 
 
+## 1304.和为零的n个唯一整数
 ```js
 /*
  * @lc app=leetcode.cn id=1304 lang=javascript
@@ -1370,6 +1415,7 @@ var sumZero = function (n) {
 ```
 
 
+## 1309.解码字母到整数映射
 ```js
 /*
  * @lc app=leetcode.cn id=1309 lang=javascript
@@ -1400,6 +1446,7 @@ var freqAlphabets = function (s) {
 ```
 
 
+## 1313.解压缩编码列表
 ```js
 /*
  * @lc app=leetcode.cn id=1313 lang=javascript
@@ -1427,6 +1474,7 @@ var decompressRLElist = function (nums) {
 ```
 
 
+## 1317.将整数转换为两个无零整数的和
 ```js
 /*
  * @lc app=leetcode.cn id=1317 lang=javascript
@@ -1450,6 +1498,7 @@ var getNoZeroIntegers = function (n) {
 ```
 
 
+## 1323.6-和-9-组成的最大数字
 ```js
 /*
  * @lc app=leetcode.cn id=1323 lang=javascript
@@ -1471,6 +1520,7 @@ var maximum69Number  = function(num) {
 ```
 
 
+## 1331.数组序号转换
 ```js
 /*
  * @lc app=leetcode.cn id=1331 lang=javascript
@@ -1496,6 +1546,7 @@ var arrayRankTransform = function (arr) {
 ```
 
 
+## 1332.删除回文子序列
 ```js
 /*
  * @lc app=leetcode.cn id=1332 lang=javascript
@@ -1535,6 +1586,7 @@ const removePalindromeSub = s => s === s.split('').reverse().join('') ? 1 : 2
 ```
 
 
+## 1337.矩阵中战斗力最弱的-k-行
 ```js
 /*
  * @lc app=leetcode.cn id=1337 lang=javascript
@@ -1575,6 +1627,7 @@ var kWeakestRows = function (mat, k) {
 ```
 
 
+## 1342.将数字变成-0-的操作次数
 ```js
 /*
  * @lc app=leetcode.cn id=1342 lang=javascript
@@ -1602,6 +1655,7 @@ var numberOfSteps = function (num) {
 ```
 
 
+## 1346.检查整数及其两倍数是否存在
 ```js
 /*
  * @lc app=leetcode.cn id=1346 lang=javascript
@@ -1640,6 +1694,7 @@ var checkIfExist = function (arr) {
 ```
 
 
+## 1351.统计有序矩阵中的负数
 ```js
 /*
  * @lc app=leetcode.cn id=1351 lang=javascript
@@ -1669,6 +1724,7 @@ var countNegatives = function (grid) {
 ```
 
 
+## 1356.根据数字二进制下-1-的数目排序
 ```js
 /*
  * @lc app=leetcode.cn id=1356 lang=javascript
@@ -1694,6 +1750,7 @@ const count = (num) => num.toString(2).split("").reduce((p, c) => {
 ```
 
 
+## 136.只出现一次的数字
 ```js
 /*
  * @lc app=leetcode.cn id=136 lang=javascript
@@ -1724,6 +1781,7 @@ var singleNumber = function (nums) {
 ```
 
 
+## 1360.日期之间隔几天
 ```js
 /*
  * @lc app=leetcode.cn id=1360 lang=javascript
@@ -1744,6 +1802,7 @@ var daysBetweenDates = (date1, date2) => Math.abs((new Date(date1).getTime() - n
 ```
 
 
+## 1365.有多少小于当前数字的数字
 ```js
 /*
  * @lc app=leetcode.cn id=1365 lang=javascript
@@ -1776,6 +1835,7 @@ var smallerNumbersThanCurrent = function (nums) {
 ```
 
 
+## 1370.上升下降字符串
 ```js
 /*
  * @lc app=leetcode.cn id=1370 lang=javascript
@@ -1822,6 +1882,7 @@ var sortString = function (s) {
 ```
 
 
+## 1374.生成每种字符都是奇数个的字符串
 ```js
 /*
  * @lc app=leetcode.cn id=1374 lang=javascript
@@ -1843,6 +1904,7 @@ var generateTheString = function (n) {
 ```
 
 
+## 1380.矩阵中的幸运数
 ```js
 /*
  * @lc app=leetcode.cn id=1380 lang=javascript
@@ -1873,6 +1935,7 @@ var luckyNumbers = function (matrix) {
 ```
 
 
+## 1385.两个数组间的距离值
 ```js
 /*
  * @lc app=leetcode.cn id=1385 lang=javascript
@@ -1906,6 +1969,7 @@ var findTheDistanceValue = function (arr1, arr2, d) {
 ```
 
 
+## 1389.按既定顺序创建目标数组
 ```js
 /*
  * @lc app=leetcode.cn id=1389 lang=javascript
@@ -1932,6 +1996,7 @@ var createTargetArray = function (nums, index) {
 ```
 
 
+## 1394.找出数组中的幸运数
 ```js
 /*
  * @lc app=leetcode.cn id=1394 lang=javascript
@@ -1961,6 +2026,7 @@ var findLucky = function (arr) {
 ```
 
 
+## 1399.统计最大组的数目
 ```js
 /*
  * @lc app=leetcode.cn id=1399 lang=javascript
@@ -1992,6 +2058,7 @@ var countLargestGroup = function (n) {
 ```
 
 
+## 14.最长公共前缀
 ```js
 /*
  * @lc app=leetcode.cn id=14 lang=javascript
@@ -2033,6 +2100,7 @@ var longestCommonPrefix = function (strs) {
 ```
 
 
+## 1403.非递增顺序的最小子序列
 ```js
 /*
  * @lc app=leetcode.cn id=1403 lang=javascript
@@ -2062,6 +2130,7 @@ var minSubsequence = function (nums) {
 ```
 
 
+## 144.二叉树的前序遍历
 ```js
 /*
  * @lc app=leetcode.cn id=144 lang=javascript
@@ -2102,6 +2171,7 @@ var preorderTraversal = function (root) {
 ```
 
 
+## 145.二叉树的后序遍历
 ```js
 /*
  * @lc app=leetcode.cn id=145 lang=javascript
@@ -2139,6 +2209,7 @@ var postorderTraversal = function (root) {
 ```
 
 
+## 155.最小栈
 ```js
 /*
  * @lc app=leetcode.cn id=155 lang=javascript
@@ -2199,6 +2270,7 @@ MinStack.prototype.getMin = function () {
 ```
 
 
+## 160.相交链表
 ```js
 /*
  * @lc app=leetcode.cn id=160 lang=javascript
@@ -2234,6 +2306,7 @@ var getIntersectionNode = function (headA, headB) {
 ```
 
 
+## 167.两数之和-ii-输入有序数组
 ```js
 /*
  * @lc app=leetcode.cn id=167 lang=javascript
@@ -2265,6 +2338,7 @@ var twoSum = function (numbers, target) {
 ```
 
 
+## 168.excel表列名称
 ```js
 /*
  * @lc app=leetcode.cn id=168 lang=javascript
@@ -2293,6 +2367,7 @@ var convertToTitle = function (columnNumber) {
 ```
 
 
+## 169.多数元素
 ```js
 /*
  * @lc app=leetcode.cn id=169 lang=javascript
@@ -2315,6 +2390,7 @@ var majorityElement = function (nums) {
 ```
 
 
+## 171.excel-表列序号
 ```js
 /*
  * @lc app=leetcode.cn id=171 lang=javascript
@@ -2341,6 +2417,7 @@ var titleToNumber = function (columnTitle) {
 ```
 
 
+## 172.阶乘后的零
 ```js
 /*
  * @lc app=leetcode.cn id=172 lang=javascript
@@ -2366,6 +2443,7 @@ var trailingZeroes = function (n) {
 ```
 
 
+## 191.位-1-的个数
 ```js
 /*
  * @lc app=leetcode.cn id=191 lang=javascript
@@ -2392,6 +2470,7 @@ var hammingWeight = function(n) {
 ```
 
 
+## 2.两数相加
 ```js
 /*
  * @lc app=leetcode.cn id=2 lang=javascript
@@ -2431,6 +2510,7 @@ var addTwoNumbers = function (l1, l2) {
 ```
 
 
+## 202.快乐数
 ```js
 /*
  * @lc app=leetcode.cn id=202 lang=javascript
@@ -2461,6 +2541,7 @@ var isHappy = function (n) {
 ```
 
 
+## 203.移除链表元素
 ```js
 /*
  * @lc app=leetcode.cn id=203 lang=javascript
@@ -2502,6 +2583,7 @@ var removeElements = function (head, val) {
 ```
 
 
+## 204.计数质数
 ```js
 /*
  * @lc app=leetcode.cn id=204 lang=javascript
@@ -2531,6 +2613,7 @@ var removeElements = function (head, val) {
 ```
 
 
+## 205.同构字符串
 ```js
 /*
  * @lc app=leetcode.cn id=205 lang=javascript
@@ -2560,6 +2643,7 @@ var removeElements = function (head, val) {
 ```
 
 
+## 206.反转链表
 ```js
 /*
  * @lc app=leetcode.cn id=206 lang=javascript
@@ -2588,6 +2672,7 @@ var reverseList = function(head) {
 ```
 
 
+## 21.合并两个有序链表
 ```js
 /*
  * @lc app=leetcode.cn id=21 lang=javascript
@@ -2629,6 +2714,7 @@ var mergeTwoLists = function (l1, l2) {
 ```
 
 
+## 26.删除有序数组中的重复项
 ```js
 /*
  * @lc app=leetcode.cn id=26 lang=javascript
@@ -2657,6 +2743,7 @@ var removeDuplicates = function (nums) {
 ```
 
 
+## 27.移除元素
 ```js
 /*
  * @lc app=leetcode.cn id=27 lang=javascript
@@ -2686,6 +2773,7 @@ var removeElement = function (nums, val) {
 ```
 
 
+## 338.比特位计数
 ```js
 /*
  * @lc app=leetcode.cn id=338 lang=javascript
@@ -2714,6 +2802,7 @@ var countBits = function (n) {
 ```
 
 
+## 342.4-的幂
 ```js
 /*
  * @lc app=leetcode.cn id=342 lang=javascript
@@ -2740,6 +2829,7 @@ var isPowerOfFour = function (n) {
 ```
 
 
+## 345.反转字符串中的元音字母
 ```js
 /*
  * @lc app=leetcode.cn id=345 lang=javascript
@@ -2760,6 +2850,7 @@ var isPowerOfFour = function (n) {
 ```
 
 
+## 35.搜索插入位置
 ```js
 /*
  * @lc app=leetcode.cn id=35 lang=javascript
@@ -2786,6 +2877,7 @@ var searchInsert = function (nums, target) {
 ```
 
 
+## 350.两个数组的交集-ii
 ```js
 /*
  * @lc app=leetcode.cn id=350 lang=javascript
@@ -2817,6 +2909,7 @@ var intersect = function (nums1, nums2) {
 ```
 
 
+## 367.有效的完全平方数
 ```js
 /*
  * @lc app=leetcode.cn id=367 lang=javascript
@@ -2843,6 +2936,7 @@ var isPerfectSquare = function (num) {
 ```
 
 
+## 374.猜数字大小
 ```js
 /*
  * @lc app=leetcode.cn id=374 lang=javascript
@@ -2884,6 +2978,7 @@ var guessNumber = function (n) {
 ```
 
 
+## 389.找不同
 ```js
 /*
  * @lc app=leetcode.cn id=389 lang=javascript
@@ -2910,6 +3005,7 @@ var findTheDifference = function (s, t) {
 ```
 
 
+## 392.判断子序列
 ```js
 /*
  * @lc app=leetcode.cn id=392 lang=javascript
@@ -2942,6 +3038,7 @@ var isSubsequence = function (s, t) {
 ```
 
 
+## 4.寻找两个正序数组的中位数
 ```js
 /*
  * @lc app=leetcode.cn id=4 lang=javascript
@@ -2970,6 +3067,7 @@ var findMedianSortedArrays = function (nums1, nums2) {
 ```
 
 
+## 401.二进制手表
 ```js
 /*
  * @lc app=leetcode.cn id=401 lang=javascript
@@ -2991,6 +3089,7 @@ var readBinaryWatch = function(turnedOn) {
 ```
 
 
+## 405.数字转换为十六进制数
 ```js
 /*
  * @lc app=leetcode.cn id=405 lang=javascript
@@ -3012,6 +3111,7 @@ var toHex = function(num) {
 ```
 
 
+## 409.最长回文串
 ```js
 /*
  * @lc app=leetcode.cn id=409 lang=javascript
@@ -3043,6 +3143,7 @@ var toHex = function(num) {
 ```
 
 
+## 412.fizz-buzz
 ```js
 /*
  * @lc app=leetcode.cn id=412 lang=javascript
@@ -3078,6 +3179,7 @@ var fizzBuzz = function (n) {
 ```
 
 
+## 414.第三大的数
 ```js
 /*
  * @lc app=leetcode.cn id=414 lang=javascript
@@ -3100,6 +3202,7 @@ var thirdMax = function (nums) {
 ```
 
 
+## 415.字符串相加
 ```js
 /*
  * @lc app=leetcode.cn id=415 lang=javascript
@@ -3138,6 +3241,7 @@ var addStrings = function (num1, num2) {
 ```
 
 
+## 434.字符串中的单词数
 ```js
 /*
  * @lc app=leetcode.cn id=434 lang=javascript
@@ -3159,6 +3263,7 @@ var countSegments = function (s) {
 ```
 
 
+## 441.排列硬币
 ```js
 /*
  * @lc app=leetcode.cn id=441 lang=javascript
@@ -3185,6 +3290,7 @@ var arrangeCoins = function (n) {
 ```
 
 
+## 448.找到所有数组中消失的数字
 ```js
 /*
  * @lc app=leetcode.cn id=448 lang=javascript
@@ -3210,6 +3316,7 @@ var findDisappearedNumbers = function (nums) {
 ```
 
 
+## 453.最小操作次数使数组元素相等
 ```js
 /*
  * @lc app=leetcode.cn id=453 lang=javascript
@@ -3235,6 +3342,7 @@ var minMoves = function (nums) {
 ```
 
 
+## 455.分发饼干
 ```js
 /*
  * @lc app=leetcode.cn id=455 lang=javascript
@@ -3267,6 +3375,7 @@ var findContentChildren = function (g, s) {
 ```
 
 
+## 459.重复的子字符串
 ```js
 /*
  * @lc app=leetcode.cn id=459 lang=javascript
@@ -3288,6 +3397,7 @@ var repeatedSubstringPattern = function(s) {
 ```
 
 
+## 485.最大连续-1-的个数
 ```js
 /*
  * @lc app=leetcode.cn id=485 lang=javascript
@@ -3321,6 +3431,7 @@ var findMaxConsecutiveOnes = function (nums) {
 ```
 
 
+## 495.提莫攻击
 ```js
 /*
  * @lc app=leetcode.cn id=495 lang=javascript
@@ -3349,6 +3460,7 @@ var findPoisonedDuration = function (timeSeries, duration) {
 ```
 
 
+## 496.下一个更大元素-i
 ```js
 /*
  * @lc app=leetcode.cn id=496 lang=javascript
@@ -3387,6 +3499,7 @@ var nextGreaterElement = function (nums1, nums2) {
 ```
 
 
+## 500.键盘行
 ```js
 /*
  * @lc app=leetcode.cn id=500 lang=javascript
@@ -3419,6 +3532,7 @@ var findWords = function (words) {
 ```
 
 
+## 504.七进制数
 ```js
 /*
  * @lc app=leetcode.cn id=504 lang=javascript
@@ -3442,6 +3556,7 @@ var convertToBase7 = function (num) {
 ```
 
 
+## 506.相对名次
 ```js
 /*
  * @lc app=leetcode.cn id=506 lang=javascript
@@ -3471,6 +3586,7 @@ var findRelativeRanks = function (score) {
 ```
 
 
+## 507.完美数
 ```js
 /*
  * @lc app=leetcode.cn id=507 lang=javascript
@@ -3496,6 +3612,7 @@ var findRelativeRanks = function (score) {
 ```
 
 
+## 520.检测大写字母
 ```js
 /*
  * @lc app=leetcode.cn id=520 lang=javascript
@@ -3527,6 +3644,7 @@ var detectCapitalUse = function (word) {
 ```
 
 
+## 521.最长特殊序列-ⅰ
 ```js
 /*
  * @lc app=leetcode.cn id=521 lang=javascript
@@ -3550,6 +3668,7 @@ var detectCapitalUse = function (word) {
 ```
 
 
+## 53.最大子序和
 ```js
 /*
  * @lc app=leetcode.cn id=53 lang=javascript
@@ -3576,6 +3695,7 @@ var maxSubArray = function (nums) {
 ```
 
 
+## 541.反转字符串-ii
 ```js
 /*
  * @lc app=leetcode.cn id=541 lang=javascript
@@ -3605,6 +3725,7 @@ var maxSubArray = function (nums) {
 ```
 
 
+## 551.学生出勤记录-i
 ```js
 /*
  * @lc app=leetcode.cn id=551 lang=javascript
@@ -3637,6 +3758,7 @@ var checkRecord = function (s) {
 ```
 
 
+## 557.反转字符串中的单词-iii
 ```js
 /*
  * @lc app=leetcode.cn id=557 lang=javascript
@@ -3658,6 +3780,7 @@ var reverseWords = function (s) {
 ```
 
 
+## 561.数组拆分-i
 ```js
 /*
  * @lc app=leetcode.cn id=561 lang=javascript
@@ -3684,6 +3807,7 @@ var arrayPairSum = function (nums) {
 ```
 
 
+## 566.重塑矩阵
 ```js
 /*
  * @lc app=leetcode.cn id=566 lang=javascript
@@ -3718,6 +3842,7 @@ var matrixReshape = function (mat, r, c) {
 ```
 
 
+## 575.分糖果
 ```js
 /*
  * @lc app=leetcode.cn id=575 lang=javascript
@@ -3741,6 +3866,7 @@ var distributeCandies = function (candyType) {
 ```
 
 
+## 58.最后一个单词的长度
 ```js
 /*
  * @lc app=leetcode.cn id=58 lang=javascript
@@ -3763,6 +3889,7 @@ var lengthOfLastWord = function (s) {
 ```
 
 
+## 594.最长和谐子序列
 ```js
 /*
  * @lc app=leetcode.cn id=594 lang=javascript
@@ -3784,6 +3911,7 @@ var findLHS = function(nums) {
 ```
 
 
+## 598.范围求和-ii
 ```js
 /*
  * @lc app=leetcode.cn id=598 lang=javascript
@@ -3807,6 +3935,7 @@ var maxCount = function(m, n, ops) {
 ```
 
 
+## 599.两个列表的最小索引总和
 ```js
 /*
  * @lc app=leetcode.cn id=599 lang=javascript
@@ -3839,6 +3968,7 @@ var findRestaurant = function (list1, list2) {
 ```
 
 
+## 605.种花问题
 ```js
 /*
  * @lc app=leetcode.cn id=605 lang=javascript
@@ -3862,11 +3992,13 @@ var canPlaceFlowers = function (flowerbed, n) {
 ```
 
 
+## 627.变更性别
 ```js
 
 ```
 
 
+## 628.三个数的最大乘积
 ```js
 /*
  * @lc app=leetcode.cn id=628 lang=javascript
@@ -3890,6 +4022,7 @@ var maximumProduct = function (nums) {
 ```
 
 
+## 643.子数组最大平均数-i
 ```js
 /*
  * @lc app=leetcode.cn id=643 lang=javascript
@@ -3917,6 +4050,7 @@ var findMaxAverage = function (nums, k) {
 ```
 
 
+## 645.错误的集合
 ```js
 /*
  * @lc app=leetcode.cn id=645 lang=javascript
@@ -3941,6 +4075,7 @@ var findErrorNums = function (nums) {
 ```
 
 
+## 657.机器人能否返回原点
 ```js
 /*
  * @lc app=leetcode.cn id=657 lang=javascript
@@ -3967,6 +4102,7 @@ var judgeCircle = function (moves) {
 ```
 
 
+## 66.加一
 ```js
 /*
  * @lc app=leetcode.cn id=66 lang=javascript
@@ -3997,6 +4133,7 @@ var plusOne = function (digits) {
 ```
 
 
+## 661.图片平滑器
 ```js
 /*
  * @lc app=leetcode.cn id=661 lang=javascript
@@ -4018,6 +4155,7 @@ var imageSmoother = function(img) {
 ```
 
 
+## 67.二进制求和
 ```js
 /*
  * @lc app=leetcode.cn id=67 lang=javascript
@@ -4040,6 +4178,7 @@ var addBinary = function (a, b) {
 ```
 
 
+## 674.最长连续递增序列
 ```js
 /*
  * @lc app=leetcode.cn id=674 lang=javascript
@@ -4068,6 +4207,7 @@ var findLengthOfLCIS = function (nums) {
 ```
 
 
+## 680.验证回文字符串-ⅱ
 ```js
 /*
  * @lc app=leetcode.cn id=680 lang=javascript
@@ -4098,6 +4238,7 @@ var validPalindrome = function (s) {
 ```
 
 
+## 682.棒球比赛
 ```js
 /*
  * @lc app=leetcode.cn id=682 lang=javascript
@@ -4132,6 +4273,7 @@ var calPoints = function (ops) {
 ```
 
 
+## 697.数组的度
 ```js
 /*
  * @lc app=leetcode.cn id=697 lang=javascript
@@ -4153,6 +4295,7 @@ var findShortestSubArray = function(nums) {
 ```
 
 
+## 704.二分查找
 ```js
 /*
  * @lc app=leetcode.cn id=704 lang=javascript
@@ -4186,6 +4329,7 @@ var search = function (nums, target) {
 ```
 
 
+## 705.设计哈希集合
 ```js
 /*
  * @lc app=leetcode.cn id=705 lang=javascript
@@ -4236,6 +4380,7 @@ MyHashSet.prototype.contains = function (key) {
 ```
 
 
+## 706.设计哈希映射
 ```js
 /*
  * @lc app=leetcode.cn id=706 lang=javascript
@@ -4287,6 +4432,7 @@ MyHashMap.prototype.remove = function (key) {
 ```
 
 
+## 709.转换成小写字母
 ```js
 /*
  * @lc app=leetcode.cn id=709 lang=javascript
@@ -4312,6 +4458,7 @@ var toLowerCase = function (s) {
 ```
 
 
+## 720.词典中最长的单词
 ```js
 /*
  * @lc app=leetcode.cn id=720 lang=javascript
@@ -4333,6 +4480,7 @@ var longestWord = function(words) {
 ```
 
 
+## 724.寻找数组的中心下标
 ```js
 /*
  * @lc app=leetcode.cn id=724 lang=javascript
@@ -4361,6 +4509,7 @@ var pivotIndex = function (nums) {
 ```
 
 
+## 728.自除数
 ```js
 /*
  * @lc app=leetcode.cn id=728 lang=javascript
@@ -4393,6 +4542,7 @@ var selfDividingNumbers = function (left, right) {
 ```
 
 
+## 733.图像渲染
 ```js
 /*
  * @lc app=leetcode.cn id=733 lang=javascript
@@ -4417,6 +4567,7 @@ var floodFill = function(image, sr, sc, newColor) {
 ```
 
 
+## 744.寻找比目标字母大的最小字母
 ```js
 /*
  * @lc app=leetcode.cn id=744 lang=javascript
@@ -4443,6 +4594,7 @@ var nextGreatestLetter = function (letters, target) {
 ```
 
 
+## 746.使用最小花费爬楼梯
 ```js
 /*
  * @lc app=leetcode.cn id=746 lang=javascript
@@ -4466,6 +4618,7 @@ var minCostClimbingStairs = function (cost) {
 ```
 
 
+## 747.至少是其他数字两倍的最大数
 ```js
 /*
  * @lc app=leetcode.cn id=747 lang=javascript
@@ -4490,6 +4643,7 @@ var dominantIndex = function (nums) {
 ```
 
 
+## 748.最短补全词
 ```js
 /*
  * @lc app=leetcode.cn id=748 lang=javascript
@@ -4527,6 +4681,7 @@ var shortestCompletingWord = function (licensePlate, words) {
 ```
 
 
+## 762.二进制表示中质数个计算置位
 ```js
 /*
  * @lc app=leetcode.cn id=762 lang=javascript
@@ -4571,6 +4726,7 @@ var isPrime = function (num, map) {
 ```
 
 
+## 766.托普利茨矩阵
 ```js
 /*
  * @lc app=leetcode.cn id=766 lang=javascript
@@ -4592,6 +4748,7 @@ var isToeplitzMatrix = function(matrix) {
 ```
 
 
+## 771.宝石与石头
 ```js
 /*
  * @lc app=leetcode.cn id=771 lang=javascript
@@ -4618,6 +4775,7 @@ var numJewelsInStones = function (jewels, stones) {
 ```
 
 
+## 796.旋转字符串
 ```js
 /*
  * @lc app=leetcode.cn id=796 lang=javascript
@@ -4644,6 +4802,7 @@ var rotateString = function (s, goal) {
 ```
 
 
+## 804.唯一摩尔斯密码词
 ```js
 /*
  * @lc app=leetcode.cn id=804 lang=javascript
@@ -4673,6 +4832,7 @@ var uniqueMorseRepresentations = function (words) {
 ```
 
 
+## 806.写字符串需要的行数
 ```js
 /*
  * @lc app=leetcode.cn id=806 lang=javascript
@@ -4705,6 +4865,7 @@ var numberOfLines = function (widths, s) {
 ```
 
 
+## 812.最大三角形面积
 ```js
 /*
  * @lc app=leetcode.cn id=812 lang=javascript
@@ -4731,6 +4892,7 @@ var largestTriangleArea = function (points) {
 ```
 
 
+## 819.最常见的单词
 ```js
 /*
  * @lc app=leetcode.cn id=819 lang=javascript
@@ -4766,6 +4928,7 @@ var mostCommonWord = function (paragraph, banned) {
 ```
 
 
+## 824.山羊拉丁文
 ```js
 /*
  * @lc app=leetcode.cn id=824 lang=javascript
@@ -4793,6 +4956,7 @@ var toGoatLatin = function (sentence) {
 ```
 
 
+## 83.删除排序链表中的重复元素
 ```js
 /*
  * @lc app=leetcode.cn id=83 lang=javascript
@@ -4832,6 +4996,7 @@ var deleteDuplicates = function (head) {
 ```
 
 
+## 830.较大分组的位置
 ```js
 /*
  * @lc app=leetcode.cn id=830 lang=javascript
@@ -4866,6 +5031,7 @@ var largeGroupPositions = function (s) {
 ```
 
 
+## 832.翻转图像
 ```js
 /*
  * @lc app=leetcode.cn id=832 lang=javascript
@@ -4887,6 +5053,7 @@ var flipAndInvertImage = function (image) {
 ```
 
 
+## 836.矩形重叠
 ```js
 /*
  * @lc app=leetcode.cn id=836 lang=javascript
@@ -4911,6 +5078,7 @@ var isRectangleOverlap = function (r1, r2) {
 ```
 
 
+## 844.比较含退格的字符串
 ```js
 /*
  * @lc app=leetcode.cn id=844 lang=javascript
@@ -4947,6 +5115,7 @@ var backspaceCompare = function (s, t) {
 ```
 
 
+## 852.山脉数组的峰顶索引
 ```js
 /*
  * @lc app=leetcode.cn id=852 lang=javascript
@@ -4968,6 +5137,7 @@ var peakIndexInMountainArray = function (arr) {
 ```
 
 
+## 859.亲密字符串
 ```js
 /*
  * @lc app=leetcode.cn id=859 lang=javascript
@@ -5010,6 +5180,7 @@ var buddyStrings = function (s, goal) {
 ```
 
 
+## 860.柠檬水找零
 ```js
 /*
  * @lc app=leetcode.cn id=860 lang=javascript
@@ -5051,6 +5222,7 @@ var lemonadeChange = function (bills) {
 ```
 
 
+## 88.合并两个有序数组
 ```js
 /*
  * @lc app=leetcode.cn id=88 lang=javascript
@@ -5084,6 +5256,7 @@ var merge = function (nums1, m, nums2, n) {
 ```
 
 
+## 884.两句话中的不常见单词
 ```js
 /*
  * @lc app=leetcode.cn id=884 lang=javascript
@@ -5113,6 +5286,7 @@ var uncommonFromSentences = function(s1, s2) {
 ```
 
 
+## 888.公平的糖果棒交换
 ```js
 /*
  * @lc app=leetcode.cn id=888 lang=javascript
@@ -5138,6 +5312,7 @@ var fairCandySwap = function (aliceSizes, bobSizes) {
 ```
 
 
+## 896.单调数列
 ```js
 /*
  * @lc app=leetcode.cn id=896 lang=javascript
@@ -5167,6 +5342,7 @@ var isMonotonic = function (nums) {
 ```
 
 
+## 905.按奇偶排序数组
 ```js
 /*
  * @lc app=leetcode.cn id=905 lang=javascript
@@ -5193,6 +5369,7 @@ var sortArrayByParity = function (nums) {
 ```
 
 
+## 908.最小差值-i
 ```js
 /*
  * @lc app=leetcode.cn id=908 lang=javascript
@@ -5216,6 +5393,7 @@ var smallestRangeI = function (nums, k) {
 ```
 
 
+## 914.卡牌分组
 ```js
 /*
  * @lc app=leetcode.cn id=914 lang=javascript
@@ -5262,6 +5440,7 @@ var hasGroupsSizeX = function (deck) {
 ```
 
 
+## 917.仅仅反转字母
 ```js
 /*
  * @lc app=leetcode.cn id=917 lang=javascript
@@ -5297,6 +5476,7 @@ var reverseOnlyLetters = function (s) {
 ```
 
 
+## 922.按奇偶排序数组-ii
 ```js
 /*
  * @lc app=leetcode.cn id=922 lang=javascript
@@ -5327,6 +5507,7 @@ var sortArrayByParityII = function (nums) {
 ```
 
 
+## 925.长按键入
 ```js
 /*
  * @lc app=leetcode.cn id=925 lang=javascript
@@ -5358,6 +5539,7 @@ var isLongPressedName = function (name, typed) {
 ```
 
 
+## 929.独特的电子邮件地址
 ```js
 /*
  * @lc app=leetcode.cn id=929 lang=javascript
@@ -5384,6 +5566,7 @@ var numUniqueEmails = function(emails) {
 ```
 
 
+## 933.最近的请求次数
 ```js
 /*
  * @lc app=leetcode.cn id=933 lang=javascript
@@ -5421,6 +5604,7 @@ RecentCounter.prototype.ping = function (t) {
 ```
 
 
+## 937.重新排列日志文件
 ```js
 /*
  * @lc app=leetcode.cn id=937 lang=javascript
@@ -5457,6 +5641,7 @@ var reorderLogFiles = function (logs) {
 ```
 
 
+## 94.二叉树的中序遍历
 ```js
 /*
  * @lc app=leetcode.cn id=94 lang=javascript
@@ -5497,6 +5682,7 @@ var inorderTraversal = function (root) {
 ```
 
 
+## 941.有效的山脉数组
 ```js
 /*
  * @lc app=leetcode.cn id=941 lang=javascript
@@ -5529,6 +5715,7 @@ var validMountainArray = function (arr) {
 ```
 
 
+## 942.增减字符串匹配
 ```js
 /*
  * @lc app=leetcode.cn id=942 lang=javascript
@@ -5564,6 +5751,7 @@ var diStringMatch = function (s) {
 ```
 
 
+## 944.删列造序
 ```js
 /*
  * @lc app=leetcode.cn id=944 lang=javascript
@@ -5594,6 +5782,7 @@ var minDeletionSize = function (strs) {
 ```
 
 
+## 953.验证外星语词典
 ```js
 /*
  * @lc app=leetcode.cn id=953 lang=javascript
@@ -5616,6 +5805,7 @@ var isAlienSorted = function(words, order) {
 ```
 
 
+## 961.在长度-2-n-的数组中找出重复-n-次的元素
 ```js
 /*
  * @lc app=leetcode.cn id=961 lang=javascript
@@ -5645,6 +5835,7 @@ var repeatedNTimes = function (nums) {
 ```
 
 
+## 976.三角形的最大周长
 ```js
 /*
  * @lc app=leetcode.cn id=976 lang=javascript
@@ -5672,6 +5863,7 @@ var largestPerimeter = function (nums) {
 ```
 
 
+## 977.有序数组的平方
 ```js
 /*
  * @lc app=leetcode.cn id=977 lang=javascript
@@ -5691,6 +5883,7 @@ const sortedSquares = nums => nums.map(item => Math.pow(item, 2)).sort((a, b) =>
 ```
 
 
+## 989.数组形式的整数加法
 ```js
 /*
  * @lc app=leetcode.cn id=989 lang=javascript
@@ -5729,6 +5922,7 @@ var addToArrayForm = function (num, k) {
 ```
 
 
+## 997.找到小镇的法官
 ```js
 /*
  * @lc app=leetcode.cn id=997 lang=javascript
@@ -5764,6 +5958,7 @@ var findJudge = function (n, trust) {
 ```
 
 
+## 999.可以被一步捕获的棋子数
 ```js
 /*
  * @lc app=leetcode.cn id=999 lang=javascript
