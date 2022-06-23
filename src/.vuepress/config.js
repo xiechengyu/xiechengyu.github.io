@@ -2,7 +2,7 @@ const { config } = require("vuepress-theme-hope");
 const navBarConfig = require("./config/navbar");
 
 module.exports = config({
-  title: "谢成昱的博客",
+  title: "xiechengyu的博客",
   description: "welcome",
 
   head: [
