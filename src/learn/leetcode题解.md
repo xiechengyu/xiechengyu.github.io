@@ -17,12 +17,88 @@ leetcode刷题题解
 把在leetcode上刷过的题目记录一二
 
 
+## 1.两数之和
+```js
+/*
+ * @lc app=leetcode.cn id=1 lang=javascript
+ *
+ * [1] 两数之和
+ * 
+给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。
+
+你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。
+
+你可以按任意顺序返回答案。
+
+ 
+
+示例 1：
+
+输入：nums = [2,7,11,15], target = 9
+输出：[0,1]
+解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。
+示例 2：
+
+输入：nums = [3,2,4], target = 6
+输出：[1,2]
+示例 3：
+
+输入：nums = [3,3], target = 6
+输出：[0,1]
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function (nums, target) {
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = i + 1; j < nums.length; j++) {
+      if (nums[i] + nums[j] === target) return [i, j]
+    }
+  }
+};
+// @lc code=end
+
+
+```
+
+
 ## 2.两数相加
 ```js
 /*
  * @lc app=leetcode.cn id=2 lang=javascript
  *
  * [2] 两数相加
+ * 
+ * 给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。
+
+请你将两个数相加，并以相同形式返回一个表示和的链表。
+
+你可以假设除了数字 0 之外，这两个数都不会以 0 开头。
+
+ 
+
+示例 1：
+
+
+输入：l1 = [2,4,3], l2 = [5,6,4]
+输出：[7,0,8]
+解释：342 + 465 = 807.
+示例 2：
+
+输入：l1 = [0], l2 = [0]
+输出：[0]
+示例 3：
+
+输入：l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
+输出：[8,9,9,9,0,0,0,1]
+ 
+
+
  */
 
 // @lc code=start
@@ -63,6 +139,24 @@ var addTwoNumbers = function (l1, l2) {
  * @lc app=leetcode.cn id=4 lang=javascript
  *
  * [4] 寻找两个正序数组的中位数
+ * 
+ * 给定两个大小分别为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。请你找出并返回这两个正序数组的 中位数 。
+
+算法的时间复杂度应该为 O(log (m+n)) 。
+
+ 
+
+示例 1：
+
+输入：nums1 = [1,3], nums2 = [2]
+输出：2.00000
+解释：合并数组 = [1,2,3] ，中位数 2
+示例 2：
+
+输入：nums1 = [1,2], nums2 = [3,4]
+输出：2.50000
+解释：合并数组 = [1,2,3,4] ，中位数 (2 + 3) / 2 = 2.5
+ 
  */
 
 // @lc code=start
@@ -86,12 +180,103 @@ var findMedianSortedArrays = function (nums1, nums2) {
 ```
 
 
+## 9.回文数
+```js
+/*
+ * @lc app=leetcode.cn id=9 lang=javascript
+ *
+ * [9] 回文数
+ * 
+给你一个整数 x ，如果 x 是一个回文整数，返回 true ；否则，返回 false 。
+
+回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。
+
+例如，121 是回文，而 123 不是。
+ 
+
+示例 1：
+
+输入：x = 121
+输出：true
+示例 2：
+
+输入：x = -121
+输出：false
+解释：从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。
+示例 3：
+
+输入：x = 10
+输出：false
+解释：从右向左读, 为 01 。因此它不是一个回文数。
+ 
+
+
+ */
+
+// @lc code=start
+/**
+ * @param {number} x
+ * @return {boolean}
+ */
+var isPalindrome = function (x) {
+  x = x.toString()
+  return x === x.split("").reverse().join("")
+};
+// @lc code=end
+
+
+```
+
+
 ## 13.罗马数字转整数
 ```js
 /*
  * @lc app=leetcode.cn id=13 lang=javascript
  *
  * [13] 罗马数字转整数
+ * 
+ * 罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。
+
+字符          数值
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000
+例如， 罗马数字 2 写做 II ，即为两个并列的 1 。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。
+
+通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况：
+
+I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。
+X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 
+C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
+给定一个罗马数字，将其转换成整数。
+
+示例 1:
+
+输入: s = "III"
+输出: 3
+示例 2:
+
+输入: s = "IV"
+输出: 4
+示例 3:
+
+输入: s = "IX"
+输出: 9
+示例 4:
+
+输入: s = "LVIII"
+输出: 58
+解释: L = 50, V= 5, III = 3.
+示例 5:
+
+输入: s = "MCMXCIV"
+输出: 1994
+解释: M = 1000, CM = 900, XC = 90, IV = 4.
+ 
  */
 
 // @lc code=start
@@ -141,6 +326,22 @@ var romanToInt = function (s) {
  * @lc app=leetcode.cn id=14 lang=javascript
  *
  * [14] 最长公共前缀
+ * 
+ * 编写一个函数来查找字符串数组中的最长公共前缀。
+
+如果不存在公共前缀，返回空字符串 ""。
+
+ 
+
+示例 1：
+
+输入：strs = ["flower","flow","flight"]
+输出："fl"
+示例 2：
+
+输入：strs = ["dog","racecar","car"]
+输出：""
+解释：输入不存在公共前缀。
  */
 
 // @lc code=start
@@ -177,12 +378,88 @@ var longestCommonPrefix = function (strs) {
 ```
 
 
+## 20.有效的括号
+```js
+/*
+ * @lc app=leetcode.cn id=20 lang=javascript
+ *
+ * [20] 有效的括号
+ * 
+ * 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。
+
+有效字符串需满足：
+
+左括号必须用相同类型的右括号闭合。
+左括号必须以正确的顺序闭合。
+ 
+
+示例 1：
+
+输入：s = "()"
+输出：true
+示例 2：
+
+输入：s = "()[]{}"
+输出：true
+示例 3：
+
+输入：s = "(]"
+输出：false
+示例 4：
+
+输入：s = "([)]"
+输出：false
+示例 5：
+
+输入：s = "{[]}"
+输出：true
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function (s) {
+  const map = new Map([[")", "("], ["}", "{"], ["]", "["]]), stack = []
+  stack.push(s[0])
+  for (let i = 1; i < s.length; i++) {
+    if (map.get(s[i]) && stack[stack.length - 1] && map.get(s[i]) === stack[stack.length - 1]) stack.pop()
+    else stack.push(s[i])
+  }
+  return stack.length === 0
+};
+// @lc code=end
+
+
+```
+
+
 ## 21.合并两个有序链表
 ```js
 /*
  * @lc app=leetcode.cn id=21 lang=javascript
  *
  * [21] 合并两个有序链表
+ * 
+ * 将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 
+
+ 
+
+示例 1：
+
+输入：l1 = [1,2,4], l2 = [1,3,4]
+输出：[1,1,2,3,4,4]
+示例 2：
+
+输入：l1 = [], l2 = []
+输出：[]
+示例 3：
+
+输入：l1 = [], l2 = [0]
+输出：[0]
+
  */
 
 // @lc code=start
@@ -225,6 +502,43 @@ var mergeTwoLists = function (l1, l2) {
  * @lc app=leetcode.cn id=26 lang=javascript
  *
  * [26] 删除有序数组中的重复项
+ * 
+ * 给你一个 升序排列 的数组 nums ，请你 原地 删除重复出现的元素，使每个元素 只出现一次 ，返回删除后数组的新长度。元素的 相对顺序 应该保持 一致 。
+
+由于在某些语言中不能改变数组的长度，所以必须将结果放在数组nums的第一部分。更规范地说，如果在删除重复项之后有 k 个元素，那么 nums 的前 k 个元素应该保存最终结果。
+
+将最终结果插入 nums 的前 k 个位置后返回 k 。
+
+不要使用额外的空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
+
+判题标准:
+
+系统会用下面的代码来测试你的题解:
+
+int[] nums = [...]; // 输入数组
+int[] expectedNums = [...]; // 长度正确的期望答案
+
+int k = removeDuplicates(nums); // 调用
+
+assert k == expectedNums.length;
+for (int i = 0; i < k; i++) {
+    assert nums[i] == expectedNums[i];
+}
+如果所有断言都通过，那么您的题解将被 通过。
+
+ 
+
+示例 1：
+
+输入：nums = [1,1,2]
+输出：2, nums = [1,2,_]
+解释：函数应该返回新的长度 2 ，并且原数组 nums 的前两个元素被修改为 1, 2 。不需要考虑数组中超出新长度后面的元素。
+示例 2：
+
+输入：nums = [0,0,1,1,1,2,2,3,3,4]
+输出：5, nums = [0,1,2,3,4]
+解释：函数应该返回新的长度 5 ， 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4 。不需要考虑数组中超出新长度后面的元素。
+ 
  */
 
 // @lc code=start
@@ -254,6 +568,46 @@ var removeDuplicates = function (nums) {
  * @lc app=leetcode.cn id=27 lang=javascript
  *
  * [27] 移除元素
+ * 
+ * 给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。
+
+不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。
+
+元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
+
+ 
+
+说明:
+
+为什么返回数值是整数，但输出的答案是数组呢?
+
+请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。
+
+你可以想象内部操作如下:
+
+// nums 是以“引用”方式传递的。也就是说，不对实参作任何拷贝
+int len = removeElement(nums, val);
+
+// 在函数里修改输入数组对于调用者是可见的。
+// 根据你的函数返回的长度, 它会打印出数组中 该长度范围内 的所有元素。
+for (int i = 0; i < len; i++) {
+    print(nums[i]);
+}
+ 
+
+示例 1：
+
+输入：nums = [3,2,2,3], val = 3
+输出：2, nums = [2,2]
+解释：函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。你不需要考虑数组中超出新长度后面的元素。例如，函数返回的新长度为 2 ，而 nums = [2,2,3,3] 或 nums = [2,2,0,0]，也会被视作正确答案。
+示例 2：
+
+输入：nums = [0,1,2,2,3,0,4,2], val = 2
+输出：5, nums = [0,1,4,0,3]
+解释：函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。注意这五个元素可为任意顺序。你不需要考虑数组中超出新长度后面的元素。
+ 
+
+
  */
 
 // @lc code=start
@@ -278,12 +632,77 @@ var removeElement = function (nums, val) {
 ```
 
 
+## 28.实现-str-str
+```js
+/*
+ * @lc app=leetcode.cn id=28 lang=javascript
+ *
+ * [28] 实现 strStr()
+ * 
+ * 实现 strStr() 函数。
+
+给你两个字符串 haystack 和 needle ，请你在 haystack 字符串中找出 needle 字符串出现的第一个位置（下标从 0 开始）。如果不存在，则返回  -1 。
+
+说明：
+
+当 needle 是空字符串时，我们应当返回什么值呢？这是一个在面试中很好的问题。
+
+对于本题而言，当 needle 是空字符串时我们应当返回 0 。这与 C 语言的 strstr() 以及 Java 的 indexOf() 定义相符。
+
+ 
+
+示例 1：
+
+输入：haystack = "hello", needle = "ll"
+输出：2
+示例 2：
+
+输入：haystack = "aaaaa", needle = "bba"
+输出：-1
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {string} haystack
+ * @param {string} needle
+ * @return {number}
+ */
+var strStr = function (haystack, needle) {
+  return haystack.indexOf(needle)
+};
+// @lc code=end
+
+
+```
+
+
 ## 35.搜索插入位置
 ```js
 /*
  * @lc app=leetcode.cn id=35 lang=javascript
  *
  * [35] 搜索插入位置
+ * 
+ * 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
+
+请必须使用时间复杂度为 O(log n) 的算法。
+
+ 
+
+示例 1:
+
+输入: nums = [1,3,5,6], target = 5
+输出: 2
+示例 2:
+
+输入: nums = [1,3,5,6], target = 2
+输出: 1
+示例 3:
+
+输入: nums = [1,3,5,6], target = 7
+输出: 4
+ 
  */
 
 // @lc code=start
@@ -332,12 +751,84 @@ var maxSubArray = function (nums) {
 ```
 
 
+## 53.最大子数组和
+```js
+/*
+ * @lc app=leetcode.cn id=53 lang=javascript
+ *
+ * [53] 最大子数组和
+ * 
+ * 给你一个整数数组 nums ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+
+子数组 是数组中的一个连续部分。
+
+ 
+
+示例 1：
+
+输入：nums = [-2,1,-3,4,-1,2,1,-5,4]
+输出：6
+解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。
+示例 2：
+
+输入：nums = [1]
+输出：1
+示例 3：
+
+输入：nums = [5,4,-1,7,8]
+输出：23
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSubArray = function (nums) {
+  let res = nums[0], count = nums[0]
+  for (let i = 1; i < nums.length; i++) {
+    if (count + nums[i] > nums[i]) count += nums[i];
+    else count = nums[i];
+    if (count > res) res = count;
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
 ## 58.最后一个单词的长度
 ```js
 /*
  * @lc app=leetcode.cn id=58 lang=javascript
  *
  * [58] 最后一个单词的长度
+ * 
+ * 给你一个字符串 s，由若干单词组成，单词前后用一些空格字符隔开。返回字符串中 最后一个 单词的长度。
+
+单词 是指仅由字母组成、不包含任何空格字符的最大子字符串。
+
+ 
+
+示例 1：
+
+输入：s = "Hello World"
+输出：5
+解释：最后一个单词是“World”，长度为5。
+示例 2：
+
+输入：s = "   fly me   to   the moon  "
+输出：4
+解释：最后一个单词是“moon”，长度为4。
+示例 3：
+
+输入：s = "luffy is still joyboy"
+输出：6
+解释：最后一个单词是长度为6的“joyboy”。
+ 
  */
 
 // @lc code=start
@@ -361,6 +852,30 @@ var lengthOfLastWord = function (s) {
  * @lc app=leetcode.cn id=66 lang=javascript
  *
  * [66] 加一
+ * 
+ * 给定一个由 整数 组成的 非空 数组所表示的非负整数，在该数的基础上加一。
+
+最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。
+
+你可以假设除了整数 0 之外，这个整数不会以零开头。
+
+ 
+
+示例 1：
+
+输入：digits = [1,2,3]
+输出：[1,2,4]
+解释：输入数组表示数字 123。
+示例 2：
+
+输入：digits = [4,3,2,1]
+输出：[4,3,2,2]
+解释：输入数组表示数字 4321。
+示例 3：
+
+输入：digits = [0]
+输出：[1]
+ 
  */
 
 // @lc code=start
@@ -392,6 +907,22 @@ var plusOne = function (digits) {
  * @lc app=leetcode.cn id=67 lang=javascript
  *
  * [67] 二进制求和
+ * 
+ * 给你两个二进制字符串，返回它们的和（用二进制表示）。
+
+输入为 非空 字符串且只包含数字 1 和 0。
+
+ 
+
+示例 1:
+
+输入: a = "11", b = "1"
+输出: "100"
+示例 2:
+
+输入: a = "1010", b = "1011"
+输出: "10101"
+ 
  */
 
 // @lc code=start
@@ -409,15 +940,127 @@ var addBinary = function (a, b) {
 ```
 
 
+## 69.x-的平方根
+```js
+/*
+ * @lc app=leetcode.cn id=69 lang=javascript
+ *
+ * [69] x 的平方根 
+ * 
+ * 给你一个非负整数 x ，计算并返回 x 的 算术平方根 。
+
+由于返回类型是整数，结果只保留 整数部分 ，小数部分将被 舍去 。
+
+注意：不允许使用任何内置指数函数和算符，例如 pow(x, 0.5) 或者 x ** 0.5 。
+
+ 
+
+示例 1：
+
+输入：x = 4
+输出：2
+示例 2：
+
+输入：x = 8
+输出：2
+解释：8 的算术平方根是 2.82842..., 由于返回类型是整数，小数部分将被舍去。
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {number} x
+ * @return {number}
+ */
+var mySqrt = function (x) {
+  let l = 1, r = Math.floor(x / 2) + 1, mid
+  while (l <= r) {
+    mid = Math.floor((l + r) / 2)
+    if (mid * mid > x) r = mid - 1
+    else if (mid * mid < x) l = mid + 1
+    else return mid
+  }
+  return r
+};
+// @lc code=end
+
+
+```
+
+
+## 70.爬楼梯
+```js
+/*
+ * @lc app=leetcode.cn id=70 lang=javascript
+ *
+ * [70] 爬楼梯
+ * 
+ * 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
+
+每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
+
+ 
+
+示例 1：
+
+输入：n = 2
+输出：2
+解释：有两种方法可以爬到楼顶。
+1. 1 阶 + 1 阶
+2. 2 阶
+示例 2：
+
+输入：n = 3
+输出：3
+解释：有三种方法可以爬到楼顶。
+1. 1 阶 + 1 阶 + 1 阶
+2. 1 阶 + 2 阶
+3. 2 阶 + 1 阶
+ 
+
+
+ */
+
+// @lc code=start
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var climbStairs = function (n) {
+  if (n < 4) return n
+  let i = 2, j = 3
+  for (let k = 4; k < n; k++) [j, i] = [j + i, j]
+  return i + j
+};
+// @lc code=end
+
+
+```
+
+
 ## 83.删除排序链表中的重复元素
 ```js
 /*
  * @lc app=leetcode.cn id=83 lang=javascript
  *
  * [83] 删除排序链表中的重复元素
- */
+ * 
+ * 给定一个已排序的链表的头 head ， 删除所有重复的元素，使每个元素只出现一次 。返回 已排序的链表 。
 
-import { left } from "inquirer/lib/utils/readline";
+ 
+
+示例 1：
+
+
+输入：head = [1,1,2]
+输出：[1,2]
+示例 2：
+
+
+输入：head = [1,1,2,3,3]
+输出：[1,2,3]
+ 
+ */
 
 // @lc code=start
 /**
@@ -455,6 +1098,35 @@ var deleteDuplicates = function (head) {
  * @lc app=leetcode.cn id=88 lang=javascript
  *
  * [88] 合并两个有序数组
+ * 
+ * 给你两个按 非递减顺序 排列的整数数组 nums1 和 nums2，另有两个整数 m 和 n ，分别表示 nums1 和 nums2 中的元素数目。
+
+请你 合并 nums2 到 nums1 中，使合并后的数组同样按 非递减顺序 排列。
+
+注意：最终，合并后数组不应由函数返回，而是存储在数组 nums1 中。为了应对这种情况，nums1 的初始长度为 m + n，其中前 m 个元素表示应合并的元素，后 n 个元素为 0 ，应忽略。nums2 的长度为 n 。
+
+ 
+
+示例 1：
+
+输入：nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+输出：[1,2,2,3,5,6]
+解释：需要合并 [1,2,3] 和 [2,5,6] 。
+合并结果是 [1,2,2,3,5,6] ，其中斜体加粗标注的为 nums1 中的元素。
+示例 2：
+
+输入：nums1 = [1], m = 1, nums2 = [], n = 0
+输出：[1]
+解释：需要合并 [1] 和 [] 。
+合并结果是 [1] 。
+示例 3：
+
+输入：nums1 = [0], m = 0, nums2 = [1], n = 1
+输出：[1]
+解释：需要合并的数组是 [] 和 [1] 。
+合并结果是 [1] 。
+注意，因为 m = 0 ，所以 nums1 中没有元素。nums1 中仅存的 0 仅仅是为了确保合并结果可以顺利存放到 nums1 中。
+ 
  */
 
 // @lc code=start
@@ -489,6 +1161,25 @@ var merge = function (nums1, m, nums2, n) {
  * @lc app=leetcode.cn id=94 lang=javascript
  *
  * [94] 二叉树的中序遍历
+ * 
+ * 给定一个二叉树的根节点 root ，返回 它的 中序 遍历 。
+
+ 
+
+示例 1：
+
+
+输入：root = [1,null,2,3]
+输出：[1,3,2]
+示例 2：
+
+输入：root = []
+输出：[]
+示例 3：
+
+输入：root = [1]
+输出：[1]
+ 
  */
 
 // @lc code=start
@@ -530,6 +1221,29 @@ var inorderTraversal = function (root) {
  * @lc app=leetcode.cn id=100 lang=javascript
  *
  * [100] 相同的树
+ * 
+ * 给你两棵二叉树的根节点 p 和 q ，编写一个函数来检验这两棵树是否相同。
+
+如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。
+
+ 
+
+示例 1：
+
+
+输入：p = [1,2,3], q = [1,2,3]
+输出：true
+示例 2：
+
+
+输入：p = [1,2], q = [1,null,2]
+输出：false
+示例 3：
+
+
+输入：p = [1,2,1], q = [1,1,2]
+输出：false
+ 
  */
 
 // @lc code=start
@@ -577,6 +1291,22 @@ var isSameTree = function (p, q) {
  * @lc app=leetcode.cn id=101 lang=javascript
  *
  * [101] 对称二叉树
+ * 
+ * 给你一个二叉树的根节点 root ， 检查它是否轴对称。
+
+ 
+
+示例 1：
+
+
+输入：root = [1,2,2,3,4,4,3]
+输出：true
+示例 2：
+
+
+输入：root = [1,2,2,null,3,null,3]
+输出：false
+ 
  */
 
 // @lc code=start
@@ -623,6 +1353,22 @@ var isSymmetric = function (root) {
  * @lc app=leetcode.cn id=104 lang=javascript
  *
  * [104] 二叉树的最大深度
+ * 
+ * 给定一个二叉树，找出其最大深度。
+
+二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
+
+说明: 叶子节点是指没有子节点的节点。
+
+示例：
+给定二叉树 [3,9,20,null,null,15,7]，
+
+    3
+   / \
+  9  20
+    /  \
+   15   7
+返回它的最大深度 3 。
  */
 
 // @lc code=start
@@ -714,6 +1460,24 @@ var isBalanced = function(root) {
  * @lc app=leetcode.cn id=118 lang=javascript
  *
  * [118] 杨辉三角
+ * 
+ * 给定一个非负整数 numRows，生成「杨辉三角」的前 numRows 行。
+
+在「杨辉三角」中，每个数是它左上方和右上方的数的和。
+
+
+
+ 
+
+示例 1:
+
+输入: numRows = 5
+输出: [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]
+示例 2:
+
+输入: numRows = 1
+输出: [[1]]
+ 
  */
 
 // @lc code=start
@@ -745,6 +1509,30 @@ var generate = function (numRows) {
  * @lc app=leetcode.cn id=119 lang=javascript
  *
  * [119] 杨辉三角 II
+ * 
+ * 给定一个非负索引 rowIndex，返回「杨辉三角」的第 rowIndex 行。
+
+在「杨辉三角」中，每个数是它左上方和右上方的数的和。
+
+
+
+ 
+
+示例 1:
+
+输入: rowIndex = 3
+输出: [1,3,3,1]
+示例 2:
+
+输入: rowIndex = 0
+输出: [1]
+示例 3:
+
+输入: rowIndex = 1
+输出: [1,1]
+ 
+
+
  */
 
 // @lc code=start
@@ -776,6 +1564,27 @@ var getRow = function (rowIndex) {
  * @lc app=leetcode.cn id=121 lang=javascript
  *
  * [121] 买卖股票的最佳时机
+ * 
+ * 给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。
+
+你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。
+
+返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。
+
+ 
+
+示例 1：
+
+输入：[7,1,5,3,6,4]
+输出：5
+解释：在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。
+     注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。
+示例 2：
+
+输入：prices = [7,6,4,3,1]
+输出：0
+解释：在这种情况下, 没有交易完成, 所以最大利润为 0。
+ 
  */
 
 // @lc code=start
@@ -803,6 +1612,24 @@ var maxProfit = function (prices) {
  * @lc app=leetcode.cn id=125 lang=javascript
  *
  * [125] 验证回文串
+ * 
+ * 给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。
+
+说明：本题中，我们将空字符串定义为有效的回文串。
+
+ 
+
+示例 1:
+
+输入: "A man, a plan, a canal: Panama"
+输出: true
+解释："amanaplanacanalpanama" 是回文串
+示例 2:
+
+输入: "race a car"
+输出: false
+解释："raceacar" 不是回文串
+ 
  */
 
 // @lc code=start
@@ -830,6 +1657,22 @@ var isPalindrome = function (s) {
  * @lc app=leetcode.cn id=136 lang=javascript
  *
  * [136] 只出现一次的数字
+ * 
+ * 给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
+
+说明：
+
+你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？
+
+示例 1:
+
+输入: [2,2,1]
+输出: 1
+示例 2:
+
+输入: [4,1,2,1,2]
+输出: 4
+
  */
 
 // @lc code=start
@@ -855,12 +1698,107 @@ var singleNumber = function (nums) {
 ```
 
 
+## 141.环形链表
+```js
+/*
+ * @lc app=leetcode.cn id=141 lang=javascript
+ *
+ * [141] 环形链表
+ * 
+ * 给你一个链表的头节点 head ，判断链表中是否有环。
+
+如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。注意：pos 不作为参数进行传递 。仅仅是为了标识链表的实际情况。
+
+如果链表中存在环 ，则返回 true 。 否则，返回 false 。
+
+ 
+
+示例 1：
+
+
+
+输入：head = [3,2,0,-4], pos = 1
+输出：true
+解释：链表中有一个环，其尾部连接到第二个节点。
+示例 2：
+
+
+
+输入：head = [1,2], pos = 0
+输出：true
+解释：链表中有一个环，其尾部连接到第一个节点。
+示例 3：
+
+
+
+输入：head = [1], pos = -1
+输出：false
+解释：链表中没有环。
+ 
+ */
+
+// @lc code=start
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var hasCycle = function (head) {
+  while (head) {
+    if (!head.val) return true
+    head.val = null
+    head = head.next
+  }
+  return false
+};
+// @lc code=end
+
+
+```
+
+
 ## 144.二叉树的前序遍历
 ```js
 /*
  * @lc app=leetcode.cn id=144 lang=javascript
  *
  * [144] 二叉树的前序遍历
+ * 
+ * 给你二叉树的根节点 root ，返回它节点值的 前序 遍历。
+
+ 
+
+示例 1：
+
+
+输入：root = [1,null,2,3]
+输出：[1,2,3]
+示例 2：
+
+输入：root = []
+输出：[]
+示例 3：
+
+输入：root = [1]
+输出：[1]
+示例 4：
+
+
+输入：root = [1,2]
+输出：[1,2]
+示例 5：
+
+
+输入：root = [1,null,2]
+输出：[1,2]
+ 
  */
 
 // @lc code=start
@@ -902,6 +1840,25 @@ var preorderTraversal = function (root) {
  * @lc app=leetcode.cn id=145 lang=javascript
  *
  * [145] 二叉树的后序遍历
+ * 
+ * 给你一棵二叉树的根节点 root ，返回其节点值的 后序遍历 。
+
+ 
+
+示例 1：
+
+
+输入：root = [1,null,2,3]
+输出：[3,2,1]
+示例 2：
+
+输入：root = []
+输出：[]
+示例 3：
+
+输入：root = [1]
+输出：[1]
+ 
  */
 
 // @lc code=start
@@ -940,6 +1897,39 @@ var postorderTraversal = function (root) {
  * @lc app=leetcode.cn id=155 lang=javascript
  *
  * [155] 最小栈
+ * 
+ * 设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈。
+
+实现 MinStack 类:
+
+MinStack() 初始化堆栈对象。
+void push(int val) 将元素val推入堆栈。
+void pop() 删除堆栈顶部的元素。
+int top() 获取堆栈顶部的元素。
+int getMin() 获取堆栈中的最小元素。
+ 
+
+示例 1:
+
+输入：
+["MinStack","push","push","push","getMin","pop","top","getMin"]
+[[],[-2],[0],[-3],[],[],[],[]]
+
+输出：
+[null,null,null,null,-3,null,0,-2]
+
+解释：
+MinStack minStack = new MinStack();
+minStack.push(-2);
+minStack.push(0);
+minStack.push(-3);
+minStack.getMin();   --> 返回 -3.
+minStack.pop();
+minStack.top();      --> 返回 0.
+minStack.getMin();   --> 返回 -2.
+ 
+
+
  */
 
 // @lc code=start
@@ -1001,6 +1991,60 @@ MinStack.prototype.getMin = function () {
  * @lc app=leetcode.cn id=160 lang=javascript
  *
  * [160] 相交链表
+ * 
+ * 给你两个单链表的头节点 headA 和 headB ，请你找出并返回两个单链表相交的起始节点。如果两个链表不存在相交节点，返回 null 。
+
+图示两个链表在节点 c1 开始相交：
+
+
+
+题目数据 保证 整个链式结构中不存在环。
+
+注意，函数返回结果后，链表必须 保持其原始结构 。
+
+自定义评测：
+
+评测系统 的输入如下（你设计的程序 不适用 此输入）：
+
+intersectVal - 相交的起始节点的值。如果不存在相交节点，这一值为 0
+listA - 第一个链表
+listB - 第二个链表
+skipA - 在 listA 中（从头节点开始）跳到交叉节点的节点数
+skipB - 在 listB 中（从头节点开始）跳到交叉节点的节点数
+评测系统将根据这些输入创建链式数据结构，并将两个头节点 headA 和 headB 传递给你的程序。如果程序能够正确返回相交节点，那么你的解决方案将被 视作正确答案 。
+
+ 
+
+示例 1：
+
+
+
+输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,6,1,8,4,5], skipA = 2, skipB = 3
+输出：Intersected at '8'
+解释：相交节点的值为 8 （注意，如果两个链表相交则不能为 0）。
+从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,6,1,8,4,5]。
+在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。
+示例 2：
+
+
+
+输入：intersectVal = 2, listA = [1,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1
+输出：Intersected at '2'
+解释：相交节点的值为 2 （注意，如果两个链表相交则不能为 0）。
+从各自的表头开始算起，链表 A 为 [1,9,1,2,4]，链表 B 为 [3,2,4]。
+在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。
+示例 3：
+
+
+
+输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2
+输出：null
+解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。
+由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。
+这两个链表不相交，因此返回 null 。
+ 
+
+
  */
 
 // @lc code=start
@@ -1069,6 +2113,38 @@ var twoSum = function (numbers, target) {
  * @lc app=leetcode.cn id=168 lang=javascript
  *
  * [168] Excel表列名称
+ * 
+ * 给你一个整数 columnNumber ，返回它在 Excel 表中相对应的列名称。
+
+例如：
+
+A -> 1
+B -> 2
+C -> 3
+...
+Z -> 26
+AA -> 27
+AB -> 28 
+...
+ 
+
+示例 1：
+
+输入：columnNumber = 1
+输出："A"
+示例 2：
+
+输入：columnNumber = 28
+输出："AB"
+示例 3：
+
+输入：columnNumber = 701
+输出："ZY"
+示例 4：
+
+输入：columnNumber = 2147483647
+输出："FXSHRXW"
+
  */
 
 // @lc code=start
@@ -1098,6 +2174,22 @@ var convertToTitle = function (columnNumber) {
  * @lc app=leetcode.cn id=169 lang=javascript
  *
  * [169] 多数元素
+ * 
+ * 给定一个大小为 n 的数组 nums ，返回其中的多数元素。多数元素是指在数组中出现次数 大于 ⌊ n/2 ⌋ 的元素。
+
+你可以假设数组是非空的，并且给定的数组总是存在多数元素。
+
+ 
+
+示例 1：
+
+输入：nums = [3,2,3]
+输出：3
+示例 2：
+
+输入：nums = [2,2,1,1,1,2,2]
+输出：2
+ 
  */
 
 // @lc code=start
@@ -1121,6 +2213,34 @@ var majorityElement = function (nums) {
  * @lc app=leetcode.cn id=171 lang=javascript
  *
  * [171] Excel 表列序号
+ * 
+ * 给你一个字符串 columnTitle ，表示 Excel 表格中的列名称。返回 该列名称对应的列序号 。
+
+例如：
+
+A -> 1
+B -> 2
+C -> 3
+...
+Z -> 26
+AA -> 27
+AB -> 28 
+...
+ 
+
+示例 1:
+
+输入: columnTitle = "A"
+输出: 1
+示例 2:
+
+输入: columnTitle = "AB"
+输出: 28
+示例 3:
+
+输入: columnTitle = "ZY"
+输出: 701
+ 
  */
 
 // @lc code=start
@@ -1168,12 +2288,89 @@ var trailingZeroes = function (n) {
 ```
 
 
+## 190.颠倒二进制位
+```js
+/*
+ * @lc app=leetcode.cn id=190 lang=javascript
+ *
+ * [190] 颠倒二进制位
+ * 
+ * 颠倒给定的 32 位无符号整数的二进制位。
+
+提示：
+
+请注意，在某些语言（如 Java）中，没有无符号整数类型。在这种情况下，输入和输出都将被指定为有符号整数类型，并且不应影响您的实现，因为无论整数是有符号的还是无符号的，其内部的二进制表示形式都是相同的。
+在 Java 中，编译器使用二进制补码记法来表示有符号整数。因此，在 示例 2 中，输入表示有符号整数 -3，输出表示有符号整数 -1073741825。
+ 
+
+示例 1：
+
+输入：n = 00000010100101000001111010011100
+输出：964176192 (00111001011110000010100101000000)
+解释：输入的二进制串 00000010100101000001111010011100 表示无符号整数 43261596，
+     因此返回 964176192，其二进制表示形式为 00111001011110000010100101000000。
+示例 2：
+
+输入：n = 11111111111111111111111111111101
+输出：3221225471 (10111111111111111111111111111111)
+解释：输入的二进制串 11111111111111111111111111111101 表示无符号整数 4294967293，
+     因此返回 3221225471 其二进制表示形式为 10111111111111111111111111111111 。
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {number} n - a positive integer
+ * @return {number} - a positive integer
+ */
+var reverseBits = function (n) {
+  n = n.toString(2)
+  n = "0".repeat(32 - n.length) + n
+  let res = 0
+  for (let i = 0; i < n.length; i++) {
+    if (n[i] === "1") res += Math.pow(2, i)
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
 ## 191.位-1-的个数
 ```js
 /*
  * @lc app=leetcode.cn id=191 lang=javascript
  *
  * [191] 位1的个数
+ * 
+ * 编写一个函数，输入是一个无符号整数（以二进制串的形式），返回其二进制表达式中数字位数为 '1' 的个数（也被称为汉明重量）。
+
+ 
+
+提示：
+
+请注意，在某些语言（如 Java）中，没有无符号整数类型。在这种情况下，输入和输出都将被指定为有符号整数类型，并且不应影响您的实现，因为无论整数是有符号的还是无符号的，其内部的二进制表示形式都是相同的。
+在 Java 中，编译器使用二进制补码记法来表示有符号整数。因此，在上面的 示例 3 中，输入表示有符号整数 -3。
+ 
+
+示例 1：
+
+输入：00000000000000000000000000001011
+输出：3
+解释：输入的二进制串 00000000000000000000000000001011 中，共有三位为 '1'。
+示例 2：
+
+输入：00000000000000000000000010000000
+输出：1
+解释：输入的二进制串 00000000000000000000000010000000 中，共有一位为 '1'。
+示例 3：
+
+输入：11111111111111111111111111111101
+输出：31
+解释：输入的二进制串 11111111111111111111111111111101 中，共有 31 位为 '1'。
+ 
  */
 
 // @lc code=start
@@ -1232,6 +2429,24 @@ var isHappy = function (n) {
  * @lc app=leetcode.cn id=203 lang=javascript
  *
  * [203] 移除链表元素
+ * 
+ * 给你一个链表的头节点 head 和一个整数 val ，请你删除链表中所有满足 Node.val == val 的节点，并返回 新的头节点 。
+ 
+
+示例 1：
+
+
+输入：head = [1,2,6,3,4,5,6], val = 6
+输出：[1,2,3,4,5]
+示例 2：
+
+输入：head = [], val = 1
+输出：[]
+示例 3：
+
+输入：head = [7,7,7,7], val = 7
+输出：[]
+ 
  */
 
 // @lc code=start
@@ -1304,6 +2519,30 @@ var removeElements = function (head, val) {
  * @lc app=leetcode.cn id=205 lang=javascript
  *
  * [205] 同构字符串
+ * 
+ * 给定两个字符串 s 和 t ，判断它们是否是同构的。
+
+如果 s 中的字符可以按某种映射关系替换得到 t ，那么这两个字符串是同构的。
+
+每个出现的字符都应当映射到另一个字符，同时不改变字符的顺序。不同字符不能映射到同一个字符上，相同字符只能映射到同一个字符上，字符可以映射到自己本身。
+
+ 
+
+示例 1:
+
+输入：s = "egg", t = "add"
+输出：true
+示例 2：
+
+输入：s = "foo", t = "bar"
+输出：false
+示例 3：
+
+输入：s = "paper", t = "title"
+输出：true
+ 
+
+
  */
 
 // @lc code=start
@@ -1334,6 +2573,25 @@ var removeElements = function (head, val) {
  * @lc app=leetcode.cn id=206 lang=javascript
  *
  * [206] 反转链表
+ * 
+ * 给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。
+ 
+
+示例 1：
+
+
+输入：head = [1,2,3,4,5]
+输出：[5,4,3,2,1]
+示例 2：
+
+
+输入：head = [1,2]
+输出：[2,1]
+示例 3：
+
+输入：head = []
+输出：[]
+ 
  */
 
 // @lc code=start
@@ -1348,8 +2606,590 @@ var removeElements = function (head, val) {
  * @param {ListNode} head
  * @return {ListNode}
  */
-var reverseList = function(head) {
+// var reverseList = function (head) {
+//   const res = new ListNode(), stack = []
+//   while (head) {
+//     stack.unshift(head.val)
+//     head = head.next
+//   }
+//   if (stack.length === 0) return res.next
+//   res.next = new ListNode()
+//   let node = res.next
+//   for (let i = 0; i < stack.length; i++) {
+//     node.val = stack[i]
+//     if (i < stack.length - 1) node.next = new ListNode()
+//     node = node.next
+//   }
+//   return res.next
+// };
 
+var reverseList = function (head) {
+  let prev = null, curr = head
+  while (curr) {
+      const after = curr.next
+      curr.next = prev
+      prev = curr
+      curr = after
+  }
+  return prev
+};
+// @lc code=end
+
+
+```
+
+
+## 217.存在重复元素
+```js
+/*
+ * @lc app=leetcode.cn id=217 lang=javascript
+ *
+ * [217] 存在重复元素
+ * 
+ * 给你一个整数数组 nums 。如果任一值在数组中出现 至少两次 ，返回 true ；如果数组中每个元素互不相同，返回 false 。
+ 
+
+示例 1：
+
+输入：nums = [1,2,3,1]
+输出：true
+示例 2：
+
+输入：nums = [1,2,3,4]
+输出：false
+示例 3：
+
+输入：nums = [1,1,1,3,3,4,3,2,4,2]
+输出：true
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var containsDuplicate = function(nums) {
+  return nums.length !== [...new Set(nums)].length
+};
+// @lc code=end
+
+
+```
+
+
+## 219.存在重复元素-ii
+```js
+/*
+ * @lc app=leetcode.cn id=219 lang=javascript
+ *
+ * [219] 存在重复元素 II
+ * 
+ * 给你一个整数数组 nums 和一个整数 k ，判断数组中是否存在两个 不同的索引 i 和 j ，满足 nums[i] == nums[j] 且 abs(i - j) <= k 。如果存在，返回 true ；否则，返回 false 。
+
+ 
+
+示例 1：
+
+输入：nums = [1,2,3,1], k = 3
+输出：true
+示例 2：
+
+输入：nums = [1,0,1,1], k = 1
+输出：true
+示例 3：
+
+输入：nums = [1,2,3,1,2,3], k = 2
+输出：false
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {boolean}
+ */
+var containsNearbyDuplicate = function (nums, k) {
+  const map = new Map()
+  for (let i = 0; i < nums.length; i++) {
+    if (map.has(nums[i]) && i - map.get(nums[i]) <= k) return true
+    map.set(nums[i], i)
+  }
+  return false
+};
+// @lc code=end
+
+
+```
+
+
+## 225.用队列实现栈
+```js
+/*
+ * @lc app=leetcode.cn id=225 lang=javascript
+ *
+ * [225] 用队列实现栈
+ * 
+ * 请你仅使用两个队列实现一个后入先出（LIFO）的栈，并支持普通栈的全部四种操作（push、top、pop 和 empty）。
+
+实现 MyStack 类：
+
+void push(int x) 将元素 x 压入栈顶。
+int pop() 移除并返回栈顶元素。
+int top() 返回栈顶元素。
+boolean empty() 如果栈是空的，返回 true ；否则，返回 false 。
+ 
+
+注意：
+
+你只能使用队列的基本操作 —— 也就是 push to back、peek/pop from front、size 和 is empty 这些操作。
+你所使用的语言也许不支持队列。 你可以使用 list （列表）或者 deque（双端队列）来模拟一个队列 , 只要是标准的队列操作即可。
+ 
+
+示例：
+
+输入：
+["MyStack", "push", "push", "top", "pop", "empty"]
+[[], [1], [2], [], [], []]
+输出：
+[null, null, null, 2, 2, false]
+
+解释：
+MyStack myStack = new MyStack();
+myStack.push(1);
+myStack.push(2);
+myStack.top(); // 返回 2
+myStack.pop(); // 返回 2
+myStack.empty(); // 返回 False
+ 
+
+
+ */
+
+// @lc code=start
+
+var MyStack = function () {
+  this.stack = []
+};
+
+/** 
+ * @param {number} x
+ * @return {void}
+ */
+MyStack.prototype.push = function (x) {
+  this.stack.push(x)
+};
+
+/**
+ * @return {number}
+ */
+MyStack.prototype.pop = function () {
+  return this.stack.pop()
+};
+
+/**
+ * @return {number}
+ */
+MyStack.prototype.top = function () {
+  return this.stack[this.stack.length - 1]
+};
+
+/**
+ * @return {boolean}
+ */
+MyStack.prototype.empty = function () {
+  return this.stack.length === 0
+};
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * var obj = new MyStack()
+ * obj.push(x)
+ * var param_2 = obj.pop()
+ * var param_3 = obj.top()
+ * var param_4 = obj.empty()
+ */
+// @lc code=end
+
+
+```
+
+
+## 226.翻转二叉树
+```js
+/*
+ * @lc app=leetcode.cn id=226 lang=javascript
+ *
+ * [226] 翻转二叉树
+ * 
+ * 给你一棵二叉树的根节点 root ，翻转这棵二叉树，并返回其根节点。
+
+ 
+
+示例 1：
+
+
+
+输入：root = [4,2,7,1,3,6,9]
+输出：[4,7,2,9,6,3,1]
+示例 2：
+
+
+
+输入：root = [2,1,3]
+输出：[2,3,1]
+示例 3：
+
+输入：root = []
+输出：[]
+ 
+
+
+ */
+
+// @lc code=start
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+var invertTree = function (root) {
+  if (!root) return root
+  let temp = root.right;
+  root.right = root.left;
+  root.left = temp;
+  invertTree(root.left)
+  invertTree(root.right)
+  return root
+};
+// @lc code=end
+
+
+```
+
+
+## 228.汇总区间
+```js
+/*
+ * @lc app=leetcode.cn id=228 lang=javascript
+ *
+ * [228] 汇总区间
+ * 
+ * 给定一个  无重复元素 的 有序 整数数组 nums 。
+
+返回 恰好覆盖数组中所有数字 的 最小有序 区间范围列表 。也就是说，nums 的每个元素都恰好被某个区间范围所覆盖，并且不存在属于某个范围但不属于 nums 的数字 x 。
+
+列表中的每个区间范围 [a,b] 应该按如下格式输出：
+
+"a->b" ，如果 a != b
+"a" ，如果 a == b
+ 
+
+示例 1：
+
+输入：nums = [0,1,2,4,5,7]
+输出：["0->2","4->5","7"]
+解释：区间范围是：
+[0,2] --> "0->2"
+[4,5] --> "4->5"
+[7,7] --> "7"
+示例 2：
+
+输入：nums = [0,2,3,4,6,8,9]
+输出：["0","2->4","6","8->9"]
+解释：区间范围是：
+[0,0] --> "0"
+[2,4] --> "2->4"
+[6,6] --> "6"
+[8,9] --> "8->9"
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums
+ * @return {string[]}
+ */
+var summaryRanges = function (nums) {
+  if (nums.length === 0) return nums
+  let res = [], stack = []
+  for (let i = 0; i < nums.length; i++) {
+    if (stack.length === 0 || nums[i] - stack[stack.length - 1] === 1) {
+      stack.push(nums[i])
+      continue
+    }
+    if (stack.length === 1) {
+      res.push(stack.pop().toString())
+    } else {
+      res.push(stack.shift() + "->" + stack.pop())
+    }
+    stack = [nums[i]]
+  }
+  if (stack.length === 1) {
+    res.push(stack.pop().toString())
+  } else {
+    res.push(stack.shift() + "->" + stack.pop())
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 231.2-的幂
+```js
+/*
+ * @lc app=leetcode.cn id=231 lang=javascript
+ *
+ * [231] 2 的幂
+ * 
+ * 给你一个整数 n，请你判断该整数是否是 2 的幂次方。如果是，返回 true ；否则，返回 false 。
+
+如果存在一个整数 x 使得 n == 2x ，则认为 n 是 2 的幂次方。
+
+ 
+
+示例 1：
+
+输入：n = 1
+输出：true
+解释：20 = 1
+示例 2：
+
+输入：n = 16
+输出：true
+解释：24 = 16
+示例 3：
+
+输入：n = 3
+输出：false
+示例 4：
+
+输入：n = 4
+输出：true
+示例 5：
+
+输入：n = 5
+输出：false
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {number} n
+ * @return {boolean}
+ */
+var isPowerOfTwo = function (n) {
+  if (n === 0) return false
+  while (n !== 1) {
+    if (n % 2 !== 0) return false
+    n /= 2
+  }
+  return true
+};
+// @lc code=end
+
+
+```
+
+
+## 232.用栈实现队列
+```js
+/*
+ * @lc app=leetcode.cn id=232 lang=javascript
+ *
+ * [232] 用栈实现队列
+ * 
+ * 请你仅使用两个栈实现先入先出队列。队列应当支持一般队列支持的所有操作（push、pop、peek、empty）：
+
+实现 MyQueue 类：
+
+void push(int x) 将元素 x 推到队列的末尾
+int pop() 从队列的开头移除并返回元素
+int peek() 返回队列开头的元素
+boolean empty() 如果队列为空，返回 true ；否则，返回 false
+说明：
+
+你 只能 使用标准的栈操作 —— 也就是只有 push to top, peek/pop from top, size, 和 is empty 操作是合法的。
+你所使用的语言也许不支持栈。你可以使用 list 或者 deque（双端队列）来模拟一个栈，只要是标准的栈操作即可。
+ 
+
+示例 1：
+
+输入：
+["MyQueue", "push", "push", "peek", "pop", "empty"]
+[[], [1], [2], [], [], []]
+输出：
+[null, null, null, 1, 1, false]
+
+解释：
+MyQueue myQueue = new MyQueue();
+myQueue.push(1); // queue is: [1]
+myQueue.push(2); // queue is: [1, 2] (leftmost is front of the queue)
+myQueue.peek(); // return 1
+myQueue.pop(); // return 1, queue is [2]
+myQueue.empty(); // return false
+ 
+
+
+ */
+
+// @lc code=start
+
+var MyQueue = function() {
+  this.queue = []
+};
+
+/** 
+ * @param {number} x
+ * @return {void}
+ */
+MyQueue.prototype.push = function(x) {
+  this.queue.push(x)
+};
+
+/**
+ * @return {number}
+ */
+MyQueue.prototype.pop = function() {
+  return this.queue.shift()
+};
+
+/**
+ * @return {number}
+ */
+MyQueue.prototype.peek = function() {
+  return this.queue[0]
+};
+
+/**
+ * @return {boolean}
+ */
+MyQueue.prototype.empty = function() {
+  return this.queue.length === 0
+};
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * var obj = new MyQueue()
+ * obj.push(x)
+ * var param_2 = obj.pop()
+ * var param_3 = obj.peek()
+ * var param_4 = obj.empty()
+ */
+// @lc code=end
+
+
+```
+
+
+## 234.回文链表
+```js
+/*
+ * @lc app=leetcode.cn id=234 lang=javascript
+ *
+ * [234] 回文链表
+ * 
+ * 给你一个单链表的头节点 head ，请你判断该链表是否为回文链表。如果是，返回 true ；否则，返回 false 。
+
+ 
+
+示例 1：
+
+
+输入：head = [1,2,2,1]
+输出：true
+示例 2：
+
+
+输入：head = [1,2]
+输出：false
+ 
+
+
+ */
+
+// @lc code=start
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var isPalindrome = function (head) {
+  const res = []
+  while (head) {
+    res.push(head.val)
+    head = head.next
+  }
+  return res.join("") === res.reverse().join("")
+};
+// @lc code=end
+
+
+```
+
+
+## 237.删除链表中的节点
+```js
+/*
+ * @lc app=leetcode.cn id=237 lang=javascript
+ *
+ * [237] 删除链表中的节点
+ * 
+ * 请编写一个函数，用于 删除单链表中某个特定节点 。在设计函数时需要注意，你无法访问链表的头节点 head ，只能直接访问 要被删除的节点 。
+
+题目数据保证需要删除的节点 不是末尾节点 。
+
+ 
+
+示例 1：
+
+
+输入：head = [4,5,1,9], node = 5
+输出：[4,1,9]
+解释：指定链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -> 1 -> 9
+示例 2：
+
+
+输入：head = [4,5,1,9], node = 1
+输出：[4,5,9]
+解释：指定链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -> 5 -> 9
+ 
+
+
+ */
+
+// @lc code=start
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} node
+ * @return {void} Do not return anything, modify node in-place instead.
+ */
+var deleteNode = function(node) {
+  node.val = node.next.val
+  node.next = node.next.next
 };
 // @lc code=end
 
@@ -6076,6 +7916,141 @@ var minSubsequence = function (nums) {
     res.push(nums[i])
     if (s > count) return res
   }
+};
+// @lc code=end
+
+
+```
+
+
+## 1408.数组中的字符串匹配
+```js
+/*
+ * @lc app=leetcode.cn id=1408 lang=javascript
+ *
+ * [1408] 数组中的字符串匹配
+ */
+
+// @lc code=start
+/**
+ * @param {string[]} words
+ * @return {string[]}
+ */
+var stringMatching = function (words) {
+  const res = []
+  for (let i = 0; i < words.length; i++) {
+    for (let j = i + 1; j < words.length; j++) {
+      let item
+      if (words[i].includes(words[j])) item = words[j]
+      else if (words[j].includes(words[i])) item = words[i]
+      if (item && !res.includes(item)) res.push(item);
+    }
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1413.逐步求和得到正数的最小值
+```js
+/*
+ * @lc app=leetcode.cn id=1413 lang=javascript
+ *
+ * [1413] 逐步求和得到正数的最小值
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var minStartValue = function (nums) {
+  let res = 1, count = 0
+  while (true) {
+    count = res
+    for (let i = 0; i < nums.length; i++) {
+      count += nums[i]
+      if (count < 1) {
+        res++
+        break
+      }
+      if (i === nums.length - 1) return res
+    }
+  }
+};
+// @lc code=end
+
+
+```
+
+
+## 1417.重新格式化字符串
+```js
+/*
+ * @lc app=leetcode.cn id=1417 lang=javascript
+ *
+ * [1417] 重新格式化字符串
+ */
+
+// @lc code=start
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var reformat = function (s) {
+  const arr1 = [], arr2 = []
+  for (let i = 0; i < s.length; i++) {
+    if (s[i].charCodeAt() < 58) arr1.push(s[i])
+    else arr2.push(s[i])
+  }
+  if (Math.abs(arr1.length - arr2.length) > 1) return ""
+  let max, min
+  if (arr1.length > arr2.length) {
+    max = arr1
+    min = arr2
+  } else {
+    max = arr2
+    min = arr1
+  }
+  let res = ""
+  for (let i = 0; i < max.length; i++) {
+    res += max[i]
+    if (min[i]) res += min[i]
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1422.分割字符串的最大得分
+```js
+/*
+ * @lc app=leetcode.cn id=1422 lang=javascript
+ *
+ * [1422] 分割字符串的最大得分
+ */
+
+// @lc code=start
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var maxScore = function (s) {
+  let res = 0
+  for (let i = 1; i < s.length; i++) {
+    const left = s.substring(0, i).match(/0/g)
+    const right = s.substring(i, s.length).match(/1/g)
+    const n1 = left ? left.length : 0
+    const n2 = right ? right.length : 0
+    res = Math.max(res, n1 + n2)
+  }
+  return res
 };
 // @lc code=end
 
