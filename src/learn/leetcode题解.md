@@ -724,6 +724,120 @@ var searchInsert = function (nums, target) {
 ```
 
 
+## 36.有效的数独
+```js
+/*
+ * @lc app=leetcode.cn id=36 lang=javascript
+ *
+ * [36] 有效的数独
+ * 
+ * 请你判断一个 9 x 9 的数独是否有效。只需要 根据以下规则 ，验证已经填入的数字是否有效即可。
+
+数字 1-9 在每一行只能出现一次。
+数字 1-9 在每一列只能出现一次。
+数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。（请参考示例图）
+ 
+
+注意：
+
+一个有效的数独（部分已被填充）不一定是可解的。
+只需要根据以上规则，验证已经填入的数字是否有效即可。
+空白格用 '.' 表示。
+ 
+
+示例 1：
+
+
+输入：board = 
+[["5","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]]
+输出：true
+示例 2：
+
+输入：board = 
+[["8","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]]
+输出：false
+解释：除了第一行的第一个数字从 5 改为 8 以外，空格内其他数字均与 示例1 相同。 但由于位于左上角的 3x3 宫内有两个 8 存在, 因此这个数独是无效的。
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {character[][]} board
+ * @return {boolean}
+ */
+var isValidSudoku = function (board) {
+  let c = 0
+  for (let i = 0; i < 9; i++) {
+    const set1 = new Set(), set2 = new Set(), set3 = new Set()
+    for (let j = 0; j < 9; j++) {
+      if (board[i][j] !== '.') {
+        if (set1.has(board[i][j])) return false
+        set1.add(board[i][j])
+      }
+      if (board[j][i] !== '.') {
+        if (set2.has(board[j][i])) return false
+        set2.add(board[j][i])
+      }
+      const [x, y] = getXY(c)
+      const n = j % 3 + y, m = Math.floor(j / 3) + x
+      if (board[m][n] !== '.') {
+        if (set3.has(board[m][n])) return false
+        set3.add(board[m][n])
+      }
+    }
+    c++
+  }
+  return true
+};
+
+/**
+ * @param {number} board
+ * @return {array}
+ */
+var getXY = function (num) {
+  switch (num) {
+    case 0:
+      return [0, 0]
+    case 1:
+      return [3, 0]
+    case 2:
+      return [6, 0]
+    case 3:
+      return [0, 3]
+    case 4:
+      return [3, 3]
+    case 5:
+      return [6, 3]
+    case 6:
+      return [0, 6]
+    case 7:
+      return [3, 6]
+    case 8:
+      return [6, 6]
+  }
+}
+// @lc code=end
+
+
+```
+
+
 ## 53.最大子序和
 ```js
 /*
@@ -2989,13 +3103,16 @@ var summaryRanges = function (nums) {
  * @param {number} n
  * @return {boolean}
  */
+// var isPowerOfTwo = function (n) {
+//   if (n === 0) return false
+//   while (n !== 1) {
+//     if (n % 2 !== 0) return false
+//     n /= 2
+//   }
+//   return true
+// };
 var isPowerOfTwo = function (n) {
-  if (n === 0) return false
-  while (n !== 1) {
-    if (n % 2 !== 0) return false
-    n /= 2
-  }
-  return true
+  return (n > 0) && (1 << 30) % n == 0;
 };
 // @lc code=end
 
@@ -3197,12 +3314,570 @@ var deleteNode = function(node) {
 ```
 
 
+## 242.有效的字母异位词
+```js
+/*
+ * @lc app=leetcode.cn id=242 lang=javascript
+ *
+ * [242] 有效的字母异位词
+ * 
+ * 给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
+
+注意：若 s 和 t 中每个字符出现的次数都相同，则称 s 和 t 互为字母异位词。
+
+ 
+
+示例 1:
+
+输入: s = "anagram", t = "nagaram"
+输出: true
+示例 2:
+
+输入: s = "rat", t = "car"
+输出: false
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+var isAnagram = function (s, t) {
+  if (s.length !== t.length) return false
+  const map1 = new Map(), map2 = new Map()
+  for (let i = 0; i < s.length; i++) {
+    if (!map1.has(s[i])) map1.set(s[i], 0)
+    else map1.set(s[i], map1.get(s[i]) + 1)
+  }
+  for (let i = 0; i < t.length; i++) {
+    if (!map2.has(t[i])) map2.set(t[i], 0)
+    else map2.set(t[i], map2.get(t[i]) + 1)
+  }
+  for (const [k, v] of map1) {
+    if (map2.get(k) !== v) return false
+  }
+  return true
+};
+// @lc code=end
+
+
+```
+
+
+## 258.各位相加
+```js
+/*
+ * @lc app=leetcode.cn id=258 lang=javascript
+ *
+ * [258] 各位相加
+ * 
+ * 给定一个非负整数 num，反复将各个位上的数字相加，直到结果为一位数。返回这个结果。
+
+ 
+
+示例 1:
+
+输入: num = 38
+输出: 2 
+解释: 各位相加的过程为：
+38 --> 3 + 8 --> 11
+11 --> 1 + 1 --> 2
+由于 2 是一位数，所以返回 2。
+示例 1:
+
+输入: num = 0
+输出: 0
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {number} num
+ * @return {number}
+ */
+var addDigits = function (num) {
+  while (num / 10 >= 1) {
+    const a = num.toString()
+    num = 0
+    for (let i = 0; i < a.length; i++) {
+      num += Number(a[i])
+    }
+  }
+  return num
+};
+// @lc code=end
+
+
+```
+
+
+## 263.丑数
+```js
+/*
+ * @lc app=leetcode.cn id=263 lang=javascript
+ *
+ * [263] 丑数
+ * 
+ * 丑数 就是只包含质因数 2、3 和 5 的正整数。
+
+给你一个整数 n ，请你判断 n 是否为 丑数 。如果是，返回 true ；否则，返回 false 。
+
+ 
+
+示例 1：
+
+输入：n = 6
+输出：true
+解释：6 = 2 × 3
+示例 2：
+
+输入：n = 1
+输出：true
+解释：1 没有质因数，因此它的全部质因数是 {2, 3, 5} 的空集。习惯上将其视作第一个丑数。
+示例 3：
+
+输入：n = 14
+输出：false
+解释：14 不是丑数，因为它包含了另外一个质因数 7 。
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {number} n
+ * @return {boolean}
+ */
+var isUgly = function (n) {
+  if (n === 0) return false
+  while (true) {
+    if (n % 2 === 0) n = n / 2
+    else if (n % 3 === 0) n = n / 3
+    else if (n % 5 === 0) n = n / 5
+    else if (n === 1) return true
+    else return false
+  }
+};
+// @lc code=end
+
+
+```
+
+
+## 268.丢失的数字
+```js
+/*
+ * @lc app=leetcode.cn id=268 lang=javascript
+ *
+ * [268] 丢失的数字
+ * 
+ * 给定一个包含 [0, n] 中 n 个数的数组 nums ，找出 [0, n] 这个范围内没有出现在数组中的那个数。
+
+ 
+
+示例 1：
+
+输入：nums = [3,0,1]
+输出：2
+解释：n = 3，因为有 3 个数字，所以所有的数字都在范围 [0,3] 内。2 是丢失的数字，因为它没有出现在 nums 中。
+示例 2：
+
+输入：nums = [0,1]
+输出：2
+解释：n = 2，因为有 2 个数字，所以所有的数字都在范围 [0,2] 内。2 是丢失的数字，因为它没有出现在 nums 中。
+示例 3：
+
+输入：nums = [9,6,4,2,3,5,7,0,1]
+输出：8
+解释：n = 9，因为有 9 个数字，所以所有的数字都在范围 [0,9] 内。8 是丢失的数字，因为它没有出现在 nums 中。
+示例 4：
+
+输入：nums = [0]
+输出：1
+解释：n = 1，因为有 1 个数字，所以所有的数字都在范围 [0,1] 内。1 是丢失的数字，因为它没有出现在 nums 中。
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var missingNumber = function (nums) {
+  for (let i = 0; i <= nums.length; i++) {
+    if (!nums.includes(i)) return i
+  }
+};
+// @lc code=end
+
+
+```
+
+
+## 278.第一个错误的版本
+```js
+/*
+ * @lc app=leetcode.cn id=278 lang=javascript
+ *
+ * [278] 第一个错误的版本
+ * 
+ * 你是产品经理，目前正在带领一个团队开发新的产品。不幸的是，你的产品的最新版本没有通过质量检测。由于每个版本都是基于之前的版本开发的，所以错误的版本之后的所有版本都是错的。
+
+假设你有 n 个版本 [1, 2, ..., n]，你想找出导致之后所有版本出错的第一个错误的版本。
+
+你可以通过调用 bool isBadVersion(version) 接口来判断版本号 version 是否在单元测试中出错。实现一个函数来查找第一个错误的版本。你应该尽量减少对调用 API 的次数。
+
+ 
+示例 1：
+
+输入：n = 5, bad = 4
+输出：4
+解释：
+调用 isBadVersion(3) -> false 
+调用 isBadVersion(5) -> true 
+调用 isBadVersion(4) -> true
+所以，4 是第一个错误的版本。
+示例 2：
+
+输入：n = 1, bad = 1
+输出：1
+ 
+ */
+
+// @lc code=start
+/**
+ * Definition for isBadVersion()
+ * 
+ * @param {integer} version number
+ * @return {boolean} whether the version is bad
+ * isBadVersion = function(version) {
+ *     ...
+ * };
+ */
+
+/**
+ * @param {function} isBadVersion()
+ * @return {function}
+ */
+var solution = function (isBadVersion) {
+    /**
+     * @param {integer} n Total versions
+     * @return {integer} The first bad version
+     */
+    return function (n) {
+        let s = 1, e = n, c = (s + e) / 2
+        while (e !== c) {
+            if (!isBadVersion(c)) {
+                s = c
+            } else {
+                e = c
+            }
+            c = (s + e) / 2
+        }
+        return c
+    };
+};
+// @lc code=end
+
+
+```
+
+
+## 283.移动零
+```js
+/*
+ * @lc app=leetcode.cn id=283 lang=javascript
+ *
+ * [283] 移动零
+ * 
+ * 给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+
+请注意 ，必须在不复制数组的情况下原地对数组进行操作。
+
+ 
+
+示例 1:
+
+输入: nums = [0,1,0,3,12]
+输出: [1,3,12,0,0]
+示例 2:
+
+输入: nums = [0]
+输出: [0]
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var moveZeroes = function (nums) {
+  let len = nums.length
+  for (let i = 0; i < len;) {
+    if (nums[i] === 0) {
+      nums.splice(i, 1)
+      nums.push(0)
+      len--
+      continue
+    }
+    i++
+  }
+};
+// @lc code=end
+
+
+```
+
+
+## 290.单词规律
+```js
+/*
+ * @lc app=leetcode.cn id=290 lang=javascript
+ *
+ * [290] 单词规律
+ * 
+ * 给定一种规律 pattern 和一个字符串 s ，判断 s 是否遵循相同的规律。
+
+这里的 遵循 指完全匹配，例如， pattern 里的每个字母和字符串 str 中的每个非空单词之间存在着双向连接的对应规律。
+
+ 
+
+示例1:
+
+输入: pattern = "abba", str = "dog cat cat dog"
+输出: true
+示例 2:
+
+输入:pattern = "abba", str = "dog cat cat fish"
+输出: false
+示例 3:
+
+输入: pattern = "aaaa", str = "dog cat cat dog"
+输出: false
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {string} pattern
+ * @param {string} s
+ * @return {boolean}
+ */
+var wordPattern = function (pattern, s) {
+  s = s.split(" ")
+  if (pattern.length !== s.length) return false
+  const map1 = new Map(), map2 = new Map()
+  for (let i = 0; i < pattern.length; i++) {
+    if (!map1.has(pattern[i])) map1.set(pattern[i], s[i])
+    else {
+      if (map1.get(pattern[i]) !== s[i]) return false
+    }
+    if (!map2.has(s[i])) map2.set(s[i], pattern[i])
+    else {
+      if (map2.get(s[i]) !== pattern[i]) return false
+    }
+  }
+  return true
+};
+// @lc code=end
+
+
+```
+
+
+## 292.nim-游戏
+```js
+/*
+ * @lc app=leetcode.cn id=292 lang=javascript
+ *
+ * [292] Nim 游戏
+ * 
+ * 你和你的朋友，两个人一起玩 Nim 游戏：
+
+桌子上有一堆石头。
+你们轮流进行自己的回合， 你作为先手 。
+每一回合，轮到的人拿掉 1 - 3 块石头。
+拿掉最后一块石头的人就是获胜者。
+假设你们每一步都是最优解。请编写一个函数，来判断你是否可以在给定石头数量为 n 的情况下赢得游戏。如果可以赢，返回 true；否则，返回 false 。
+
+ 
+
+示例 1：
+
+输入：n = 4
+输出：false 
+解释：以下是可能的结果:
+1. 移除1颗石头。你的朋友移走了3块石头，包括最后一块。你的朋友赢了。
+2. 移除2个石子。你的朋友移走2块石头，包括最后一块。你的朋友赢了。
+3.你移走3颗石子。你的朋友移走了最后一块石头。你的朋友赢了。
+在所有结果中，你的朋友是赢家。
+示例 2：
+
+输入：n = 1
+输出：true
+示例 3：
+
+输入：n = 2
+输出：true
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {number} n
+ * @return {boolean}
+ */
+var canWinNim = function (n) {
+  return n % 4 !== 0
+};
+// @lc code=end
+
+
+```
+
+
+## 303.区域和检索-数组不可变
+```js
+/*
+ * @lc app=leetcode.cn id=303 lang=javascript
+ *
+ * [303] 区域和检索 - 数组不可变
+ * 
+ * 给定一个整数数组  nums，处理以下类型的多个查询:
+
+计算索引 left 和 right （包含 left 和 right）之间的 nums 元素的 和 ，其中 left <= right
+实现 NumArray 类：
+
+NumArray(int[] nums) 使用数组 nums 初始化对象
+int sumRange(int i, int j) 返回数组 nums 中索引 left 和 right 之间的元素的 总和 ，包含 left 和 right 两点（也就是 nums[left] + nums[left + 1] + ... + nums[right] )
+ 
+
+示例 1：
+
+输入：
+["NumArray", "sumRange", "sumRange", "sumRange"]
+[[[-2, 0, 3, -5, 2, -1]], [0, 2], [2, 5], [0, 5]]
+输出：
+[null, 1, -1, -3]
+
+解释：
+NumArray numArray = new NumArray([-2, 0, 3, -5, 2, -1]);
+numArray.sumRange(0, 2); // return 1 ((-2) + 0 + 3)
+numArray.sumRange(2, 5); // return -1 (3 + (-5) + 2 + (-1)) 
+numArray.sumRange(0, 5); // return -3 ((-2) + 0 + 3 + (-5) + 2 + (-1))
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums
+ */
+var NumArray = function (nums) {
+  this.arr = [nums[0]]
+  for (let i = 1; i < nums.length; i++) {
+    this.arr.push(this.arr[i - 1] + nums[i])
+  }
+};
+
+/** 
+ * @param {number} left 
+ * @param {number} right
+ * @return {number}
+ */
+NumArray.prototype.sumRange = function (left, right) {
+  return this.arr[right] - (this.arr[left - 1] || 0)
+};
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * var obj = new NumArray(nums)
+ * var param_1 = obj.sumRange(left,right)
+ */
+// @lc code=end
+
+
+```
+
+
+## 326.3-的幂
+```js
+/*
+ * @lc app=leetcode.cn id=326 lang=javascript
+ *
+ * [326] 3 的幂
+ * 
+ * 给定一个整数，写一个函数来判断它是否是 3 的幂次方。如果是，返回 true ；否则，返回 false 。
+
+整数 n 是 3 的幂次方需满足：存在整数 x 使得 n == 3x
+
+ 
+
+示例 1：
+
+输入：n = 27
+输出：true
+示例 2：
+
+输入：n = 0
+输出：false
+示例 3：
+
+输入：n = 9
+输出：true
+示例 4：
+
+输入：n = 45
+输出：false
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {number} n
+ * @return {boolean}
+ */
+var isPowerOfThree = function (n) {
+  return /^10*$/.test(n.toString(3));
+};
+// @lc code=end
+
+
+```
+
+
 ## 338.比特位计数
 ```js
 /*
  * @lc app=leetcode.cn id=338 lang=javascript
  *
  * [338] 比特位计数
+ * 
+ * 给你一个整数 n ，对于 0 <= i <= n 中的每个 i ，计算其二进制表示中 1 的个数 ，返回一个长度为 n + 1 的数组 ans 作为答案。
+
+ 
+
+示例 1：
+
+输入：n = 2
+输出：[0,1,1]
+解释：
+0 --> 0
+1 --> 1
+2 --> 10
+示例 2：
+
+输入：n = 5
+输出：[0,1,1,2,1,2]
+解释：
+0 --> 0
+1 --> 1
+2 --> 10
+3 --> 11
+4 --> 100
+5 --> 101
+ 
  */
 
 // @lc code=start
@@ -3232,6 +3907,28 @@ var countBits = function (n) {
  * @lc app=leetcode.cn id=342 lang=javascript
  *
  * [342] 4的幂
+ * 
+ * 给定一个整数，写一个函数来判断它是否是 4 的幂次方。如果是，返回 true ；否则，返回 false 。
+
+整数 n 是 4 的幂次方需满足：存在整数 x 使得 n == 4x
+
+ 
+
+示例 1：
+
+输入：n = 16
+输出：true
+示例 2：
+
+输入：n = 5
+输出：false
+示例 3：
+
+输入：n = 1
+输出：true
+ 
+
+
  */
 
 // @lc code=start
@@ -3253,12 +3950,68 @@ var isPowerOfFour = function (n) {
 ```
 
 
+## 344.反转字符串
+```js
+/*
+ * @lc app=leetcode.cn id=344 lang=javascript
+ *
+ * [344] 反转字符串
+ * 
+ * 编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 s 的形式给出。
+
+不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。
+
+ 
+
+示例 1：
+
+输入：s = ["h","e","l","l","o"]
+输出：["o","l","l","e","h"]
+示例 2：
+
+输入：s = ["H","a","n","n","a","h"]
+输出：["h","a","n","n","a","H"]
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {character[]} s
+ * @return {void} Do not return anything, modify s in-place instead.
+ */
+var reverseString = function (s) {
+  for (let i = 0; i < s.length / 2; i++) {
+    [s[i], s[s.length - i - 1]] = [s[s.length - i - 1], s[i]]
+  }
+};
+// @lc code=end
+
+
+```
+
+
 ## 345.反转字符串中的元音字母
 ```js
 /*
  * @lc app=leetcode.cn id=345 lang=javascript
  *
  * [345] 反转字符串中的元音字母
+ * 
+ * 给你一个字符串 s ，仅反转字符串中的所有元音字母，并返回结果字符串。
+
+元音字母包括 'a'、'e'、'i'、'o'、'u'，且可能以大小写两种形式出现。
+
+ 
+
+示例 1：
+
+输入：s = "hello"
+输出："holle"
+示例 2：
+
+输入：s = "leetcode"
+输出："leotcede"
+ 
  */
 
 // @lc code=start
@@ -3266,8 +4019,74 @@ var isPowerOfFour = function (n) {
  * @param {string} s
  * @return {string}
  */
+var reverseVowels = function (s) {
+  s = s.split("")
+  const set = new Set(["a", "A", "e", "E", "i", "I", "o", "O", "u", "U"])
+  let l = 0, r = s.length - 1
+  while (l < r) {
+    if (!set.has(s[l])) l++
+    if (!set.has(s[r])) r--
+    if (set.has(s[l]) && set.has(s[r])) {
+      [s[l], s[r]] = [s[r], s[l]]
+      l++
+      r--
+    }
+  }
+  return s.join("")
+};
+
+// @lc code=end
 
 
+```
+
+
+## 349.两个数组的交集
+```js
+/*
+ * @lc app=leetcode.cn id=349 lang=javascript
+ *
+ * [349] 两个数组的交集
+ * 
+ * 给定两个数组 nums1 和 nums2 ，返回 它们的交集 。输出结果中的每个元素一定是 唯一 的。我们可以 不考虑输出结果的顺序 。
+
+ 
+
+示例 1：
+
+输入：nums1 = [1,2,2,1], nums2 = [2,2]
+输出：[2]
+示例 2：
+
+输入：nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+输出：[9,4]
+解释：[4,9] 也是可通过的
+ 
+
+
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var intersection = function (nums1, nums2) {
+  const set1 = new Set(nums1), set2 = new Set(nums2),res = []
+  let min, max
+  if (set1.size < set2.size) {
+    min = set1
+    max = set2
+  } else {
+    min = set2
+    max = set1
+  }
+  for (const v of min) {
+    if(max.has(v)) res.push(v)
+  }
+  return res
+};
 // @lc code=end
 
 
@@ -3280,6 +4099,20 @@ var isPowerOfFour = function (n) {
  * @lc app=leetcode.cn id=350 lang=javascript
  *
  * [350] 两个数组的交集 II
+ * 
+ * 给你两个整数数组 nums1 和 nums2 ，请你以数组形式返回两数组的交集。返回结果中每个元素出现的次数，应与元素在两个数组中都出现的次数一致（如果出现次数不一致，则考虑取较小值）。可以不考虑输出结果的顺序。
+
+ 
+
+示例 1：
+
+输入：nums1 = [1,2,2,1], nums2 = [2,2]
+输出：[2,2]
+示例 2:
+
+输入：nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+输出：[4,9]
+ 
  */
 
 // @lc code=start
@@ -3312,6 +4145,22 @@ var intersect = function (nums1, nums2) {
  * @lc app=leetcode.cn id=367 lang=javascript
  *
  * [367] 有效的完全平方数
+ * 
+ * 给定一个 正整数 num ，编写一个函数，如果 num 是一个完全平方数，则返回 true ，否则返回 false 。
+
+进阶：不要 使用任何内置的库函数，如  sqrt 。
+
+ 
+
+示例 1：
+
+输入：num = 16
+输出：true
+示例 2：
+
+输入：num = 14
+输出：false
+ 
  */
 
 // @lc code=start
@@ -3339,6 +4188,37 @@ var isPerfectSquare = function (num) {
  * @lc app=leetcode.cn id=374 lang=javascript
  *
  * [374] 猜数字大小
+ * 
+ * 猜数字游戏的规则如下：
+
+每轮游戏，我都会从 1 到 n 随机选择一个数字。 请你猜选出的是哪个数字。
+如果你猜错了，我会告诉你，你猜测的数字比我选出的数字是大了还是小了。
+你可以通过调用一个预先定义好的接口 int guess(int num) 来获取猜测结果，返回值一共有 3 种可能的情况（-1，1 或 0）：
+
+-1：我选出的数字比你猜的数字小 pick < num
+1：我选出的数字比你猜的数字大 pick > num
+0：我选出的数字和你猜的数字一样。恭喜！你猜对了！pick == num
+返回我选出的数字。
+
+ 
+
+示例 1：
+
+输入：n = 10, pick = 6
+输出：6
+示例 2：
+
+输入：n = 1, pick = 1
+输出：1
+示例 3：
+
+输入：n = 2, pick = 1
+输出：1
+示例 4：
+
+输入：n = 2, pick = 2
+输出：2
+
  */
 
 // @lc code=start
@@ -3375,12 +4255,130 @@ var guessNumber = function (n) {
 ```
 
 
+## 383.赎金信
+```js
+/*
+ * @lc app=leetcode.cn id=383 lang=javascript
+ *
+ * [383] 赎金信
+ * 
+ * 给你两个字符串：ransomNote 和 magazine ，判断 ransomNote 能不能由 magazine 里面的字符构成。
+
+如果可以，返回 true ；否则返回 false 。
+
+magazine 中的每个字符只能在 ransomNote 中使用一次。
+
+ 
+
+示例 1：
+
+输入：ransomNote = "a", magazine = "b"
+输出：false
+示例 2：
+
+输入：ransomNote = "aa", magazine = "ab"
+输出：false
+示例 3：
+
+输入：ransomNote = "aa", magazine = "aab"
+输出：true
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {string} ransomNote
+ * @param {string} magazine
+ * @return {boolean}
+ */
+var canConstruct = function (ransomNote, magazine) {
+  const map = new Map()
+  for (let i = 0; i < magazine.length; i++) {
+    if (!map.has(magazine[i])) map.set(magazine[i], 1)
+    else map.set(magazine[i], map.get(magazine[i]) + 1)
+  }
+  for (let i = 0; i < ransomNote.length; i++) {
+    if (!map.get(ransomNote[i])) return false
+    else map.set(ransomNote[i], map.get(ransomNote[i]) - 1)
+  }
+  return true
+};
+// @lc code=end
+
+
+```
+
+
+## 387.字符串中的第一个唯一字符
+```js
+/*
+ * @lc app=leetcode.cn id=387 lang=javascript
+ *
+ * [387] 字符串中的第一个唯一字符
+ * 
+ * 给定一个字符串 s ，找到 它的第一个不重复的字符，并返回它的索引 。如果不存在，则返回 -1 。
+
+ 
+
+示例 1：
+
+输入: s = "leetcode"
+输出: 0
+示例 2:
+
+输入: s = "loveleetcode"
+输出: 2
+示例 3:
+
+输入: s = "aabb"
+输出: -1
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var firstUniqChar = function (s) {
+  const arr = []
+  for (let i = 0; i < s.length; i++) {
+    if (s.lastIndexOf(s[i]) === i && !arr.includes(s[i])) return i
+    arr.push(s[i])
+  }
+  return -1
+};
+// @lc code=end
+
+
+```
+
+
 ## 389.找不同
 ```js
 /*
  * @lc app=leetcode.cn id=389 lang=javascript
  *
  * [389] 找不同
+ * 
+ * 给定两个字符串 s 和 t ，它们只包含小写字母。
+
+字符串 t 由字符串 s 随机重排，然后在随机位置添加一个字母。
+
+请找出在 t 中被添加的字母。
+
+ 
+
+示例 1：
+
+输入：s = "abcd", t = "abcde"
+输出："e"
+解释：'e' 是那个被添加的字母。
+示例 2：
+
+输入：s = "", t = "y"
+输出："y"
+ 
  */
 
 // @lc code=start
@@ -3408,6 +4406,30 @@ var findTheDifference = function (s, t) {
  * @lc app=leetcode.cn id=392 lang=javascript
  *
  * [392] 判断子序列
+ * 
+ * 给定字符串 s 和 t ，判断 s 是否为 t 的子序列。
+
+字符串的一个子序列是原始字符串删除一些（也可以不删除）字符而不改变剩余字符相对位置形成的新字符串。（例如，"ace"是"abcde"的一个子序列，而"aec"不是）。
+
+进阶：
+
+如果有大量输入的 S，称作 S1, S2, ... , Sk 其中 k >= 10亿，你需要依次检查它们是否为 T 的子序列。在这种情况下，你会怎样改变代码？
+
+致谢：
+
+特别感谢 @pbrother 添加此问题并且创建所有测试用例。
+
+ 
+
+示例 1：
+
+输入：s = "abc", t = "ahbgdc"
+输出：true
+示例 2：
+
+输入：s = "axc", t = "ahbgdc"
+输出：false
+ 
  */
 
 // @lc code=start
@@ -3485,6 +4507,30 @@ var toHex = function(num) {
  * @lc app=leetcode.cn id=409 lang=javascript
  *
  * [409] 最长回文串
+ * 
+ * 给定一个包含大写字母和小写字母的字符串 s ，返回 通过这些字母构造成的 最长的回文串 。
+
+在构造过程中，请注意 区分大小写 。比如 "Aa" 不能当做一个回文字符串。
+
+ 
+
+示例 1:
+
+输入:s = "abccccdd"
+输出:7
+解释:
+我们可以构造的最长的回文串是"dccaccd", 它的长度是 7。
+示例 2:
+
+输入:s = "a"
+输入:1
+示例 3:
+
+输入:s = "bb"
+输入: 2
+ 
+
+
  */
 
 // @lc code=start
@@ -3517,6 +4563,30 @@ var toHex = function(num) {
  * @lc app=leetcode.cn id=412 lang=javascript
  *
  * [412] Fizz Buzz
+ * 
+ * 给你一个整数 n ，找出从 1 到 n 各个整数的 Fizz Buzz 表示，并用字符串数组 answer（下标从 1 开始）返回结果，其中：
+
+answer[i] == "FizzBuzz" 如果 i 同时是 3 和 5 的倍数。
+answer[i] == "Fizz" 如果 i 是 3 的倍数。
+answer[i] == "Buzz" 如果 i 是 5 的倍数。
+answer[i] == i （以字符串形式）如果上述条件全不满足。
+ 
+
+示例 1：
+
+输入：n = 3
+输出：["1","2","Fizz"]
+示例 2：
+
+输入：n = 5
+输出：["1","2","Fizz","4","Buzz"]
+示例 3：
+
+输入：n = 15
+输出：["1","2","Fizz","4","Buzz","Fizz","7","8","Fizz","Buzz","11","Fizz","13","14","FizzBuzz"]
+ 
+
+
  */
 
 // @lc code=start
@@ -3553,6 +4623,28 @@ var fizzBuzz = function (n) {
  * @lc app=leetcode.cn id=414 lang=javascript
  *
  * [414] 第三大的数
+ * 
+ * 给你一个非空数组，返回此数组中 第三大的数 。如果不存在，则返回数组中最大的数。
+
+ 
+
+示例 1：
+
+输入：[3, 2, 1]
+输出：1
+解释：第三大的数是 1 。
+示例 2：
+
+输入：[1, 2]
+输出：2
+解释：第三大的数不存在, 所以返回最大的数 2 。
+示例 3：
+
+输入：[2, 2, 3, 1]
+输出：1
+解释：注意，要求返回第三大的数，是指在所有不同数字中排第三大的数。
+此例中存在两个值为 2 的数，它们都排第二。在所有不同数字中排第三大的数为 1 。
+ 
  */
 
 // @lc code=start
@@ -3576,6 +4668,28 @@ var thirdMax = function (nums) {
  * @lc app=leetcode.cn id=415 lang=javascript
  *
  * [415] 字符串相加
+ * 
+ * 给定两个字符串形式的非负整数 num1 和num2 ，计算它们的和并同样以字符串形式返回。
+
+你不能使用任何內建的用于处理大整数的库（比如 BigInteger）， 也不能直接将输入的字符串转换为整数形式。
+
+ 
+
+示例 1：
+
+输入：num1 = "11", num2 = "123"
+输出："134"
+示例 2：
+
+输入：num1 = "456", num2 = "77"
+输出："533"
+示例 3：
+
+输入：num1 = "0", num2 = "0"
+输出："0"
+ 
+
+
  */
 
 // @lc code=start
@@ -3615,6 +4729,17 @@ var addStrings = function (num1, num2) {
  * @lc app=leetcode.cn id=434 lang=javascript
  *
  * [434] 字符串中的单词数
+ * 
+ * 统计字符串中的单词个数，这里的单词指的是连续的不是空格的字符。
+
+请注意，你可以假定字符串里不包括任何不可打印的字符。
+
+示例:
+
+输入: "Hello, my name is John"
+输出: 5
+解释: 这里的单词是指连续的不是空格的字符，所以 "Hello," 算作 1 个单词。
+
  */
 
 // @lc code=start
@@ -3637,6 +4762,26 @@ var countSegments = function (s) {
  * @lc app=leetcode.cn id=441 lang=javascript
  *
  * [441] 排列硬币
+ * 
+ * 你总共有 n 枚硬币，并计划将它们按阶梯状排列。对于一个由 k 行组成的阶梯，其第 i 行必须正好有 i 枚硬币。阶梯的最后一行 可能 是不完整的。
+
+给你一个数字 n ，计算并返回可形成 完整阶梯行 的总行数。
+
+ 
+
+示例 1：
+
+
+输入：n = 5
+输出：2
+解释：因为第三行不完整，所以返回 2 。
+示例 2：
+
+
+输入：n = 8
+输出：3
+解释：因为第四行不完整，所以返回 3 。
+ 
  */
 
 // @lc code=start
@@ -3664,6 +4809,20 @@ var arrangeCoins = function (n) {
  * @lc app=leetcode.cn id=448 lang=javascript
  *
  * [448] 找到所有数组中消失的数字
+ * 
+ * 给你一个含 n 个整数的数组 nums ，其中 nums[i] 在区间 [1, n] 内。请你找出所有在 [1, n] 范围内但没有出现在 nums 中的数字，并以数组的形式返回结果。
+
+ 
+
+示例 1：
+
+输入：nums = [4,3,2,7,8,2,3,1]
+输出：[5,6]
+示例 2：
+
+输入：nums = [1,1]
+输出：[2]
+ 
  */
 
 // @lc code=start
@@ -3771,6 +4930,21 @@ var repeatedSubstringPattern = function(s) {
  * @lc app=leetcode.cn id=485 lang=javascript
  *
  * [485] 最大连续 1 的个数
+ * 
+ * 给定一个二进制数组 nums ， 计算其中最大连续 1 的个数。
+
+ 
+
+示例 1：
+
+输入：nums = [1,1,0,1,1,1]
+输出：3
+解释：开头的两位和最后的三位都是连续 1 ，所以最大连续 1 的个数是 3.
+示例 2:
+
+输入：nums = [1,0,1,1,0,1]
+输出：2
+ 
  */
 
 // @lc code=start
@@ -3834,6 +5008,33 @@ var findPoisonedDuration = function (timeSeries, duration) {
  * @lc app=leetcode.cn id=496 lang=javascript
  *
  * [496] 下一个更大元素 I
+ * 
+ * nums1 中数字 x 的 下一个更大元素 是指 x 在 nums2 中对应位置 右侧 的 第一个 比 x 大的元素。
+
+给你两个 没有重复元素 的数组 nums1 和 nums2 ，下标从 0 开始计数，其中nums1 是 nums2 的子集。
+
+对于每个 0 <= i < nums1.length ，找出满足 nums1[i] == nums2[j] 的下标 j ，并且在 nums2 确定 nums2[j] 的 下一个更大元素 。如果不存在下一个更大元素，那么本次查询的答案是 -1 。
+
+返回一个长度为 nums1.length 的数组 ans 作为答案，满足 ans[i] 是如上所述的 下一个更大元素 。
+
+ 
+
+示例 1：
+
+输入：nums1 = [4,1,2], nums2 = [1,3,4,2].
+输出：[-1,3,-1]
+解释：nums1 中每个值的下一个更大元素如下所述：
+- 4 ，用加粗斜体标识，nums2 = [1,3,4,2]。不存在下一个更大元素，所以答案是 -1 。
+- 1 ，用加粗斜体标识，nums2 = [1,3,4,2]。下一个更大元素是 3 。
+- 2 ，用加粗斜体标识，nums2 = [1,3,4,2]。不存在下一个更大元素，所以答案是 -1 。
+示例 2：
+
+输入：nums1 = [2,4], nums2 = [1,2,3,4].
+输出：[3,-1]
+解释：nums1 中每个值的下一个更大元素如下所述：
+- 2 ，用加粗斜体标识，nums2 = [1,2,3,4]。下一个更大元素是 3 。
+- 4 ，用加粗斜体标识，nums2 = [1,2,3,4]。不存在下一个更大元素，所以答案是 -1 。
+ 
  */
 
 // @lc code=start
@@ -3873,6 +5074,33 @@ var nextGreaterElement = function (nums1, nums2) {
  * @lc app=leetcode.cn id=500 lang=javascript
  *
  * [500] 键盘行
+ * 
+ * 给你一个字符串数组 words ，只返回可以使用在 美式键盘 同一行的字母打印出来的单词。键盘如下图所示。
+
+美式键盘 中：
+
+第一行由字符 "qwertyuiop" 组成。
+第二行由字符 "asdfghjkl" 组成。
+第三行由字符 "zxcvbnm" 组成。
+American keyboard
+
+ 
+
+示例 1：
+
+输入：words = ["Hello","Alaska","Dad","Peace"]
+输出：["Alaska","Dad"]
+示例 2：
+
+输入：words = ["omk"]
+输出：[]
+示例 3：
+
+输入：words = ["adsdf","sfd"]
+输出：["adsdf","sfd"]
+ 
+
+
  */
 
 // @lc code=start
@@ -3930,6 +5158,30 @@ var convertToBase7 = function (num) {
  * @lc app=leetcode.cn id=506 lang=javascript
  *
  * [506] 相对名次
+ * 
+ * 给你一个长度为 n 的整数数组 score ，其中 score[i] 是第 i 位运动员在比赛中的得分。所有得分都 互不相同 。
+
+运动员将根据得分 决定名次 ，其中名次第 1 的运动员得分最高，名次第 2 的运动员得分第 2 高，依此类推。运动员的名次决定了他们的获奖情况：
+
+名次第 1 的运动员获金牌 "Gold Medal" 。
+名次第 2 的运动员获银牌 "Silver Medal" 。
+名次第 3 的运动员获铜牌 "Bronze Medal" 。
+从名次第 4 到第 n 的运动员，只能获得他们的名次编号（即，名次第 x 的运动员获得编号 "x"）。
+使用长度为 n 的数组 answer 返回获奖，其中 answer[i] 是第 i 位运动员的获奖情况。
+
+ 
+
+示例 1：
+
+输入：score = [5,4,3,2,1]
+输出：["Gold Medal","Silver Medal","Bronze Medal","4","5"]
+解释：名次为 [1st, 2nd, 3rd, 4th, 5th] 。
+示例 2：
+
+输入：score = [10,3,8,9,4]
+输出：["Gold Medal","5","Bronze Medal","Silver Medal","4"]
+解释：名次为 [1st, 5th, 3rd, 2nd, 4th] 。
+ 
  */
 
 // @lc code=start
@@ -3960,6 +5212,24 @@ var findRelativeRanks = function (score) {
  * @lc app=leetcode.cn id=507 lang=javascript
  *
  * [507] 完美数
+ * 
+ * 对于一个 正整数，如果它和除了它自身以外的所有 正因子 之和相等，我们称它为 「完美数」。
+
+给定一个 整数 n， 如果是完美数，返回 true；否则返回 false。
+
+ 
+
+示例 1：
+
+输入：num = 28
+输出：true
+解释：28 = 1 + 2 + 4 + 7 + 14
+1, 2, 4, 7, 和 14 是 28 的所有正因子。
+示例 2：
+
+输入：num = 7
+输出：false
+ 
  */
 
 // @lc code=start
@@ -3980,12 +5250,80 @@ var findRelativeRanks = function (score) {
 ```
 
 
+## 509.斐波那契数
+```js
+/*
+ * @lc app=leetcode.cn id=509 lang=javascript
+ *
+ * [509] 斐波那契数
+ * 
+ * 斐波那契数 （通常用 F(n) 表示）形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是：
+
+F(0) = 0，F(1) = 1
+F(n) = F(n - 1) + F(n - 2)，其中 n > 1
+给定 n ，请计算 F(n) 。
+
+ 
+
+示例 1：
+
+输入：n = 2
+输出：1
+解释：F(2) = F(1) + F(0) = 1 + 0 = 1
+示例 2：
+
+输入：n = 3
+输出：2
+解释：F(3) = F(2) + F(1) = 1 + 1 = 2
+示例 3：
+
+输入：n = 4
+输出：3
+解释：F(4) = F(3) + F(2) = 2 + 1 = 3
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var fib = function (n) {
+  if (n === 0) return 0
+  else if (n < 3) return 1
+  return fib(n - 1) + fib(n - 2)
+};
+// @lc code=end
+
+
+```
+
+
 ## 520.检测大写字母
 ```js
 /*
  * @lc app=leetcode.cn id=520 lang=javascript
  *
  * [520] 检测大写字母
+ * 
+ * 我们定义，在以下情况时，单词的大写用法是正确的：
+
+全部字母都是大写，比如 "USA" 。
+单词中所有字母都不是大写，比如 "leetcode" 。
+如果单词不只含有一个字母，只有首字母大写， 比如 "Google" 。
+给你一个字符串 word 。如果大写用法正确，返回 true ；否则，返回 false 。
+
+ 
+
+示例 1：
+
+输入：word = "USA"
+输出：true
+示例 2：
+
+输入：word = "FlaG"
+输出：false
+ 
  */
 
 // @lc code=start
@@ -4018,6 +5356,32 @@ var detectCapitalUse = function (word) {
  * @lc app=leetcode.cn id=521 lang=javascript
  *
  * [521] 最长特殊序列 Ⅰ
+ * 
+ * 给你两个字符串 a 和 b，请返回 这两个字符串中 最长的特殊序列  的长度。如果不存在，则返回 -1 。
+
+「最长特殊序列」 定义如下：该序列为 某字符串独有的最长子序列（即不能是其他字符串的子序列） 。
+
+字符串 s 的子序列是在从 s 中删除任意数量的字符后可以获得的字符串。
+
+例如，"abc" 是 "aebdc" 的子序列，因为删除 "aebdc" 中斜体加粗的字符可以得到 "abc" 。 "aebdc" 的子序列还包括 "aebdc" 、 "aeb" 和 "" (空字符串)。
+ 
+
+示例 1：
+
+输入: a = "aba", b = "cdc"
+输出: 3
+解释: 最长特殊序列可为 "aba" (或 "cdc")，两者均为自身的子序列且不是对方的子序列。
+示例 2：
+
+输入：a = "aaa", b = "bbb"
+输出：3
+解释: 最长特殊序列是 "aaa" 和 "bbb" 。
+示例 3：
+
+输入：a = "aaa", b = "aaa"
+输出：-1
+解释: 字符串 a 的每个子序列也是字符串 b 的每个子序列。同样，字符串 b 的每个子序列也是字符串 a 的子序列。
+ 
  */
 
 // @lc code=start
@@ -4042,6 +5406,22 @@ var detectCapitalUse = function (word) {
  * @lc app=leetcode.cn id=541 lang=javascript
  *
  * [541] 反转字符串 II
+ * 
+ * 给定一个字符串 s 和一个整数 k，从字符串开头算起，每计数至 2k 个字符，就反转这 2k 字符中的前 k 个字符。
+
+如果剩余字符少于 k 个，则将剩余字符全部反转。
+如果剩余字符小于 2k 但大于或等于 k 个，则反转前 k 个字符，其余字符保持原样。
+ 
+
+示例 1：
+
+输入：s = "abcdefg", k = 2
+输出："bacdfeg"
+示例 2：
+
+输入：s = "abcd", k = 2
+输出："bacd"
+ 
  */
 
 // @lc code=start
@@ -4072,6 +5452,33 @@ var detectCapitalUse = function (word) {
  * @lc app=leetcode.cn id=551 lang=javascript
  *
  * [551] 学生出勤记录 I
+ * 
+ * 给你一个字符串 s 表示一个学生的出勤记录，其中的每个字符用来标记当天的出勤情况（缺勤、迟到、到场）。记录中只含下面三种字符：
+
+'A'：Absent，缺勤
+'L'：Late，迟到
+'P'：Present，到场
+如果学生能够 同时 满足下面两个条件，则可以获得出勤奖励：
+
+按 总出勤 计，学生缺勤（'A'）严格 少于两天。
+学生 不会 存在 连续 3 天或 连续 3 天以上的迟到（'L'）记录。
+如果学生可以获得出勤奖励，返回 true ；否则，返回 false 。
+
+ 
+
+示例 1：
+
+输入：s = "PPALLP"
+输出：true
+解释：学生缺勤次数少于 2 次，且不存在 3 天或以上的连续迟到记录。
+示例 2：
+
+输入：s = "PPALLL"
+输出：false
+解释：学生最后三天连续迟到，所以不满足出勤奖励的条件。
+ 
+
+
  */
 
 // @lc code=start
@@ -4105,6 +5512,20 @@ var checkRecord = function (s) {
  * @lc app=leetcode.cn id=557 lang=javascript
  *
  * [557] 反转字符串中的单词 III
+ * 
+ * 给定一个字符串 s ，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。
+
+ 
+
+示例 1：
+
+输入：s = "Let's take LeetCode contest"
+输出："s'teL ekat edoCteeL tsetnoc"
+示例 2:
+
+输入： s = "God Ding"
+输出："doG gniD"
+ 
  */
 
 // @lc code=start
@@ -4127,6 +5548,28 @@ var reverseWords = function (s) {
  * @lc app=leetcode.cn id=561 lang=javascript
  *
  * [561] 数组拆分 I
+ * 
+ * 给定长度为 2n 的整数数组 nums ，你的任务是将这些数分成 n 对, 例如 (a1, b1), (a2, b2), ..., (an, bn) ，使得从 1 到 n 的 min(ai, bi) 总和最大。
+
+返回该 最大总和 。
+
+ 
+
+示例 1：
+
+输入：nums = [1,4,3,2]
+输出：4
+解释：所有可能的分法（忽略元素顺序）为：
+1. (1, 4), (2, 3) -> min(1, 4) + min(2, 3) = 1 + 2 = 3
+2. (1, 3), (2, 4) -> min(1, 3) + min(2, 4) = 1 + 2 = 3
+3. (1, 2), (3, 4) -> min(1, 2) + min(3, 4) = 1 + 3 = 4
+所以最大总和为 4
+示例 2：
+
+输入：nums = [6,2,6,5,1,2]
+输出：9
+解释：最优的分法为 (2, 1), (2, 5), (6, 6). min(2, 1) + min(2, 5) + min(6, 6) = 1 + 2 + 6 = 9
+ 
  */
 
 // @lc code=start
@@ -4154,6 +5597,28 @@ var arrayPairSum = function (nums) {
  * @lc app=leetcode.cn id=566 lang=javascript
  *
  * [566] 重塑矩阵
+ * 
+ * 在 MATLAB 中，有一个非常有用的函数 reshape ，它可以将一个 m x n 矩阵重塑为另一个大小不同（r x c）的新矩阵，但保留其原始数据。
+
+给你一个由二维数组 mat 表示的 m x n 矩阵，以及两个正整数 r 和 c ，分别表示想要的重构的矩阵的行数和列数。
+
+重构后的矩阵需要将原始矩阵的所有元素以相同的 行遍历顺序 填充。
+
+如果具有给定参数的 reshape 操作是可行且合理的，则输出新的重塑矩阵；否则，输出原始矩阵。
+
+ 
+
+示例 1：
+
+
+输入：mat = [[1,2],[3,4]], r = 1, c = 4
+输出：[[1,2,3,4]]
+示例 2：
+
+
+输入：mat = [[1,2],[3,4]], r = 2, c = 4
+输出：[[1,2],[3,4]]
+ 
  */
 
 // @lc code=start
@@ -4189,6 +5654,31 @@ var matrixReshape = function (mat, r, c) {
  * @lc app=leetcode.cn id=575 lang=javascript
  *
  * [575] 分糖果
+ * 
+ * Alice 有 n 枚糖，其中第 i 枚糖的类型为 candyType[i] 。Alice 注意到她的体重正在增长，所以前去拜访了一位医生。
+
+医生建议 Alice 要少摄入糖分，只吃掉她所有糖的 n / 2 即可（n 是一个偶数）。Alice 非常喜欢这些糖，她想要在遵循医生建议的情况下，尽可能吃到最多不同种类的糖。
+
+给你一个长度为 n 的整数数组 candyType ，返回： Alice 在仅吃掉 n / 2 枚糖的情况下，可以吃到糖的 最多 种类数。
+
+ 
+
+示例 1：
+
+输入：candyType = [1,1,2,2,3,3]
+输出：3
+解释：Alice 只能吃 6 / 2 = 3 枚糖，由于只有 3 种糖，她可以每种吃一枚。
+示例 2：
+
+输入：candyType = [1,1,2,3]
+输出：2
+解释：Alice 只能吃 4 / 2 = 2 枚糖，不管她选择吃的种类是 [1,2]、[1,3] 还是 [2,3]，她只能吃到两种不同类的糖。
+示例 3：
+
+输入：candyType = [6,6,6,6]
+输出：1
+解释：Alice 只能吃 4 / 2 = 2 枚糖，尽管她能吃 2 枚，但只能吃到 1 种糖。
+ 
  */
 
 // @lc code=start
@@ -4259,6 +5749,24 @@ var maxCount = function(m, n, ops) {
  * @lc app=leetcode.cn id=599 lang=javascript
  *
  * [599] 两个列表的最小索引总和
+ * 
+ * 假设 Andy 和 Doris 想在晚餐时选择一家餐厅，并且他们都有一个表示最喜爱餐厅的列表，每个餐厅的名字用字符串表示。
+
+你需要帮助他们用最少的索引和找出他们共同喜爱的餐厅。 如果答案不止一个，则输出所有答案并且不考虑顺序。 你可以假设答案总是存在。
+
+ 
+
+示例 1:
+
+输入: list1 = ["Shogun", "Tapioca Express", "Burger King", "KFC"]，list2 = ["Piatti", "The Grill at Torrey Pines", "Hungry Hunter Steakhouse", "Shogun"]
+输出: ["Shogun"]
+解释: 他们唯一共同喜爱的餐厅是“Shogun”。
+示例 2:
+
+输入:list1 = ["Shogun", "Tapioca Express", "Burger King", "KFC"]，list2 = ["KFC", "Shogun", "Burger King"]
+输出: ["Shogun"]
+解释: 他们共同喜爱且具有最小索引和的餐厅是“Shogun”，它有最小的索引和1(0+1)。
+ 
  */
 
 // @lc code=start
@@ -4322,6 +5830,24 @@ var canPlaceFlowers = function (flowerbed, n) {
  * @lc app=leetcode.cn id=628 lang=javascript
  *
  * [628] 三个数的最大乘积
+ * 
+ * 给你一个整型数组 nums ，在数组中找出由三个数组成的最大乘积，并输出这个乘积。
+
+ 
+
+示例 1：
+
+输入：nums = [1,2,3]
+输出：6
+示例 2：
+
+输入：nums = [1,2,3,4]
+输出：24
+示例 3：
+
+输入：nums = [-1,-2,-3]
+输出：-6
+ 
  */
 
 // @lc code=start
@@ -4346,6 +5872,25 @@ var maximumProduct = function (nums) {
  * @lc app=leetcode.cn id=643 lang=javascript
  *
  * [643] 子数组最大平均数 I
+ * 
+ * 给你一个由 n 个元素组成的整数数组 nums 和一个整数 k 。
+
+请你找出平均数最大且 长度为 k 的连续子数组，并输出该最大平均数。
+
+任何误差小于 10-5 的答案都将被视为正确答案。
+
+ 
+
+示例 1：
+
+输入：nums = [1,12,-5,-6,50,3], k = 4
+输出：12.75
+解释：最大平均数 (12-5-6+50)/4 = 51/4 = 12.75
+示例 2：
+
+输入：nums = [5], k = 1
+输出：5.00000
+ 
  */
 
 // @lc code=start
@@ -4399,6 +5944,28 @@ var findErrorNums = function (nums) {
  * @lc app=leetcode.cn id=657 lang=javascript
  *
  * [657] 机器人能否返回原点
+ * 
+ * 在二维平面上，有一个机器人从原点 (0, 0) 开始。给出它的移动顺序，判断这个机器人在完成移动后是否在 (0, 0) 处结束。
+
+移动顺序由字符串 moves 表示。字符 move[i] 表示其第 i 次移动。机器人的有效动作有 R（右），L（左），U（上）和 D（下）。
+
+如果机器人在完成所有动作后返回原点，则返回 true。否则，返回 false。
+
+注意：机器人“面朝”的方向无关紧要。 “R” 将始终使机器人向右移动一次，“L” 将始终向左移动等。此外，假设每次移动机器人的移动幅度相同。
+
+ 
+
+示例 1:
+
+输入: moves = "UD"
+输出: true
+解释：机器人向上移动一次，然后向下移动一次。所有动作都具有相同的幅度，因此它最终回到它开始的原点。因此，我们返回 true。
+示例 2:
+
+输入: moves = "LL"
+输出: false
+解释：机器人向左移动两次。它最终位于原点的左侧，距原点有两次 “移动” 的距离。我们返回 false，因为它在移动结束时没有返回原点。
+ 
  */
 
 // @lc code=start
@@ -4448,6 +6015,25 @@ var imageSmoother = function(img) {
  * @lc app=leetcode.cn id=674 lang=javascript
  *
  * [674] 最长连续递增序列
+ * 
+ * 给定一个未经排序的整数数组，找到最长且 连续递增的子序列，并返回该序列的长度。
+
+连续递增的子序列 可以由两个下标 l 和 r（l < r）确定，如果对于每个 l <= i < r，都有 nums[i] < nums[i + 1] ，那么子序列 [nums[l], nums[l + 1], ..., nums[r - 1], nums[r]] 就是连续递增子序列。
+
+ 
+
+示例 1：
+
+输入：nums = [1,3,5,4,7]
+输出：3
+解释：最长连续递增序列是 [1,3,5], 长度为3。
+尽管 [1,3,5,7] 也是升序的子序列, 但它不是连续的，因为 5 和 7 在原数组里被 4 隔开。 
+示例 2：
+
+输入：nums = [2,2,2,2,2]
+输出：1
+解释：最长连续递增序列是 [2], 长度为1。
+ 
  */
 
 // @lc code=start
@@ -4508,6 +6094,49 @@ var validPalindrome = function (s) {
  * @lc app=leetcode.cn id=682 lang=javascript
  *
  * [682] 棒球比赛
+ * 
+ * 你现在是一场采用特殊赛制棒球比赛的记录员。这场比赛由若干回合组成，过去几回合的得分可能会影响以后几回合的得分。
+
+比赛开始时，记录是空白的。你会得到一个记录操作的字符串列表 ops，其中 ops[i] 是你需要记录的第 i 项操作，ops 遵循下述规则：
+
+整数 x - 表示本回合新获得分数 x
+"+" - 表示本回合新获得的得分是前两次得分的总和。题目数据保证记录此操作时前面总是存在两个有效的分数。
+"D" - 表示本回合新获得的得分是前一次得分的两倍。题目数据保证记录此操作时前面总是存在一个有效的分数。
+"C" - 表示前一次得分无效，将其从记录中移除。题目数据保证记录此操作时前面总是存在一个有效的分数。
+请你返回记录中所有得分的总和。
+
+ 
+
+示例 1：
+
+输入：ops = ["5","2","C","D","+"]
+输出：30
+解释：
+"5" - 记录加 5 ，记录现在是 [5]
+"2" - 记录加 2 ，记录现在是 [5, 2]
+"C" - 使前一次得分的记录无效并将其移除，记录现在是 [5].
+"D" - 记录加 2 * 5 = 10 ，记录现在是 [5, 10].
+"+" - 记录加 5 + 10 = 15 ，记录现在是 [5, 10, 15].
+所有得分的总和 5 + 10 + 15 = 30
+示例 2：
+
+输入：ops = ["5","-2","4","C","D","9","+","+"]
+输出：27
+解释：
+"5" - 记录加 5 ，记录现在是 [5]
+"-2" - 记录加 -2 ，记录现在是 [5, -2]
+"4" - 记录加 4 ，记录现在是 [5, -2, 4]
+"C" - 使前一次得分的记录无效并将其移除，记录现在是 [5, -2]
+"D" - 记录加 2 * -2 = -4 ，记录现在是 [5, -2, -4]
+"9" - 记录加 9 ，记录现在是 [5, -2, -4, 9]
+"+" - 记录加 -4 + 9 = 5 ，记录现在是 [5, -2, -4, 9, 5]
+"+" - 记录加 9 + 5 = 14 ，记录现在是 [5, -2, -4, 9, 5, 14]
+所有得分的总和 5 + -2 + -4 + 9 + 5 + 14 = 27
+示例 3：
+
+输入：ops = ["1"]
+输出：1
+ 
  */
 
 // @lc code=start
@@ -4565,6 +6194,23 @@ var findShortestSubArray = function(nums) {
  * @lc app=leetcode.cn id=704 lang=javascript
  *
  * [704] 二分查找
+ * 
+ * 给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。
+
+
+示例 1:
+
+输入: nums = [-1,0,3,5,9,12], target = 9
+输出: 4
+解释: 9 出现在 nums 中并且下标为 4
+示例 2:
+
+输入: nums = [-1,0,3,5,9,12], target = 2
+输出: -1
+解释: 2 不存在 nums 中因此返回 -1
+ 
+
+
  */
 
 // @lc code=start
@@ -4599,6 +6245,36 @@ var search = function (nums, target) {
  * @lc app=leetcode.cn id=705 lang=javascript
  *
  * [705] 设计哈希集合
+ * 
+ * 不使用任何内建的哈希表库设计一个哈希集合（HashSet）。
+
+实现 MyHashSet 类：
+
+void add(key) 向哈希集合中插入值 key 。
+bool contains(key) 返回哈希集合中是否存在这个值 key 。
+void remove(key) 将给定值 key 从哈希集合中删除。如果哈希集合中没有这个值，什么也不做。
+ 
+示例：
+
+输入：
+["MyHashSet", "add", "add", "contains", "contains", "add", "contains", "remove", "contains"]
+[[], [1], [2], [1], [3], [2], [2], [2], [2]]
+输出：
+[null, null, null, true, false, null, true, null, false]
+
+解释：
+MyHashSet myHashSet = new MyHashSet();
+myHashSet.add(1);      // set = [1]
+myHashSet.add(2);      // set = [1, 2]
+myHashSet.contains(1); // 返回 True
+myHashSet.contains(3); // 返回 False ，（未找到）
+myHashSet.add(2);      // set = [1, 2]
+myHashSet.contains(2); // 返回 True
+myHashSet.remove(2);   // set = [1]
+myHashSet.contains(2); // 返回 False ，（已移除）
+ 
+
+
  */
 
 // @lc code=start
@@ -4650,6 +6326,36 @@ MyHashSet.prototype.contains = function (key) {
  * @lc app=leetcode.cn id=706 lang=javascript
  *
  * [706] 设计哈希映射
+ * 
+ * 不使用任何内建的哈希表库设计一个哈希映射（HashMap）。
+
+实现 MyHashMap 类：
+
+MyHashMap() 用空映射初始化对象
+void put(int key, int value) 向 HashMap 插入一个键值对 (key, value) 。如果 key 已经存在于映射中，则更新其对应的值 value 。
+int get(int key) 返回特定的 key 所映射的 value ；如果映射中不包含 key 的映射，返回 -1 。
+void remove(key) 如果映射中存在 key 的映射，则移除 key 和它所对应的 value 。
+ 
+
+示例：
+
+输入：
+["MyHashMap", "put", "put", "get", "get", "put", "get", "remove", "get"]
+[[], [1, 1], [2, 2], [1], [3], [2, 1], [2], [2], [2]]
+输出：
+[null, null, null, 1, -1, null, 1, null, -1]
+
+解释：
+MyHashMap myHashMap = new MyHashMap();
+myHashMap.put(1, 1); // myHashMap 现在为 [[1,1]]
+myHashMap.put(2, 2); // myHashMap 现在为 [[1,1], [2,2]]
+myHashMap.get(1);    // 返回 1 ，myHashMap 现在为 [[1,1], [2,2]]
+myHashMap.get(3);    // 返回 -1（未找到），myHashMap 现在为 [[1,1], [2,2]]
+myHashMap.put(2, 1); // myHashMap 现在为 [[1,1], [2,1]]（更新已有的值）
+myHashMap.get(2);    // 返回 1 ，myHashMap 现在为 [[1,1], [2,1]]
+myHashMap.remove(2); // 删除键为 2 的数据，myHashMap 现在为 [[1,1]]
+myHashMap.get(2);    // 返回 -1（未找到），myHashMap 现在为 [[1,1]]
+ 
  */
 
 // @lc code=start
@@ -4702,6 +6408,24 @@ MyHashMap.prototype.remove = function (key) {
  * @lc app=leetcode.cn id=709 lang=javascript
  *
  * [709] 转换成小写字母
+ * 
+ * 给你一个字符串 s ，将该字符串中的大写字母转换成相同的小写字母，返回新的字符串。
+
+ 
+
+示例 1：
+
+输入：s = "Hello"
+输出："hello"
+示例 2：
+
+输入：s = "here"
+输出："here"
+示例 3：
+
+输入：s = "LOVELY"
+输出："lovely"
+ 
  */
 
 // @lc code=start
@@ -4750,6 +6474,40 @@ var longestWord = function(words) {
  * @lc app=leetcode.cn id=724 lang=javascript
  *
  * [724] 寻找数组的中心下标
+ * 
+ * 给你一个整数数组 nums ，请计算数组的 中心下标 。
+
+数组 中心下标 是数组的一个下标，其左侧所有元素相加的和等于右侧所有元素相加的和。
+
+如果中心下标位于数组最左端，那么左侧数之和视为 0 ，因为在下标的左侧不存在元素。这一点对于中心下标位于数组最右端同样适用。
+
+如果数组有多个中心下标，应该返回 最靠近左边 的那一个。如果数组不存在中心下标，返回 -1 。
+
+ 
+
+示例 1：
+
+输入：nums = [1, 7, 3, 6, 5, 6]
+输出：3
+解释：
+中心下标是 3 。
+左侧数之和 sum = nums[0] + nums[1] + nums[2] = 1 + 7 + 3 = 11 ，
+右侧数之和 sum = nums[4] + nums[5] = 5 + 6 = 11 ，二者相等。
+示例 2：
+
+输入：nums = [1, 2, 3]
+输出：-1
+解释：
+数组中不存在满足此条件的中心下标。
+示例 3：
+
+输入：nums = [2, 1, -1]
+输出：0
+解释：
+中心下标是 0 。
+左侧数之和 sum = 0 ，（下标 0 左侧不存在元素），
+右侧数之和 sum = nums[1] + nums[2] = 1 + -1 = 0 。
+ 
  */
 
 // @lc code=start
@@ -4779,6 +6537,25 @@ var pivotIndex = function (nums) {
  * @lc app=leetcode.cn id=728 lang=javascript
  *
  * [728] 自除数
+ * 
+ * 自除数 是指可以被它包含的每一位数整除的数。
+
+例如，128 是一个 自除数 ，因为 128 % 1 == 0，128 % 2 == 0，128 % 8 == 0。
+自除数 不允许包含 0 。
+
+给定两个整数 left 和 right ，返回一个列表，列表的元素是范围 [left, right] 内所有的 自除数 。
+
+ 
+
+示例 1：
+
+输入：left = 1, right = 22
+输出：[1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 22]
+示例 2:
+
+输入：left = 47, right = 85
+输出：[48,55,66,77]
+ 
  */
 
 // @lc code=start
@@ -4837,6 +6614,27 @@ var floodFill = function(image, sr, sc, newColor) {
  * @lc app=leetcode.cn id=744 lang=javascript
  *
  * [744] 寻找比目标字母大的最小字母
+ * 
+ * 给你一个排序后的字符列表 letters ，列表中只包含小写英文字母。另给出一个目标字母 target，请你寻找在这一有序列表里比目标字母大的最小字母。
+
+在比较时，字母是依序循环出现的。举个例子：
+
+如果目标字母 target = 'z' 并且字符列表为 letters = ['a', 'b']，则答案返回 'a'
+ 
+
+示例 1：
+
+输入: letters = ["c", "f", "j"]，target = "a"
+输出: "c"
+示例 2:
+
+输入: letters = ["c","f","j"], target = "c"
+输出: "f"
+示例 3:
+
+输入: letters = ["c","f","j"], target = "d"
+输出: "f"
+ 
  */
 
 // @lc code=start
@@ -4864,6 +6662,37 @@ var nextGreatestLetter = function (letters, target) {
  * @lc app=leetcode.cn id=746 lang=javascript
  *
  * [746] 使用最小花费爬楼梯
+ * 
+ * 给你一个整数数组 cost ，其中 cost[i] 是从楼梯第 i 个台阶向上爬需要支付的费用。一旦你支付此费用，即可选择向上爬一个或者两个台阶。
+
+你可以选择从下标为 0 或下标为 1 的台阶开始爬楼梯。
+
+请你计算并返回达到楼梯顶部的最低花费。
+
+ 
+
+示例 1：
+
+输入：cost = [10,15,20]
+输出：15
+解释：你将从下标为 1 的台阶开始。
+- 支付 15 ，向上爬两个台阶，到达楼梯顶部。
+总花费为 15 。
+示例 2：
+
+输入：cost = [1,100,1,1,1,100,1,1,100,1]
+输出：6
+解释：你将从下标为 0 的台阶开始。
+- 支付 1 ，向上爬两个台阶，到达下标为 2 的台阶。
+- 支付 1 ，向上爬两个台阶，到达下标为 4 的台阶。
+- 支付 1 ，向上爬两个台阶，到达下标为 6 的台阶。
+- 支付 1 ，向上爬一个台阶，到达下标为 7 的台阶。
+- 支付 1 ，向上爬两个台阶，到达下标为 9 的台阶。
+- 支付 1 ，向上爬一个台阶，到达楼梯顶部。
+总花费为 6 。
+ 
+
+
  */
 
 // @lc code=start
@@ -4888,6 +6717,29 @@ var minCostClimbingStairs = function (cost) {
  * @lc app=leetcode.cn id=747 lang=javascript
  *
  * [747] 至少是其他数字两倍的最大数
+ * 
+ * 给你一个整数数组 nums ，其中总是存在 唯一的 一个最大整数 。
+
+请你找出数组中的最大元素并检查它是否 至少是数组中每个其他数字的两倍 。如果是，则返回 最大元素的下标 ，否则返回 -1 。
+
+ 
+
+示例 1：
+
+输入：nums = [3,6,1,0]
+输出：1
+解释：6 是最大的整数，对于数组中的其他整数，6 至少是数组中其他元素的两倍。6 的下标是 1 ，所以返回 1 。
+示例 2：
+
+输入：nums = [1,2,3,4]
+输出：-1
+解释：4 没有超过 3 的两倍大，所以返回 -1 。
+示例 3：
+
+输入：nums = [1]
+输出：0
+解释：因为不存在其他数字，所以认为现有数字 1 至少是其他数字的两倍。
+ 
  */
 
 // @lc code=start
@@ -4913,6 +6765,33 @@ var dominantIndex = function (nums) {
  * @lc app=leetcode.cn id=748 lang=javascript
  *
  * [748] 最短补全词
+ * 
+ * 给你一个字符串 licensePlate 和一个字符串数组 words ，请你找出 words 中的 最短补全词 。
+
+补全词 是一个包含 licensePlate 中所有字母的单词。忽略 licensePlate 中的 数字和空格 。不区分大小写。如果某个字母在 licensePlate 中出现不止一次，那么该字母在补全词中的出现次数应当一致或者更多。
+
+例如：licensePlate = "aBc 12c"，那么它的补全词应当包含字母 'a'、'b' （忽略大写）和两个 'c' 。可能的 补全词 有 "abccdef"、"caaacab" 以及 "cbca" 。
+
+请返回 words 中的 最短补全词 。题目数据保证一定存在一个最短补全词。当有多个单词都符合最短补全词的匹配条件时取 words 中 第一个 出现的那个。
+
+ 
+
+示例 1：
+
+输入：licensePlate = "1s3 PSt", words = ["step", "steps", "stripe", "stepple"]
+输出："steps"
+解释：最短补全词应该包括 "s"、"p"、"s"（忽略大小写） 以及 "t"。
+"step" 包含 "t"、"p"，但只包含一个 "s"，所以它不符合条件。
+"steps" 包含 "t"、"p" 和两个 "s"。
+"stripe" 缺一个 "s"。
+"stepple" 缺一个 "s"。
+因此，"steps" 是唯一一个包含所有字母的单词，也是本例的答案。
+示例 2：
+
+输入：licensePlate = "1s3 456", words = ["looks", "pest", "stew", "show"]
+输出："pest"
+解释：licensePlate 只包含字母 "s" 。所有的单词都包含字母 "s" ，其中 "pest"、"stew"、和 "show" 三者最短。答案是 "pest" ，因为它是三个单词中在 words 里最靠前的那个。
+ 
  */
 
 // @lc code=start
@@ -4951,6 +6830,37 @@ var shortestCompletingWord = function (licensePlate, words) {
  * @lc app=leetcode.cn id=762 lang=javascript
  *
  * [762] 二进制表示中质数个计算置位
+ * 
+ * 给你两个整数 left 和 right ，在闭区间 [left, right] 范围内，统计并返回 计算置位位数为质数 的整数个数。
+
+计算置位位数 就是二进制表示中 1 的个数。
+
+例如， 21 的二进制表示 10101 有 3 个计算置位。
+ 
+
+示例 1：
+
+输入：left = 6, right = 10
+输出：4
+解释：
+6 -> 110 (2 个计算置位，2 是质数)
+7 -> 111 (3 个计算置位，3 是质数)
+9 -> 1001 (2 个计算置位，2 是质数)
+10-> 1010 (2 个计算置位，2 是质数)
+共计 4 个计算置位为质数的数字。
+示例 2：
+
+输入：left = 10, right = 15
+输出：5
+解释：
+10 -> 1010 (2 个计算置位, 2 是质数)
+11 -> 1011 (3 个计算置位, 3 是质数)
+12 -> 1100 (2 个计算置位, 2 是质数)
+13 -> 1101 (3 个计算置位, 3 是质数)
+14 -> 1110 (3 个计算置位, 3 是质数)
+15 -> 1111 (4 个计算置位, 4 不是质数)
+共计 5 个计算置位为质数的数字。
+ 
  */
 
 // @lc code=start
@@ -5018,6 +6928,22 @@ var isToeplitzMatrix = function(matrix) {
  * @lc app=leetcode.cn id=771 lang=javascript
  *
  * [771] 宝石与石头
+ * 
+ *  给你一个字符串 jewels 代表石头中宝石的类型，另有一个字符串 stones 代表你拥有的石头。 stones 中每个字符代表了一种你拥有的石头的类型，你想知道你拥有的石头中有多少是宝石。
+
+字母区分大小写，因此 "a" 和 "A" 是不同类型的石头。
+
+ 
+
+示例 1：
+
+输入：jewels = "aA", stones = "aAAbbbb"
+输出：3
+示例 2：
+
+输入：jewels = "z", stones = "ZZ"
+输出：0
+ 
  */
 
 // @lc code=start
@@ -5045,6 +6971,23 @@ var numJewelsInStones = function (jewels, stones) {
  * @lc app=leetcode.cn id=796 lang=javascript
  *
  * [796] 旋转字符串
+ * 
+ * 给定两个字符串, s 和 goal。如果在若干次旋转操作之后，s 能变成 goal ，那么返回 true 。
+
+s 的 旋转操作 就是将 s 最左边的字符移动到最右边。 
+
+例如, 若 s = 'abcde'，在旋转一次之后结果就是'bcdea' 。
+ 
+
+示例 1:
+
+输入: s = "abcde", goal = "cdeab"
+输出: true
+示例 2:
+
+输入: s = "abcde", goal = "abced"
+输出: false
+ 
  */
 
 // @lc code=start
@@ -5072,6 +7015,41 @@ var rotateString = function (s, goal) {
  * @lc app=leetcode.cn id=804 lang=javascript
  *
  * [804] 唯一摩尔斯密码词
+ * 
+ * 国际摩尔斯密码定义一种标准编码方式，将每个字母对应于一个由一系列点和短线组成的字符串， 比如:
+
+'a' 对应 ".-" ，
+'b' 对应 "-..." ，
+'c' 对应 "-.-." ，以此类推。
+为了方便，所有 26 个英文字母的摩尔斯密码表如下：
+
+[".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+给你一个字符串数组 words ，每个单词可以写成每个字母对应摩尔斯密码的组合。
+
+例如，"cab" 可以写成 "-.-..--..." ，(即 "-.-." + ".-" + "-..." 字符串的结合)。我们将这样一个连接过程称作 单词翻译 。
+对 words 中所有单词进行单词翻译，返回不同 单词翻译 的数量。
+
+ 
+
+示例 1：
+
+输入: words = ["gin", "zen", "gig", "msg"]
+输出: 2
+解释: 
+各单词翻译如下:
+"gin" -> "--...-."
+"zen" -> "--...-."
+"gig" -> "--...--."
+"msg" -> "--...--."
+
+共有 2 种不同翻译, "--...-." 和 "--...--.".
+示例 2：
+
+输入：words = ["a"]
+输出：1
+ 
+
+
  */
 
 // @lc code=start
@@ -5102,6 +7080,29 @@ var uniqueMorseRepresentations = function (words) {
  * @lc app=leetcode.cn id=806 lang=javascript
  *
  * [806] 写字符串需要的行数
+ * 
+ * 我们要把给定的字符串 S 从左到右写到每一行上，每一行的最大宽度为100个单位，如果我们在写某个字母的时候会使这行超过了100 个单位，那么我们应该把这个字母写到下一行。我们给定了一个数组 widths ，这个数组 widths[0] 代表 'a' 需要的单位， widths[1] 代表 'b' 需要的单位，...， widths[25] 代表 'z' 需要的单位。
+
+现在回答两个问题：至少多少行能放下S，以及最后一行使用的宽度是多少个单位？将你的答案作为长度为2的整数列表返回。
+
+示例 1:
+输入: 
+widths = [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]
+S = "abcdefghijklmnopqrstuvwxyz"
+输出: [3, 60]
+解释: 
+所有的字符拥有相同的占用单位10。所以书写所有的26个字母，
+我们需要2个整行和占用60个单位的一行。
+示例 2:
+输入: 
+widths = [4,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]
+S = "bbbcccdddaaa"
+输出: [2, 4]
+解释: 
+除去字母'a'所有的字符都是相同的单位10，并且字符串 "bbbcccdddaa" 将会覆盖 9 * 10 + 2 * 4 = 98 个单位.
+最后一个字母 'a' 将会被写到第二行，因为第一行只剩下2个单位了。
+所以，这个答案是2行，第二行有4个单位宽度。
+
  */
 
 // @lc code=start
@@ -5162,6 +7163,27 @@ var largestTriangleArea = function (points) {
  * @lc app=leetcode.cn id=819 lang=javascript
  *
  * [819] 最常见的单词
+ * 
+ * 给定一个段落 (paragraph) 和一个禁用单词列表 (banned)。返回出现次数最多，同时不在禁用列表中的单词。
+
+题目保证至少有一个词不在禁用列表中，而且答案唯一。
+
+禁用列表中的单词用小写字母表示，不含标点符号。段落中的单词不区分大小写。答案都是小写字母。
+
+ 
+
+示例：
+
+输入: 
+paragraph = "Bob hit a ball, the hit BALL flew far after it was hit."
+banned = ["hit"]
+输出: "ball"
+解释: 
+"hit" 出现了3次，但它是一个禁用的单词。
+"ball" 出现了2次 (同时没有其他单词出现2次)，所以它是段落里出现次数最多的，且不在禁用列表中的单词。 
+注意，所有这些单词在段落里不区分大小写，标点符号需要忽略（即使是紧挨着单词也忽略， 比如 "ball,"）， 
+"hit"不是最终的答案，虽然它出现次数更多，但它在禁用单词列表中。
+ 
  */
 
 // @lc code=start
@@ -5183,6 +7205,57 @@ var mostCommonWord = function (paragraph, banned) {
         count = num
       }
     }
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 821.字符的最短距离
+```js
+/*
+ * @lc app=leetcode.cn id=821 lang=javascript
+ *
+ * [821] 字符的最短距离
+ * 
+ * 给你一个字符串 s 和一个字符 c ，且 c 是 s 中出现过的字符。
+
+返回一个整数数组 answer ，其中 answer.length == s.length 且 answer[i] 是 s 中从下标 i 到离它 最近 的字符 c 的 距离 。
+
+两个下标 i 和 j 之间的 距离 为 abs(i - j) ，其中 abs 是绝对值函数。
+
+ 
+
+示例 1：
+
+输入：s = "loveleetcode", c = "e"
+输出：[3,2,1,0,1,0,0,1,2,2,1,0]
+解释：字符 'e' 出现在下标 3、5、6 和 11 处（下标从 0 开始计数）。
+距下标 0 最近的 'e' 出现在下标 3 ，所以距离为 abs(0 - 3) = 3 。
+距下标 1 最近的 'e' 出现在下标 3 ，所以距离为 abs(1 - 3) = 2 。
+对于下标 4 ，出现在下标 3 和下标 5 处的 'e' 都离它最近，但距离是一样的 abs(4 - 3) == abs(4 - 5) = 1 。
+距下标 8 最近的 'e' 出现在下标 6 ，所以距离为 abs(8 - 6) = 2 。
+示例 2：
+
+输入：s = "aaab", c = "b"
+输出：[3,2,1,0]
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {string} s
+ * @param {character} c
+ * @return {number[]}
+ */
+var shortestToChar = function (s, c) {
+  const res = []
+  for (let i = 0; i < s.length; i++) {
+    if (s.lastIndexOf(c, i) > -1) res.push(Math.min(Math.abs(s.indexOf(c, i) - i), Math.abs(s.lastIndexOf(c, i) - i)))
+    else res.push(Math.abs(s.indexOf(c, i) - i))
   }
   return res
 };
@@ -8049,6 +10122,61 @@ var maxScore = function (s) {
     const n1 = left ? left.length : 0
     const n2 = right ? right.length : 0
     res = Math.max(res, n1 + n2)
+  }
+  return res
+};
+// @lc code=end
+
+
+```
+
+
+## 1822.数组元素积的符号
+```js
+/*
+ * @lc app=leetcode.cn id=1822 lang=javascript
+ *
+ * [1822] 数组元素积的符号
+ * 
+ * 已知函数 signFunc(x) 将会根据 x 的正负返回特定值：
+
+如果 x 是正数，返回 1 。
+如果 x 是负数，返回 -1 。
+如果 x 是等于 0 ，返回 0 。
+给你一个整数数组 nums 。令 product 为数组 nums 中所有元素值的乘积。
+
+返回 signFunc(product) 。
+
+ 
+
+示例 1：
+
+输入：nums = [-1,-2,-3,-4,3,2,1]
+输出：1
+解释：数组中所有值的乘积是 144 ，且 signFunc(144) = 1
+示例 2：
+
+输入：nums = [1,5,0,2,-3]
+输出：0
+解释：数组中所有值的乘积是 0 ，且 signFunc(0) = 0
+示例 3：
+
+输入：nums = [-1,1,-1,1,-1]
+输出：-1
+解释：数组中所有值的乘积是 -1 ，且 signFunc(-1) = -1
+ 
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var arraySign = function (nums) {
+  let res = 1
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] < 0) res = res * -1
+    else if (nums[i] === 0) return 0
   }
   return res
 };
