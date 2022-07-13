@@ -6,7 +6,7 @@
     "serve": "vuepress dev src",
     "cleanServe": "vuepress dev src --no-cache",
     "build": "vuepress build src",
-    "pub": "sh deploy.sh",
+    "pub": "zx deploy.mjs",
     "super:build": "node --max_old_space_size=8192 ./node_modules/vuepress/cli.js build src",
     "lint": "prettier --check --write .",
     "lint:check": "prettier --check .",
@@ -46,8 +46,9 @@
     "textlint-rule-terminology": "2.1.5",
     "textlint-rule-zh-half-and-full-width-bracket": "1.1.0",
     "vuepress": "1.9.7",
+    "vuepress-plugin-baidu-tongji-analytics": "^1.0.2",
     "vuepress-theme-hope": "1.27.3",
-    "vuepress-plugin-baidu-tongji-analytics": "^1.0.2"
+    "zx": "^7.0.7"
   },
   "remarkConfig": {
     "plugins": [

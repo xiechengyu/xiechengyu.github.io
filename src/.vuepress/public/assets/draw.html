@@ -48,10 +48,10 @@
       <button type="button" onClick="app.clear()">清除画板</button>
       <button type="button" onClick="app.screenshot.call(app)">截图</button>
     </div>
-    <!-- <div>
+    <div>
       <button type="button" onClick="app.next.call(app)">前进</button>
       <button type="button" onClick="app.back.call(app)">后退</button>
-    </div> -->
+    </div>
     <div>
       选择画笔颜色<input type="color" name="color" id="color" value="#ffffff">
     </div>
@@ -108,6 +108,7 @@
           //线条拐角为圆角
           this.ctx.lineJoin = 'round'
           this.ctx.lineWidth = this.lineWidth
+          this.allMessage.push({ offsetX: event.offsetX, offsetY: event.offsetY, type: "line", color: this.color, lineWidth: this.lineWidth, action: "move" })
           this.el.addEventListener('mousemove', this.eventCallback)
         }
         this.toggle()
@@ -130,16 +131,20 @@
       }
       erazer(event) {
         this.ctx.clearRect(event.offsetX - this.erazerSize[0] / 2, event.offsetY - this.erazerSize[1] / 2, ...this.erazerSize)
-        this.allMessage.push({ x: event.offsetX, y: event.offsetY, type: "erazer" })
       }
       line(event) {
-        //添加一个绘制点
-        this.ctx.lineTo(event.offsetX, event.offsetY)
+        if (this.allMessage.length === 0) {
+          this.ctx.moveTo(event.offsetX, event.offsetY);
+        } else {
+          //添加一个绘制点
+          this.ctx.lineTo(event.offsetX, event.offsetY)
+        }
         //设置线条颜色
         this.ctx.strokeStyle = this.color
         //将使用 lineTo 定义的点绘制出来
         this.ctx.stroke()
-        this.allMessage.push({ x: event.offsetX, y: event.offsetY, type: "line", color: this.color, lineWidth: this.lineWidth })
+        this.allMessage.push({ offsetX: event.offsetX, offsetY: event.offsetY, type: "line", color: this.color, lineWidth: this.lineWidth, action: "line" })
+        this.actionMessage = []
       }
       screenshot() {
         const img = document.querySelector('#img')
@@ -162,27 +167,23 @@
       }
       render() {
         this.ctx.clearRect(0, 0, this.el.width, this.el.height)
-        this.allMessage.forEach(({ x, y, color, type, lineWidth }) => {
-          console.log({ x, y, color, type, lineWidth })
-          if (type === "erazer") {
-            this.ctx.clearRect(x - this.erazerSize[0] / 2, y - this.erazerSize[1] / 2, ...this.erazerSize)
+        this.ctx.beginPath()
+        this.allMessage.forEach((v, i) => {
+          const { offsetX, offsetY, color, type, lineWidth, action } = v
+          //线条结束为圆角
+          this.ctx.lineCap = 'round'
+          //线条拐角为圆角
+          this.ctx.lineJoin = 'round'
+          this.ctx.lineWidth = lineWidth
+          //添加一个绘制点
+          this.ctx.strokeStyle = color
+          if (action === "move") {
+            this.ctx.moveTo(offsetX, offsetY);
           } else {
-            this.ctx.beginPath()
-            //移动画笔到指定坐标
-            this.ctx.moveTo(x, y)
-            //线条结束为圆角
-            this.ctx.lineCap = 'round'
-            //线条拐角为圆角
-            this.ctx.lineJoin = 'round'
-            this.ctx.lineWidth = lineWidth
-            //添加一个绘制点
-            this.ctx.lineTo(x, y)
-            //设置线条颜色
-            this.ctx.strokeStyle = color
-            //将使用 lineTo 定义的点绘制出来
-            this.ctx.stroke()
+            this.ctx.lineTo(offsetX, offsetY);
           }
         })
+        this.ctx.stroke()
       }
       upload() {
         if (this.diableUpload) return
@@ -201,7 +202,6 @@
     }
 
     const app = new Draw('#canvas')
-    // app.run()
   </script>
 </body>
 
