@@ -12,7 +12,11 @@ await $`git init`
 
 await $`git add -A`
 
-await $`git commit -m 'deploy'`
+try {
+  await $`git commit -m 'deploy'`
+} catch (error) {
+  echo(error)
+}
 
 await $`git push -f git@github.com:xiechengyu/xiechengyu.github.io.git master`
 
