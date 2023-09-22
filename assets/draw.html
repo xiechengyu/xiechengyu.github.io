@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    .app {
+      margin-top: 20px;
+    }
+
+    .canvas {
+      width: 900px;
+      height: 500px;
+      background: #000;
+    }
+
+    #image_uploads {
+      opacity: 0;
+    }
+
+    .image_uploads {
+      background: rgb(239, 239, 239);
+      border: 1px solid black;
+      display: inline-block;
+      cursor: pointer;
+      padding: 3px;
+      color: #1a1a1a;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <div class="canvas"><canvas id="canvas" width="900" height="500"></canvas>
+    </div>
+    <img id="img" />
+    <div>
+      <label for="image_uploads" class="image_uploads">上传背景</label>
+      <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png">
+    </div>
+    <div>
+      <button type="button" onClick="app.run.call(app)">画笔</button>
+      <button type="button" onClick="app.clearRect.call(app)">橡皮擦</button>
+      <button type="button" onClick="app.clear()">清除画板</button>
+      <button type="button" onClick="app.screenshot.call(app)">截图</button>
+    </div>
+    <div>
+      <button type="button" onClick="app.next.call(app)">前进</button>
+      <button type="button" onClick="app.back.call(app)">后退</button>
+    </div>
+    <div>
+      选择画笔颜色<input type="color" name="color" id="color" value="#ffffff">
+    </div>
+    <div> 画笔粗细 <input type="range" name="drawRange" id="drawRange" value="50">
+    </div>
+    <div> 橡皮擦大小 <input type="range" name="erazerRange" id="erazerRange" value="50">
+    </div>
+  </div>
+  <script>
+    class Draw {
+      constructor(el) {
+        this.el = document.querySelector(el)
+        this.ctx = this.el.getContext('2d')
+        this.allMessage = []
+        this.actionMessage = []
+        this.color = "#ffffff"
+        this.callback = () => { }
+        this.colorEl = document.querySelector("#color")
+        this.colorEl.addEventListener("change", (event) => {
+          this.color = event.target.value
+        })
+        this.lineWidth = 10
+        this.erazerSize = [20, 20]
+        this.drawRangeEl = document.querySelector("#drawRange")
+        this.drawRangeEl.addEventListener("change", (event) => {
+          this.lineWidth = 10 * (Number(event.target.value) / 100)
+        })
+        this.erazerRangeEl = document.querySelector("#erazerRange")
+        this.erazerRangeEl.addEventListener("change", (event) => {
+          const size = 20 * (Number(event.target.value) / 100)
+          this.erazerSize = [size, size]
+        })
+        this.uploadEl = document.querySelector("#image_uploads")
+        this.uploadEl.addEventListener('change', this.upload.bind(this));
+        this.uploadButton = document.querySelector(".image_uploads")
+        this.diableUpload = false
+        this.clear()
+      }
+      toggle() {
+        this.el.removeEventListener('mousemove', this.callback)
+        this.el.addEventListener('mousedown', this.callback)
+        this.el.addEventListener('mouseup', () => {
+          this.el.removeEventListener('mousemove', this.eventCallback)
+        })
+      }
+      run() {
+        this.eventCallback = this.line.bind(this)
+        this.callback = event => {
+          this.ctx.beginPath()
+          //移动画笔到指定坐标
+          this.ctx.moveTo(event.offsetX, event.offsetY)
+          //线条结束为圆角
+          this.ctx.lineCap = 'round'
+          //线条拐角为圆角
+          this.ctx.lineJoin = 'round'
+          this.ctx.lineWidth = this.lineWidth
+          this.allMessage.push({ offsetX: event.offsetX, offsetY: event.offsetY, type: "line", color: this.color, lineWidth: this.lineWidth, action: "move" })
+          this.el.addEventListener('mousemove', this.eventCallback)
+        }
+        this.toggle()
+      }
+      clearRect() {
+        this.eventCallback = this.erazer.bind(this)
+        this.callback = event => {
+          this.eventCallback(event)
+          this.el.addEventListener('mousemove', this.eventCallback)
+        }
+        this.toggle()
+      }
+      clear() {
+        this.ctx.clearRect(0, 0, this.el.width, this.el.height)
+        this.allMessage = []
+        this.actionMessage = []
+        this.diableUpload = false
+        this.uploadButton.style = "display: inline-block"
+        this.uploadEl.style = "display: inline-block"
+      }
+      erazer(event) {
+        this.ctx.clearRect(event.offsetX - this.erazerSize[0] / 2, event.offsetY - this.erazerSize[1] / 2, ...this.erazerSize)
+      }
+      line(event) {
+        if (this.allMessage.length === 0) {
+          this.ctx.moveTo(event.offsetX, event.offsetY);
+        } else {
+          //添加一个绘制点
+          this.ctx.lineTo(event.offsetX, event.offsetY)
+        }
+        //设置线条颜色
+        this.ctx.strokeStyle = this.color
+        //将使用 lineTo 定义的点绘制出来
+        this.ctx.stroke()
+        this.allMessage.push({ offsetX: event.offsetX, offsetY: event.offsetY, type: "line", color: this.color, lineWidth: this.lineWidth, action: "line" })
+        this.actionMessage = []
+      }
+      screenshot() {
+        const img = document.querySelector('#img')
+        //生成图片 base64 数据
+        img.src = this.el.toDataURL('image/jpeg')
+        img.width = 200
+        img.style = 'border:solid 5px #16a085'
+      }
+      next() {
+        if (this.actionMessage.length === 0) return
+        const item = this.actionMessage.pop()
+        this.allMessage.push(item)
+        this.render()
+      }
+      back() {
+        if (this.allMessage.length === 0) return
+        const item = this.allMessage.pop()
+        this.actionMessage.push(item)
+        this.render()
+      }
+      render() {
+        this.ctx.clearRect(0, 0, this.el.width, this.el.height)
+        this.ctx.beginPath()
+        this.allMessage.forEach((v, i) => {
+          const { offsetX, offsetY, color, type, lineWidth, action } = v
+          //线条结束为圆角
+          this.ctx.lineCap = 'round'
+          //线条拐角为圆角
+          this.ctx.lineJoin = 'round'
+          this.ctx.lineWidth = lineWidth
+          //添加一个绘制点
+          this.ctx.strokeStyle = color
+          if (action === "move") {
+            this.ctx.moveTo(offsetX, offsetY);
+          } else {
+            this.ctx.lineTo(offsetX, offsetY);
+          }
+        })
+        this.ctx.stroke()
+      }
+      upload() {
+        if (this.diableUpload) return
+        const url = URL.createObjectURL(this.uploadEl.files[0]);
+        const img = new Image();
+        img.src = url;
+        img.onload = () => {
+          const bg = this.ctx.createPattern(img, "no-repeat");//createPattern() 方法在指定的方向内重复指定的元素。
+          this.ctx.fillStyle = bg;//fillStyle 属性设置或返回用于填充绘画的颜色、渐变或模式。
+          this.ctx.fillRect(0, 0, img.width, img.height);//绘制已填充矩形fillRect(左上角x坐标, 左上角y坐标, 宽, 高)
+          this.diableUpload = true
+          this.uploadButton.style = "display: none"
+          this.uploadEl.style = "display: none"
+        }
+      }
+    }
+
+    const app = new Draw('#canvas')
+  </script>
+</body>
+
+</html>
